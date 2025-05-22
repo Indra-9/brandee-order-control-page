@@ -7,7 +7,35 @@ import { BentoGrid, BentoGridItem } from '@/components/BentoGrid';
 import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import ContactForm from '@/components/ContactForm';
-import { Layers, CreditCard, Check, Settings, Link, Zap, TrendingUp, Info } from 'lucide-react';
+import SEO from '@/components/SEO';
+import { 
+  Layers, 
+  CreditCard, 
+  Check, 
+  Settings, 
+  Link, 
+  Zap, 
+  TrendingUp, 
+  Info, 
+  Clock, 
+  Globe,
+  Shield,
+  MessageSquare,
+  Bell,
+  Package,
+  Search,
+  Users
+} from 'lucide-react';
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardFooter, 
+  CardHeader, 
+  CardTitle 
+} from "@/components/ui/card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import FeatureCard from '@/components/FeatureCard';
 
 export default function Features() {
   const [activeTab, setActiveTab] = useState('features');
@@ -34,6 +62,11 @@ export default function Features() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
+      <SEO 
+        title="Features - Brandae | Grow Your Business with Advanced Ordering Tools" 
+        description="Explore the powerful features of Brandae that help restaurants and grocery stores grow with branded ordering apps, marketing tools, and delivery control."
+      />
+      
       <Navbar />
       
       {/* Hero Section */}
@@ -150,6 +183,47 @@ export default function Features() {
                     <p className="text-gray-300">Insights on sales, order trends, customer behavior, and campaign performance.</p>
                   </div>
                 </BentoGridItem>
+
+                {/* Additional Feature Cards */}
+                <BentoGridItem gradient="green" delay={6}>
+                  <div className="p-6 h-full">
+                    <div className="mb-4 p-2 rounded-full bg-green-500/10 w-fit">
+                      <Bell className="h-6 w-6 text-green-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Smart Notifications</h3>
+                    <p className="text-gray-300">Automated alerts for orders, promotions, and customer engagement.</p>
+                  </div>
+                </BentoGridItem>
+
+                <BentoGridItem gradient="blue" delay={7}>
+                  <div className="p-6 h-full">
+                    <div className="mb-4 p-2 rounded-full bg-blue-500/10 w-fit">
+                      <Globe className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Multi-language Support</h3>
+                    <p className="text-gray-300">Reach diverse customer bases with localized ordering experiences.</p>
+                  </div>
+                </BentoGridItem>
+
+                <BentoGridItem gradient="purple" delay={8}>
+                  <div className="p-6 h-full">
+                    <div className="mb-4 p-2 rounded-full bg-purple-500/10 w-fit">
+                      <Shield className="h-6 w-6 text-purple-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">Secure Payment Processing</h3>
+                    <p className="text-gray-300">PCI-compliant payment gateway with fraud protection systems.</p>
+                  </div>
+                </BentoGridItem>
+
+                <BentoGridItem gradient="pink" delay={9}>
+                  <div className="p-6 h-full">
+                    <div className="mb-4 p-2 rounded-full bg-pink-500/10 w-fit">
+                      <MessageSquare className="h-6 w-6 text-pink-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">In-App Chat Support</h3>
+                    <p className="text-gray-300">Direct communication with customers for order issues and feedback.</p>
+                  </div>
+                </BentoGridItem>
               </BentoGrid>
             </motion.div>
           </TabsContent>
@@ -254,6 +328,202 @@ export default function Features() {
         </Tabs>
       </div>
 
+      {/* NEW SECTION 1: Customer Success Stories */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Real <span className="gradient-text">Success Stories</span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            See how businesses like yours are thriving with Brandae's powerful features.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {successStories.map((story, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-brandae-gray rounded-xl p-6 border border-white/10"
+            >
+              <div className="flex items-start gap-3 mb-4">
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold text-xl">
+                  {story.business[0]}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">{story.business}</h3>
+                  <p className="text-sm text-gray-400">{story.type}</p>
+                </div>
+              </div>
+              <p className="text-gray-300 mb-4">{story.testimonial}</p>
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-sm text-brandae-green font-medium">{story.result}</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <svg key={star} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* NEW SECTION 2: Feature Comparison */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-20 bg-gradient-to-br from-brandae-darker/50 to-transparent rounded-2xl"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Why Choose <span className="gradient-text">Brandae</span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            See how our features stack up against third-party aggregators
+          </p>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[800px] border-collapse">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="p-4 text-left">Feature</th>
+                <th className="p-4 text-center">
+                  <span className="gradient-text font-bold">Brandae</span>
+                </th>
+                <th className="p-4 text-center">Third-party Aggregators</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonFeatures.map((feature, idx) => (
+                <motion.tr 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="border-b border-white/5"
+                >
+                  <td className="p-4 font-medium">{feature.name}</td>
+                  <td className="p-4 text-center">
+                    {feature.brandae ? 
+                      <Check className="h-5 w-5 text-brandae-green mx-auto" /> : 
+                      <span className="text-gray-500">—</span>
+                    }
+                  </td>
+                  <td className="p-4 text-center">
+                    {feature.competitors ? 
+                      <Check className="h-5 w-5 text-gray-500 mx-auto" /> : 
+                      <span className="text-gray-500">—</span>
+                    }
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </motion.section>
+
+      {/* NEW SECTION 3: How It Works */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            How Brandae <span className="gradient-text">Works</span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Getting started with your own branded ordering system is simple
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {howItWorks.map((step, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
+              className="bg-brandae-gray p-6 rounded-xl border border-white/10 relative"
+            >
+              <div className="absolute -top-5 -left-2 h-10 w-10 rounded-full bg-gradient-to-br from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold">
+                {idx + 1}
+              </div>
+              <div className="mb-4 p-2 rounded-full bg-brandae-dark/50 w-fit">
+                {step.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+              <p className="text-gray-300">{step.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* NEW SECTION 4: FAQ */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Frequently Asked <span className="gradient-text">Questions</span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Get answers to common questions about Brandae's features and capabilities
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {faqs.map((faq, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-brandae-gray rounded-xl p-6 border border-white/10"
+            >
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <h3 className="text-lg font-semibold mb-3 cursor-pointer hover:text-brandae-green transition-colors flex items-center gap-2">
+                    {faq.question}
+                    <Info className="h-4 w-4 text-brandae-purple" />
+                  </h3>
+                </HoverCardTrigger>
+                <HoverCardContent className="bg-brandae-darker border-white/10 w-80">
+                  <p className="text-sm text-gray-300">Click to expand for more details about this feature.</p>
+                </HoverCardContent>
+              </HoverCard>
+              <p className="text-gray-300">{faq.answer}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
       {/* CTA Section */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -334,3 +604,85 @@ const dashboardMetrics = [
     change: -2.1
   }
 ];
+
+// Success Stories data
+const successStories = [
+  {
+    business: "Spice Garden",
+    type: "Indian Restaurant",
+    testimonial: "Since implementing Brandae, we've seen a 40% increase in direct orders and saved thousands in commission fees that were previously going to delivery apps.",
+    result: "40% increase in direct orders",
+  },
+  {
+    business: "Fresh Market",
+    type: "Grocery Store",
+    testimonial: "Our customers love the convenience of our branded app. The loyalty program has dramatically increased repeat purchases and average order value.",
+    result: "35% higher customer retention",
+  },
+  {
+    business: "Burger Base",
+    type: "Fast Food Chain",
+    testimonial: "The marketing tools in Brandae have transformed how we engage with customers. Our push notification campaigns have a 30% conversion rate.",
+    result: "3x ROI on marketing spend",
+  }
+];
+
+// Comparison Features
+const comparisonFeatures = [
+  { name: "Zero Commission Fees", brandae: true, competitors: false },
+  { name: "Branded Mobile App", brandae: true, competitors: false },
+  { name: "Customer Data Ownership", brandae: true, competitors: false },
+  { name: "Direct Customer Relationship", brandae: true, competitors: false },
+  { name: "Customizable Loyalty Programs", brandae: true, competitors: true },
+  { name: "Marketing Campaign Tools", brandae: true, competitors: false },
+  { name: "Delivery Management", brandae: true, competitors: true },
+  { name: "Real-time Analytics", brandae: true, competitors: true }
+];
+
+// How It Works steps
+const howItWorks = [
+  {
+    title: "Consultation & Setup",
+    description: "We'll understand your business needs and set up your branded ordering system with your colors and logo.",
+    icon: <Settings className="h-6 w-6 text-brandae-purple" />
+  },
+  {
+    title: "Integration & Training",
+    description: "We'll integrate with your existing systems and train your team on how to use the platform effectively.",
+    icon: <Users className="h-6 w-6 text-brandae-green" />
+  },
+  {
+    title: "Launch & Grow",
+    description: "Launch your branded app and website to customers and use our tools to grow your direct ordering business.",
+    icon: <Zap className="h-6 w-6 text-blue-400" />
+  }
+];
+
+// FAQ items
+const faqs = [
+  {
+    question: "How long does it take to set up?",
+    answer: "Most businesses can be fully set up within 2-4 weeks, including app development, menu setup, and staff training."
+  },
+  {
+    question: "Do I need technical knowledge?",
+    answer: "No technical knowledge required. Our team handles all the setup, and the platform is designed to be user-friendly."
+  },
+  {
+    question: "Can I keep using third-party platforms?",
+    answer: "Yes, you can continue using third-party platforms while gradually shifting your customers to your own branded system."
+  },
+  {
+    question: "How do I handle delivery logistics?",
+    answer: "Brandae offers built-in delivery management tools to coordinate your own drivers or integrate with third-party delivery services."
+  },
+  {
+    question: "Is there a contract lock-in period?",
+    answer: "We offer flexible monthly plans with no long-term contracts, as well as annual plans with special pricing."
+  },
+  {
+    question: "What kind of support is provided?",
+    answer: "We provide 24/7 technical support, regular training sessions, and a dedicated account manager for enterprise clients."
+  }
+];
+
