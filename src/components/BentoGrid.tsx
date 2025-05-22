@@ -8,7 +8,7 @@ interface BentoGridProps {
   className?: string;
 }
 
-export default function BentoGrid({ children, className }: BentoGridProps) {
+export const BentoGrid = ({ children, className }: BentoGridProps) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -67,3 +67,6 @@ export function BentoGridItem({
     </motion.div>
   );
 }
+
+// Also export BentoGrid as default for backward compatibility
+export default BentoGrid;
