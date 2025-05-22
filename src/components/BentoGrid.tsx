@@ -28,6 +28,7 @@ interface BentoGridItemProps {
   colSpan?: number;
   rowSpan?: number;
   delay?: number;
+  gradient?: "purple" | "green" | "blue" | "pink" | "orange" | "mixed" | undefined;
 }
 
 export function BentoGridItem({ 
@@ -35,7 +36,8 @@ export function BentoGridItem({
   className, 
   colSpan = 1, 
   rowSpan = 1,
-  delay = 0
+  delay = 0,
+  gradient
 }: BentoGridItemProps) {
   const colSpanClasses = {
     1: 'md:col-span-1',
@@ -49,21 +51,32 @@ export function BentoGridItem({
     3: 'md:row-span-3',
   };
   
+  const gradientClasses = {
+    purple: 'before:bg-gradient-to-br before:from-purple-500/20 before:to-purple-800/10',
+    green: 'before:bg-gradient-to-br before:from-green-500/20 before:to-green-800/10',
+    blue: 'before:bg-gradient-to-br before:from-blue-500/20 before:to-blue-800/10', 
+    pink: 'before:bg-gradient-to-br before:from-pink-500/20 before:to-pink-800/10',
+    orange: 'before:bg-gradient-to-br before:from-orange-500/20 before:to-orange-800/10',
+    mixed: 'before:bg-gradient-to-br before:from-brandae-purple/20 before:to-brandae-green/10',
+  };
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
       className={cn(
-        'bg-brandae-gray rounded-xl border border-white/5 overflow-hidden',
+        'bg-brandae-gray rounded-xl border border-white/5 overflow-hidden relative group',
+        'before:absolute before:inset-0 before:opacity-40 before:rounded-xl before:z-0',
+        gradient && gradientClasses[gradient],
         colSpanClasses[colSpan as keyof typeof colSpanClasses],
         rowSpanClasses[rowSpan as keyof typeof rowSpanClasses],
         className
       )}
     >
-      {children}
+      <div className="relative z-10">{children}</div>
     </motion.div>
   );
 }

@@ -1,20 +1,42 @@
-
 import React, { useEffect } from 'react';
 import { motion, useAnimation, useScroll } from 'framer-motion';
+import { Helmet } from 'react-helmet';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import AnimatedButton from '@/components/AnimatedButton';
 import FeatureCard from '@/components/FeatureCard';
 import { BentoGrid, BentoGridItem } from '@/components/BentoGrid';
 import StepCard from '@/components/StepCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import IntegrationLogo from '@/components/IntegrationLogo';
+import Navbar from '@/components/Navbar';
+import ContactForm from '@/components/ContactForm';
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
 
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
+      <Helmet>
+        <title>Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps</title>
+        <meta name="description" content="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
+        <meta name="keywords" content="food ordering app, restaurant app, zero commission, delivery management, restaurant tech, online ordering system, food delivery app" />
+        <meta property="og:title" content="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" />
+        <meta property="og:description" content="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://brandae.com" />
+        <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Brandae - Own Your Orders, Own Your Customers" />
+        <meta name="twitter:description" content="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
+        <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        <link rel="canonical" href="https://brandae.com" />
+      </Helmet>
+
+      {/* Navigation */}
+      <Navbar />
+      
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent_70%)]"></div>
         
@@ -51,7 +73,16 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <AnimatedButton variant="primary" size="lg">Book a Demo</AnimatedButton>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <div>
+                      <AnimatedButton variant="primary" size="lg">Book a Demo</AnimatedButton>
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
+                    <ContactForm />
+                  </PopoverContent>
+                </Popover>
                 <AnimatedButton variant="outline" size="lg">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
@@ -114,7 +145,7 @@ const Index = () => {
       </section>
       
       {/* Featured Sections - Bento Grid */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="features" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -128,7 +159,7 @@ const Index = () => {
           </motion.div>
           
           <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <BentoGridItem delay={0}>
+            <BentoGridItem delay={0} gradient="green">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -140,7 +171,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={1}>
+            <BentoGridItem delay={1} gradient="purple">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -154,7 +185,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={2}>
+            <BentoGridItem delay={2} gradient="blue">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -169,7 +200,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={3}>
+            <BentoGridItem delay={3} gradient="pink">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -188,12 +219,12 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={4}>
+            <BentoGridItem delay={4} gradient="orange">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="m12 2 3 7h7l-6 4 3 7-7-4-7 4 3-7-6-4h7Z" />
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                    <path d="M9.9 12.1L11.5 14l2.6-4" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Delivery Management System</h3>
@@ -201,7 +232,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={5}>
+            <BentoGridItem delay={5} gradient="mixed">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -214,7 +245,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={6}>
+            <BentoGridItem delay={6} gradient="green">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -227,7 +258,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={7}>
+            <BentoGridItem delay={7} gradient="blue">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -243,7 +274,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={8}>
+            <BentoGridItem delay={8} gradient="purple">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -265,7 +296,7 @@ const Index = () => {
       </section>
       
       {/* How It Works - 3-Step Flow */}
-      <section className="px-6 md:px-12 lg:px-24 py-20">
+      <section id="how-it-works" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -301,7 +332,7 @@ const Index = () => {
       </section>
       
       {/* Branded For Different Verticals */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="solutions" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -367,7 +398,7 @@ const Index = () => {
       </section>
       
       {/* Dashboard Preview */}
-      <section className="px-6 md:px-12 lg:px-24 py-20">
+      <section id="dashboard" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <motion.div 
@@ -436,7 +467,7 @@ const Index = () => {
       </section>
       
       {/* Testimonials */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="testimonials" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -483,7 +514,7 @@ const Index = () => {
       </section>
       
       {/* Admin Panel & Toolkit */}
-      <section className="px-6 md:px-12 lg:px-24 py-20">
+      <section id="toolkit" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -557,7 +588,7 @@ const Index = () => {
       </section>
       
       {/* Integrations */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="integrations" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto">
           <motion.div 
             className="text-center mb-16"
@@ -585,7 +616,7 @@ const Index = () => {
       </section>
       
       {/* Security & Reliability */}
-      <section className="px-6 md:px-12 lg:px-24 py-20">
+      <section id="security" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto">
           <div className="bg-brandae-gray rounded-2xl p-8 md:p-12 border border-white/5">
             <div className="flex flex-col md:flex-row items-center gap-8">
@@ -645,6 +676,83 @@ const Index = () => {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Call to Action Section with Form Popup */}
+      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-brandae-purple/20 to-transparent opacity-50"></div>
+        <div className="container mx-auto relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Ready to <span className="gradient-text">Boost Your Revenue?</span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Join thousands of local businesses who have taken control of their online ordering experience and increased their revenue by up to 30%.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div className="inline-block">
+                    <AnimatedButton variant="primary" size="lg">
+                      Schedule Your Free Demo
+                    </AnimatedButton>
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
+                  <ContactForm />
+                </PopoverContent>
+              </Popover>
+            </motion.div>
+            
+            <motion.div 
+              className="mt-8 flex flex-wrap justify-center gap-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
+                </div>
+                <span>No credit card required</span>
+              </div>
+              
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
+                </div>
+                <span>30-day free trial</span>
+              </div>
+              
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
+                </div>
+                <span>Cancel anytime</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
