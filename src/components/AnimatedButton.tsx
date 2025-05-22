@@ -3,10 +3,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AnimatedButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  form?: string;
 }
 
 export default function AnimatedButton({
@@ -14,6 +19,10 @@ export default function AnimatedButton({
   className,
   variant = 'primary',
   size = 'md',
+  onClick,
+  type = "button",
+  disabled,
+  form,
   ...props
 }: AnimatedButtonProps) {
   const variants = {
@@ -38,6 +47,10 @@ export default function AnimatedButton({
         sizes[size],
         className
       )}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      form={form}
       {...props}
     >
       {children}

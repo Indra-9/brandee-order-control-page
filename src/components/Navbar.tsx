@@ -6,14 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import ContactForm from './ContactForm';
 import AnimatedButton from './AnimatedButton';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Features', href: '#features' },
+  { name: 'Features', href: '/features' },
   { name: 'How It Works', href: '#how-it-works' },
   { name: 'Solutions', href: '#solutions' },
   { name: 'Dashboard', href: '#dashboard' },
   { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Pricing', href: '#pricing' }
+  { name: 'Pricing', href: '/pricing' }
 ];
 
 export default function Navbar() {
@@ -30,26 +31,32 @@ export default function Navbar() {
             transition={{ duration: 0.5 }}
             className="flex-shrink-0"
           >
-            <a href="#" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold text-xl">B</div>
               <span className="text-white text-xl font-bold">Brandae</span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-white transition-colors"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
               >
-                {item.name}
-              </motion.a>
+                {item.href.startsWith('/') ? (
+                  <Link to={item.href} className="text-gray-300 hover:text-white transition-colors">
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a href={item.href} className="text-gray-300 hover:text-white transition-colors">
+                    {item.name}
+                  </a>
+                )}
+              </motion.div>
             ))}
           </div>
 
@@ -95,14 +102,17 @@ export default function Navbar() {
       )}>
         <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
           {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-gray-300 hover:text-white transition-colors py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.name}
-            </a>
+            <div key={item.name} onClick={() => setIsMenuOpen(false)}>
+              {item.href.startsWith('/') ? (
+                <Link to={item.href} className="text-gray-300 hover:text-white transition-colors py-2 block">
+                  {item.name}
+                </Link>
+              ) : (
+                <a href={item.href} className="text-gray-300 hover:text-white transition-colors py-2 block">
+                  {item.name}
+                </a>
+              )}
+            </div>
           ))}
           <Popover>
             <PopoverTrigger asChild>
