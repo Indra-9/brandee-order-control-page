@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { useEffect } from 'react';
 
 interface SEOProps {
   title: string;
@@ -19,28 +18,66 @@ const SEO: React.FC<SEOProps> = ({
   ogUrl = "https://brandae.com",
   twitterImage = "https://lovable.dev/opengraph-image-p98pqg.png"
 }) => {
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      
-      {/* Open Graph / Facebook */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={ogUrl} />
-      <meta property="og:image" content={ogImage} />
-      
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={twitterImage} />
-      
-      <link rel="canonical" href={ogUrl} />
-    </Helmet>
-  );
+  useEffect(() => {
+    // Update document title
+    document.title = title;
+    
+    // Helper function to create or update meta tags
+    const updateMetaTag = (name: string, content: string) => {
+      let element = document.querySelector(`meta[name="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        (element as HTMLMetaElement).name = name;
+        document.head.appendChild(element);
+      }
+      (element as HTMLMetaElement).content = content;
+    };
+    
+    // Helper function for Open Graph meta tags
+    const updateOgMetaTag = (property: string, content: string) => {
+      let element = document.querySelector(`meta[property="${property}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        (element as HTMLMetaElement).setAttribute('property', property);
+        document.head.appendChild(element);
+      }
+      (element as HTMLMetaElement).content = content;
+    };
+    
+    // Set meta tags
+    updateMetaTag('description', description);
+    updateMetaTag('keywords', keywords);
+    
+    // Set Open Graph meta tags
+    updateOgMetaTag('og:title', title);
+    updateOgMetaTag('og:description', description);
+    updateOgMetaTag('og:type', 'website');
+    updateOgMetaTag('og:url', ogUrl);
+    updateOgMetaTag('og:image', ogImage);
+    
+    // Set Twitter meta tags
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', twitterImage);
+    
+    // Set canonical link
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      (canonicalLink as HTMLLinkElement).rel = 'canonical';
+      document.head.appendChild(canonicalLink);
+    }
+    (canonicalLink as HTMLLinkElement).href = ogUrl;
+    
+    // Cleanup function to prevent memory leaks
+    return () => {
+      // No need to remove meta tags when component unmounts,
+      // as they'll be updated when another SEO component mounts
+    };
+  }, [title, description, keywords, ogImage, ogUrl, twitterImage]);
+  
+  return null; // This component doesn't render anything visibly
 };
 
 export default SEO;
