@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,49 +7,29 @@ import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
-import { 
-  Layers, 
-  CreditCard, 
-  Check, 
-  Settings, 
-  Link, 
-  Zap, 
-  TrendingUp, 
-  Info, 
-  Clock, 
-  Globe,
-  Shield,
-  MessageSquare,
-  Bell,
-  Package,
-  Search,
-  Users
-} from 'lucide-react';
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
+import { Layers, CreditCard, Check, Settings, Link, Zap, TrendingUp, Info, Clock, Globe, Shield, MessageSquare, Bell, Package, Search, Users } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import FeatureCard from '@/components/FeatureCard';
-
 export default function Features() {
   const [activeTab, setActiveTab] = useState('features');
-  
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: {
+        duration: 0.6
+      }
     }
   };
-
   const staggerContainer = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0
+    },
     visible: {
       opacity: 1,
       transition: {
@@ -59,23 +38,13 @@ export default function Features() {
       }
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
-      <SEO 
-        title="Features - Brandae | Grow Your Business with Advanced Ordering Tools" 
-        description="Explore the powerful features of Brandae that help restaurants and grocery stores grow with branded ordering apps, marketing tools, and delivery control."
-      />
+  return <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
+      <SEO title="Features - Brandae | Grow Your Business with Advanced Ordering Tools" description="Explore the powerful features of Brandae that help restaurants and grocery stores grow with branded ordering apps, marketing tools, and delivery control." />
       
       <Navbar />
       
       {/* Hero Section */}
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-        className="container mx-auto pt-32 pb-16 px-4"
-      >
+      <motion.div initial="hidden" animate="visible" variants={fadeIn} className="container mx-auto pt-32 pb-16 px-4">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
           Powerful <span className="gradient-text">Features</span> to Grow Your Business
         </h1>
@@ -87,7 +56,7 @@ export default function Features() {
       {/* Tabs Navigation */}
       <div className="container mx-auto px-4 mb-16">
         <Tabs defaultValue="features" onValueChange={setActiveTab} className="w-full">
-          <TabsList className="bg-brandae-gray/50 mx-auto border border-white/10">
+          <TabsList className="bg-brandae-gray/50 mx-auto border border-white/10 rounded-none px-0">
             <TabsTrigger value="features" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-brandae-purple/20 data-[state=active]:to-brandae-green/20">
               <Layers className="mr-2 h-4 w-4" />
               Core Features
@@ -104,11 +73,7 @@ export default function Features() {
 
           {/* Features Tab Content */}
           <TabsContent value="features" className="pt-8">
-            <motion.div
-              initial="hidden"
-              animate={activeTab === 'features' ? "visible" : "hidden"}
-              variants={staggerContainer}
-            >
+            <motion.div initial="hidden" animate={activeTab === 'features' ? "visible" : "hidden"} variants={staggerContainer}>
               <BentoGrid>
                 <BentoGridItem gradient="green" delay={0}>
                   <div className="p-6 h-full">
@@ -230,92 +195,76 @@ export default function Features() {
 
           {/* Integrations Tab Content */}
           <TabsContent value="integrations" className="pt-8">
-            <motion.div
-              initial="hidden"
-              animate={activeTab === 'integrations' ? "visible" : "hidden"}
-              variants={staggerContainer}
-              className="space-y-8"
-            >
+            <motion.div initial="hidden" animate={activeTab === 'integrations' ? "visible" : "hidden"} variants={staggerContainer} className="space-y-8">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-4">Seamless Integrations</h2>
                 <p className="text-gray-300 max-w-2xl mx-auto">Connect Brandae with your existing tools and systems for a unified workflow.</p>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {integrations.map((category, idx) => (
-                  <motion.div 
-                    key={category.title}
-                    variants={fadeIn}
-                    custom={idx}
-                    className="bg-brandae-gray rounded-xl p-6 border border-white/5"
-                  >
+                {integrations.map((category, idx) => <motion.div key={category.title} variants={fadeIn} custom={idx} className="bg-brandae-gray rounded-xl p-6 border border-white/5">
                     <h3 className="text-xl font-bold mb-4">{category.title}</h3>
                     <ul className="space-y-3">
-                      {category.items.map((item, i) => (
-                        <motion.li 
-                          key={i}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 * i }}
-                          className="flex items-center"
-                        >
+                      {category.items.map((item, i) => <motion.li key={i} initial={{
+                    opacity: 0,
+                    x: -10
+                  }} animate={{
+                    opacity: 1,
+                    x: 0
+                  }} transition={{
+                    delay: 0.1 * i
+                  }} className="flex items-center">
                           <Check className="h-4 w-4 mr-2 text-brandae-green" />
                           <span>{item}</span>
-                        </motion.li>
-                      ))}
+                        </motion.li>)}
                     </ul>
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </div>
             </motion.div>
           </TabsContent>
 
           {/* Dashboard Tab Content */}
           <TabsContent value="dashboard" className="pt-8">
-            <motion.div
-              initial="hidden"
-              animate={activeTab === 'dashboard' ? "visible" : "hidden"}
-              variants={fadeIn}
-              className="space-y-12"
-            >
+            <motion.div initial="hidden" animate={activeTab === 'dashboard' ? "visible" : "hidden"} variants={fadeIn} className="space-y-12">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-4">Powerful Dashboard</h2>
                 <p className="text-gray-300 max-w-2xl mx-auto">Everything you need to manage your business in one place.</p>
               </div>
               
               <div className="bg-brandae-gray rounded-xl p-6 border border-white/5 overflow-hidden">
-                <motion.div
-                  initial={{ y: 100, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.7 }}
-                >
+                <motion.div initial={{
+                y: 100,
+                opacity: 0
+              }} animate={{
+                y: 0,
+                opacity: 1
+              }} transition={{
+                delay: 0.2,
+                duration: 0.7
+              }}>
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-xl font-bold">Dashboard Preview</h3>
                     <span className="text-brandae-green text-sm">Live Data</span>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    {dashboardMetrics.map((metric, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 + idx * 0.1 }}
-                        className="bg-brandae-dark p-4 rounded-lg border border-white/5"
-                      >
+                    {dashboardMetrics.map((metric, idx) => <motion.div key={idx} initial={{
+                    scale: 0.9,
+                    opacity: 0
+                  }} animate={{
+                    scale: 1,
+                    opacity: 1
+                  }} transition={{
+                    delay: 0.2 + idx * 0.1
+                  }} className="bg-brandae-dark p-4 rounded-lg border border-white/5">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-sm text-gray-400">{metric.name}</span>
-                          {metric.change > 0 ? (
-                            <span className="text-green-400 text-xs flex items-center">
+                          {metric.change > 0 ? <span className="text-green-400 text-xs flex items-center">
                               <TrendingUp className="h-3 w-3 mr-1" />+{metric.change}%
-                            </span>
-                          ) : (
-                            <span className="text-red-400 text-xs">-{Math.abs(metric.change)}%</span>
-                          )}
+                            </span> : <span className="text-red-400 text-xs">-{Math.abs(metric.change)}%</span>}
                         </div>
                         <div className="text-2xl font-bold">{metric.value}</div>
-                      </motion.div>
-                    ))}
+                      </motion.div>)}
                   </div>
                   
                   <div className="h-48 md:h-64 bg-brandae-dark rounded-lg border border-white/5 flex items-center justify-center">
@@ -329,13 +278,17 @@ export default function Features() {
       </div>
 
       {/* NEW SECTION 1: Customer Success Stories */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-20"
-      >
+      <motion.section initial={{
+      opacity: 0,
+      y: 50
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Real <span className="gradient-text">Success Stories</span>
@@ -346,15 +299,17 @@ export default function Features() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {successStories.map((story, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-brandae-gray rounded-xl p-6 border border-white/10"
-            >
+          {successStories.map((story, idx) => <motion.div key={idx} initial={{
+          opacity: 0,
+          scale: 0.9
+        }} whileInView={{
+          opacity: 1,
+          scale: 1
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: idx * 0.1
+        }} className="bg-brandae-gray rounded-xl p-6 border border-white/10">
               <div className="flex items-start gap-3 mb-4">
                 <div className="h-12 w-12 rounded-full bg-gradient-to-br from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold text-xl">
                   {story.business[0]}
@@ -370,26 +325,27 @@ export default function Features() {
                   <p className="text-sm text-brandae-green font-medium">{story.result}</p>
                 </div>
                 <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg key={star} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  {[1, 2, 3, 4, 5].map(star => <svg key={star} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                  ))}
+                    </svg>)}
                 </div>
               </div>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
       </motion.section>
 
       {/* NEW SECTION 2: Feature Comparison */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-20 bg-gradient-to-br from-brandae-darker/50 to-transparent rounded-2xl"
-      >
+      <motion.section initial={{
+      opacity: 0,
+      y: 50
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-20 bg-gradient-to-br from-brandae-darker/50 to-transparent rounded-2xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Why Choose <span className="gradient-text">Brandae</span>
@@ -411,43 +367,42 @@ export default function Features() {
               </tr>
             </thead>
             <tbody>
-              {comparisonFeatures.map((feature, idx) => (
-                <motion.tr 
-                  key={idx} 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="border-b border-white/5"
-                >
+              {comparisonFeatures.map((feature, idx) => <motion.tr key={idx} initial={{
+              opacity: 0,
+              x: -20
+            }} whileInView={{
+              opacity: 1,
+              x: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              delay: idx * 0.05
+            }} className="border-b border-white/5">
                   <td className="p-4 font-medium">{feature.name}</td>
                   <td className="p-4 text-center">
-                    {feature.brandae ? 
-                      <Check className="h-5 w-5 text-brandae-green mx-auto" /> : 
-                      <span className="text-gray-500">—</span>
-                    }
+                    {feature.brandae ? <Check className="h-5 w-5 text-brandae-green mx-auto" /> : <span className="text-gray-500">—</span>}
                   </td>
                   <td className="p-4 text-center">
-                    {feature.competitors ? 
-                      <Check className="h-5 w-5 text-gray-500 mx-auto" /> : 
-                      <span className="text-gray-500">—</span>
-                    }
+                    {feature.competitors ? <Check className="h-5 w-5 text-gray-500 mx-auto" /> : <span className="text-gray-500">—</span>}
                   </td>
-                </motion.tr>
-              ))}
+                </motion.tr>)}
             </tbody>
           </table>
         </div>
       </motion.section>
 
       {/* NEW SECTION 3: How It Works */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-20"
-      >
+      <motion.section initial={{
+      opacity: 0,
+      y: 50
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             How Brandae <span className="gradient-text">Works</span>
@@ -458,15 +413,17 @@ export default function Features() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {howItWorks.map((step, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-              className="bg-brandae-gray p-6 rounded-xl border border-white/10 relative"
-            >
+          {howItWorks.map((step, idx) => <motion.div key={idx} initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: idx * 0.2
+        }} className="bg-brandae-gray p-6 rounded-xl border border-white/10 relative">
               <div className="absolute -top-5 -left-2 h-10 w-10 rounded-full bg-gradient-to-br from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold">
                 {idx + 1}
               </div>
@@ -475,19 +432,22 @@ export default function Features() {
               </div>
               <h3 className="text-xl font-bold mb-2">{step.title}</h3>
               <p className="text-gray-300">{step.description}</p>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
       </motion.section>
 
       {/* NEW SECTION 4: FAQ */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-20"
-      >
+      <motion.section initial={{
+      opacity: 0,
+      y: 50
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-20">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Frequently Asked <span className="gradient-text">Questions</span>
@@ -498,15 +458,17 @@ export default function Features() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {faqs.map((faq, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-brandae-gray rounded-xl p-6 border border-white/10"
-            >
+          {faqs.map((faq, idx) => <motion.div key={idx} initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: idx * 0.1
+        }} className="bg-brandae-gray rounded-xl p-6 border border-white/10">
               <HoverCard>
                 <HoverCardTrigger asChild>
                   <h3 className="text-lg font-semibold mb-3 cursor-pointer hover:text-brandae-green transition-colors flex items-center gap-2">
@@ -519,19 +481,20 @@ export default function Features() {
                 </HoverCardContent>
               </HoverCard>
               <p className="text-gray-300">{faq.answer}</p>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
       </motion.section>
 
       {/* CTA Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-16 text-center"
-      >
+      <motion.div initial={{
+      opacity: 0
+    }} whileInView={{
+      opacity: 1
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-3xl mx-auto bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 p-8 md:p-12 rounded-2xl border border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to take control of your ordering system?</h2>
           <p className="text-gray-300 mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
@@ -549,140 +512,134 @@ export default function Features() {
           </Popover>
         </div>
       </motion.div>
-    </div>
-  );
+    </div>;
 }
 
 // Integration categories and items
-const integrations = [
-  {
-    title: "Payment Providers",
-    items: ["Stripe", "PayPal", "Razorpay", "Square", "Braintree"]
-  },
-  {
-    title: "POS Systems",
-    items: ["Petpooja", "Square", "Toast", "Lightspeed", "Clover"]
-  },
-  {
-    title: "Marketing Tools",
-    items: ["WhatsApp Business", "SMS APIs", "Email Marketing", "Push Notifications", "Customer CRM"]
-  },
-  {
-    title: "Delivery Services",
-    items: ["Internal Delivery", "Third-party Delivery", "Route Optimization", "Tracking APIs"]
-  },
-  {
-    title: "Analytics & Reporting",
-    items: ["Google Analytics", "Custom Reports", "Data Export", "Business Intelligence"]
-  },
-  {
-    title: "Other Tools",
-    items: ["Inventory Management", "Accounting Software", "Customer Loyalty", "Zapier"]
-  }
-];
+const integrations = [{
+  title: "Payment Providers",
+  items: ["Stripe", "PayPal", "Razorpay", "Square", "Braintree"]
+}, {
+  title: "POS Systems",
+  items: ["Petpooja", "Square", "Toast", "Lightspeed", "Clover"]
+}, {
+  title: "Marketing Tools",
+  items: ["WhatsApp Business", "SMS APIs", "Email Marketing", "Push Notifications", "Customer CRM"]
+}, {
+  title: "Delivery Services",
+  items: ["Internal Delivery", "Third-party Delivery", "Route Optimization", "Tracking APIs"]
+}, {
+  title: "Analytics & Reporting",
+  items: ["Google Analytics", "Custom Reports", "Data Export", "Business Intelligence"]
+}, {
+  title: "Other Tools",
+  items: ["Inventory Management", "Accounting Software", "Customer Loyalty", "Zapier"]
+}];
 
 // Dashboard metrics for demonstration
-const dashboardMetrics = [
-  {
-    name: "Total Orders",
-    value: "1,234",
-    change: 12.5
-  },
-  {
-    name: "Revenue",
-    value: "$9,876",
-    change: 8.3
-  },
-  {
-    name: "Active Users",
-    value: "587",
-    change: 15.2
-  },
-  {
-    name: "Avg. Order Value",
-    value: "$42.50",
-    change: -2.1
-  }
-];
+const dashboardMetrics = [{
+  name: "Total Orders",
+  value: "1,234",
+  change: 12.5
+}, {
+  name: "Revenue",
+  value: "$9,876",
+  change: 8.3
+}, {
+  name: "Active Users",
+  value: "587",
+  change: 15.2
+}, {
+  name: "Avg. Order Value",
+  value: "$42.50",
+  change: -2.1
+}];
 
 // Success Stories data
-const successStories = [
-  {
-    business: "Spice Garden",
-    type: "Indian Restaurant",
-    testimonial: "Since implementing Brandae, we've seen a 40% increase in direct orders and saved thousands in commission fees that were previously going to delivery apps.",
-    result: "40% increase in direct orders",
-  },
-  {
-    business: "Fresh Market",
-    type: "Grocery Store",
-    testimonial: "Our customers love the convenience of our branded app. The loyalty program has dramatically increased repeat purchases and average order value.",
-    result: "35% higher customer retention",
-  },
-  {
-    business: "Burger Base",
-    type: "Fast Food Chain",
-    testimonial: "The marketing tools in Brandae have transformed how we engage with customers. Our push notification campaigns have a 30% conversion rate.",
-    result: "3x ROI on marketing spend",
-  }
-];
+const successStories = [{
+  business: "Spice Garden",
+  type: "Indian Restaurant",
+  testimonial: "Since implementing Brandae, we've seen a 40% increase in direct orders and saved thousands in commission fees that were previously going to delivery apps.",
+  result: "40% increase in direct orders"
+}, {
+  business: "Fresh Market",
+  type: "Grocery Store",
+  testimonial: "Our customers love the convenience of our branded app. The loyalty program has dramatically increased repeat purchases and average order value.",
+  result: "35% higher customer retention"
+}, {
+  business: "Burger Base",
+  type: "Fast Food Chain",
+  testimonial: "The marketing tools in Brandae have transformed how we engage with customers. Our push notification campaigns have a 30% conversion rate.",
+  result: "3x ROI on marketing spend"
+}];
 
 // Comparison Features
-const comparisonFeatures = [
-  { name: "Zero Commission Fees", brandae: true, competitors: false },
-  { name: "Branded Mobile App", brandae: true, competitors: false },
-  { name: "Customer Data Ownership", brandae: true, competitors: false },
-  { name: "Direct Customer Relationship", brandae: true, competitors: false },
-  { name: "Customizable Loyalty Programs", brandae: true, competitors: true },
-  { name: "Marketing Campaign Tools", brandae: true, competitors: false },
-  { name: "Delivery Management", brandae: true, competitors: true },
-  { name: "Real-time Analytics", brandae: true, competitors: true }
-];
+const comparisonFeatures = [{
+  name: "Zero Commission Fees",
+  brandae: true,
+  competitors: false
+}, {
+  name: "Branded Mobile App",
+  brandae: true,
+  competitors: false
+}, {
+  name: "Customer Data Ownership",
+  brandae: true,
+  competitors: false
+}, {
+  name: "Direct Customer Relationship",
+  brandae: true,
+  competitors: false
+}, {
+  name: "Customizable Loyalty Programs",
+  brandae: true,
+  competitors: true
+}, {
+  name: "Marketing Campaign Tools",
+  brandae: true,
+  competitors: false
+}, {
+  name: "Delivery Management",
+  brandae: true,
+  competitors: true
+}, {
+  name: "Real-time Analytics",
+  brandae: true,
+  competitors: true
+}];
 
 // How It Works steps
-const howItWorks = [
-  {
-    title: "Consultation & Setup",
-    description: "We'll understand your business needs and set up your branded ordering system with your colors and logo.",
-    icon: <Settings className="h-6 w-6 text-brandae-purple" />
-  },
-  {
-    title: "Integration & Training",
-    description: "We'll integrate with your existing systems and train your team on how to use the platform effectively.",
-    icon: <Users className="h-6 w-6 text-brandae-green" />
-  },
-  {
-    title: "Launch & Grow",
-    description: "Launch your branded app and website to customers and use our tools to grow your direct ordering business.",
-    icon: <Zap className="h-6 w-6 text-blue-400" />
-  }
-];
+const howItWorks = [{
+  title: "Consultation & Setup",
+  description: "We'll understand your business needs and set up your branded ordering system with your colors and logo.",
+  icon: <Settings className="h-6 w-6 text-brandae-purple" />
+}, {
+  title: "Integration & Training",
+  description: "We'll integrate with your existing systems and train your team on how to use the platform effectively.",
+  icon: <Users className="h-6 w-6 text-brandae-green" />
+}, {
+  title: "Launch & Grow",
+  description: "Launch your branded app and website to customers and use our tools to grow your direct ordering business.",
+  icon: <Zap className="h-6 w-6 text-blue-400" />
+}];
 
 // FAQ items
-const faqs = [
-  {
-    question: "How long does it take to set up?",
-    answer: "Most businesses can be fully set up within 2-4 weeks, including app development, menu setup, and staff training."
-  },
-  {
-    question: "Do I need technical knowledge?",
-    answer: "No technical knowledge required. Our team handles all the setup, and the platform is designed to be user-friendly."
-  },
-  {
-    question: "Can I keep using third-party platforms?",
-    answer: "Yes, you can continue using third-party platforms while gradually shifting your customers to your own branded system."
-  },
-  {
-    question: "How do I handle delivery logistics?",
-    answer: "Brandae offers built-in delivery management tools to coordinate your own drivers or integrate with third-party delivery services."
-  },
-  {
-    question: "Is there a contract lock-in period?",
-    answer: "We offer flexible monthly plans with no long-term contracts, as well as annual plans with special pricing."
-  },
-  {
-    question: "What kind of support is provided?",
-    answer: "We provide 24/7 technical support, regular training sessions, and a dedicated account manager for enterprise clients."
-  }
-];
-
+const faqs = [{
+  question: "How long does it take to set up?",
+  answer: "Most businesses can be fully set up within 2-4 weeks, including app development, menu setup, and staff training."
+}, {
+  question: "Do I need technical knowledge?",
+  answer: "No technical knowledge required. Our team handles all the setup, and the platform is designed to be user-friendly."
+}, {
+  question: "Can I keep using third-party platforms?",
+  answer: "Yes, you can continue using third-party platforms while gradually shifting your customers to your own branded system."
+}, {
+  question: "How do I handle delivery logistics?",
+  answer: "Brandae offers built-in delivery management tools to coordinate your own drivers or integrate with third-party delivery services."
+}, {
+  question: "Is there a contract lock-in period?",
+  answer: "We offer flexible monthly plans with no long-term contracts, as well as annual plans with special pricing."
+}, {
+  question: "What kind of support is provided?",
+  answer: "We provide 24/7 technical support, regular training sessions, and a dedicated account manager for enterprise clients."
+}];
