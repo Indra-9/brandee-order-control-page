@@ -10,16 +10,12 @@ import IntegrationLogo from '@/components/IntegrationLogo';
 import Navbar from '@/components/Navbar';
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
-
 const Index = () => {
-  const { scrollYProgress } = useScroll();
-
-  return (
-    <div className="min-h-screen bg-brandae-dark text-white">
-      <SEO 
-        title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps"
-        description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control."
-      />
+  const {
+    scrollYProgress
+  } = useScroll();
+  return <div className="min-h-screen bg-brandae-dark text-white">
+      <SEO title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
 
       {/* Navigation */}
       <Navbar />
@@ -29,39 +25,54 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent_70%)]"></div>
         
-        <div className="container mx-auto z-10">
+        <div className="container mx-auto z-10 px-0">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <motion.div 
-              className="flex-1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <motion.h1 
-                className="text-4xl md:text-6xl font-bold mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
+            <motion.div className="flex-1" initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.8
+          }}>
+              <motion.h1 className="text-4xl md:text-6xl font-bold mb-6" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.2
+            }}>
                 Own Your Orders. <br />
                 <span className="gradient-text">Own Your Customers.</span>
               </motion.h1>
               
-              <motion.p 
-                className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
+              <motion.p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.4
+            }}>
                 Say goodbye to aggregator commissions and customer data loss. Brandae helps you grow with your own branded app, powerful marketing tools, and delivery control.
               </motion.p>
               
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
+              <motion.div className="flex flex-col sm:flex-row gap-4" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.6
+            }}>
                 <Popover>
                   <PopoverTrigger asChild>
                     <div>
@@ -76,58 +87,40 @@ const Index = () => {
               </motion.div>
             </motion.div>
             
-            <motion.div 
-              className="flex-1 relative"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
+            <motion.div className="flex-1 relative" initial={{
+            opacity: 0,
+            scale: 0.9
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            duration: 0.8,
+            delay: 0.4
+          }}>
               <div className="relative w-full max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-t from-brandae-purple/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Brandae App Demo" 
-                  className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-white/10"
-                />
+                <img src="/placeholder.svg" alt="Brandae App Demo" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-white/10" />
               </div>
               
-              <motion.div 
-                className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl"
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.5, 0.3]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-              />
+              <motion.div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl" animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }} transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }} />
             </motion.div>
           </div>
         </div>
         
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ 
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-          }}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-brandae-green"
-          >
+        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{
+        y: [0, 10, 0]
+      }} transition={{
+        duration: 1.5,
+        repeat: Infinity
+      }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brandae-green">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </motion.div>
@@ -135,14 +128,18 @@ const Index = () => {
       
       {/* Featured Sections - Bento Grid */}
       <section id="features" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
-        <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto px-0">
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need to <span className="gradient-text">Own Your Digital Storefront</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">All the tools you need to build a successful online ordering business without the hefty fees.</p>
           </motion.div>
@@ -286,59 +283,54 @@ const Index = () => {
       
       {/* How It Works - 3-Step Flow */}
       <section id="how-it-works" className="px-6 md:px-12 lg:px-24 py-20">
-        <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto px-0">
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Online in <span className="gradient-text">3 Simple Steps</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Launch your digital storefront in minutes, not months.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <StepCard 
-              number={1}
-              title="Create Your Storefront"
-              description="Add your logo, menu items with images, and select your brand theme to match your identity perfectly."
-            />
+            <StepCard number={1} title="Create Your Storefront" description="Add your logo, menu items with images, and select your brand theme to match your identity perfectly." />
             
-            <StepCard 
-              number={2}
-              title="Customize & Set Offers"
-              description="Set your pricing, delivery areas, and create launch campaigns to attract your first customers."
-            />
+            <StepCard number={2} title="Customize & Set Offers" description="Set your pricing, delivery areas, and create launch campaigns to attract your first customers." />
             
-            <StepCard 
-              number={3}
-              title="Go Live & Start Earning"
-              description="Share your app link, QR code, and start accepting orders directly with zero commission fees."
-            />
+            <StepCard number={3} title="Go Live & Start Earning" description="Share your app link, QR code, and start accepting orders directly with zero commission fees." />
           </div>
         </div>
       </section>
       
       {/* Branded For Different Verticals */}
       <section id="solutions" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
-        <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto px-0">
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for <span className="gradient-text">Every Local Business</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Tailored solutions for different types of food and grocery businesses.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div 
-              className="relative h-64 rounded-xl overflow-hidden group"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            y: -5
+          }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
               <img src="/placeholder.svg" alt="Restaurants" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-x-0 bottom-0 p-6 z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -347,10 +339,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="relative h-64 rounded-xl overflow-hidden group"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            y: -5
+          }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
               <img src="/placeholder.svg" alt="Cloud Kitchens" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-x-0 bottom-0 p-6 z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -359,10 +350,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="relative h-64 rounded-xl overflow-hidden group"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            y: -5
+          }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
               <img src="/placeholder.svg" alt="Grocery Stores" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-x-0 bottom-0 p-6 z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -371,10 +361,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="relative h-64 rounded-xl overflow-hidden group"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            y: -5
+          }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
               <img src="/placeholder.svg" alt="Cafes & Bakeries" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-x-0 bottom-0 p-6 z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -388,15 +377,19 @@ const Index = () => {
       
       {/* Dashboard Preview */}
       <section id="dashboard" className="px-6 md:px-12 lg:px-24 py-20">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-0">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <motion.div 
-              className="flex-1"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div className="flex-1" initial={{
+            opacity: 0,
+            x: -50
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.8
+          }}>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 <span className="gradient-text">Track Everything.</span><br />
                 Improve Every Day.
@@ -407,20 +400,30 @@ const Index = () => {
               </p>
               
               <ul className="space-y-4">
-                {[
-                  { title: 'Sales Trends', description: 'Track daily, weekly, and monthly revenue patterns' },
-                  { title: 'Repeat Customers', description: 'Monitor customer retention and ordering frequency' },
-                  { title: 'Average Order Value', description: 'Identify opportunities to increase order sizes' },
-                  { title: 'Campaign ROI', description: 'Measure the effectiveness of your marketing efforts' }
-                ].map((item, index) => (
-                  <motion.li 
-                    key={index}
-                    className="flex items-start gap-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
+                {[{
+                title: 'Sales Trends',
+                description: 'Track daily, weekly, and monthly revenue patterns'
+              }, {
+                title: 'Repeat Customers',
+                description: 'Monitor customer retention and ordering frequency'
+              }, {
+                title: 'Average Order Value',
+                description: 'Identify opportunities to increase order sizes'
+              }, {
+                title: 'Campaign ROI',
+                description: 'Measure the effectiveness of your marketing efforts'
+              }].map((item, index) => <motion.li key={index} className="flex items-start gap-3" initial={{
+                opacity: 0,
+                y: 10
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                duration: 0.5,
+                delay: index * 0.1
+              }}>
                     <div className="mt-1 text-brandae-green">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6L9 17l-5-5" />
@@ -430,25 +433,24 @@ const Index = () => {
                       <h4 className="font-semibold">{item.title}</h4>
                       <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
-                  </motion.li>
-                ))}
+                  </motion.li>)}
               </ul>
             </motion.div>
             
-            <motion.div 
-              className="flex-1 relative"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div className="flex-1 relative" initial={{
+            opacity: 0,
+            x: 50
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.8
+          }}>
               <div className="relative w-full max-w-lg mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-t from-brandae-purple/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Analytics Dashboard" 
-                  className="relative z-10 w-full h-auto rounded-xl shadow-xl border border-white/10"
-                />
+                <img src="/placeholder.svg" alt="Analytics Dashboard" className="relative z-10 w-full h-auto rounded-xl shadow-xl border border-white/10" />
               </div>
             </motion.div>
           </div>
@@ -457,46 +459,36 @@ const Index = () => {
       
       {/* Testimonials */}
       <section id="testimonials" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
-        <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto px-0">
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by <span className="gradient-text">1,000+ Local Businesses</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">See what our customers are saying about their experience with Brandae.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <TestimonialCard
-              quote="Since switching to Brandae, our profit margins have gone up by 25%. No more commission fees means we can finally invest in growing our business."
-              author="Raj Kumar"
-              company="Spice Garden Restaurant"
-              image="/placeholder.svg"
-            />
+            <TestimonialCard quote="Since switching to Brandae, our profit margins have gone up by 25%. No more commission fees means we can finally invest in growing our business." author="Raj Kumar" company="Spice Garden Restaurant" image="/placeholder.svg" />
             
-            <TestimonialCard
-              quote="The marketing tools are incredible. Our customer retention is up by 40% thanks to the automated loyalty program and push notifications."
-              author="Sarah Chen"
-              company="Green Basket Grocery"
-              image="/placeholder.svg"
-            />
+            <TestimonialCard quote="The marketing tools are incredible. Our customer retention is up by 40% thanks to the automated loyalty program and push notifications." author="Sarah Chen" company="Green Basket Grocery" image="/placeholder.svg" />
             
-            <TestimonialCard
-              quote="The setup was so easy! Within a week, we had our own branded app and were taking direct orders. Support team was super helpful."
-              author="Mike Johnson"
-              company="City Brew Coffee"
-              image="/placeholder.svg"
-            />
+            <TestimonialCard quote="The setup was so easy! Within a week, we had our own branded app and were taking direct orders. Support team was super helpful." author="Mike Johnson" company="City Brew Coffee" image="/placeholder.svg" />
           </div>
           
-          <motion.div 
-            className="mt-12 text-center"
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div className="mt-12 text-center" whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }}>
             <AnimatedButton variant="outline" size="md">See More Success Stories</AnimatedButton>
           </motion.div>
         </div>
@@ -504,23 +496,26 @@ const Index = () => {
       
       {/* Admin Panel & Toolkit */}
       <section id="toolkit" className="px-6 md:px-12 lg:px-24 py-20">
-        <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto px-0">
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">You're Always <span className="gradient-text">in Control</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Powerful yet intuitive tools that put you in the driver's seat.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div 
-              className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            y: -5
+          }}>
               <h3 className="text-xl font-semibold mb-4">Menu Editor</h3>
               <p className="text-muted-foreground mb-6">Easily update your menu items, prices, descriptions, and availability in real-time.</p>
               <div className="relative h-48 rounded-lg overflow-hidden">
@@ -531,10 +526,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            y: -5
+          }}>
               <h3 className="text-xl font-semibold mb-4">Campaign Builder</h3>
               <p className="text-muted-foreground mb-6">Create and launch marketing campaigns with customizable templates in minutes.</p>
               <div className="relative h-48 rounded-lg overflow-hidden">
@@ -545,10 +539,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            y: -5
+          }}>
               <h3 className="text-xl font-semibold mb-4">Live Order Feed</h3>
               <p className="text-muted-foreground mb-6">Monitor incoming orders, kitchen status, and delivery progress from one dashboard.</p>
               <div className="relative h-48 rounded-lg overflow-hidden">
@@ -559,10 +552,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div 
-              className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300"
-              whileHover={{ y: -5 }}
-            >
+            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            y: -5
+          }}>
               <h3 className="text-xl font-semibold mb-4">Driver Assignment</h3>
               <p className="text-muted-foreground mb-6">Manage your delivery fleet, optimize routes, and track deliveries in real-time.</p>
               <div className="relative h-48 rounded-lg overflow-hidden">
@@ -579,63 +571,64 @@ const Index = () => {
       {/* Integrations */}
       <section id="integrations" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div className="text-center mb-16" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Plug & Play With <span className="gradient-text">Your Tools</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Brandae seamlessly integrates with your existing tech stack.</p>
           </motion.div>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-              <motion.div 
-                key={index}
-                whileHover={{ y: -5, scale: 1.05 }}
-                className="bg-brandae-gray p-4 rounded-xl flex items-center justify-center h-24 border border-white/5"
-              >
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(index => <motion.div key={index} whileHover={{
+            y: -5,
+            scale: 1.05
+          }} className="bg-brandae-gray p-4 rounded-xl flex items-center justify-center h-24 border border-white/5">
                 <img src="/placeholder.svg" alt={`Integration ${index}`} className="max-h-12" />
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
       </section>
       
       {/* Security & Reliability */}
       <section id="security" className="px-6 md:px-12 lg:px-24 py-20">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-0">
           <div className="bg-brandae-gray rounded-2xl p-8 md:p-12 border border-white/5">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <motion.div 
-                className="flex-1"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
+              <motion.div className="flex-1" initial={{
+              opacity: 0
+            }} whileInView={{
+              opacity: 1
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.8
+            }}>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   <span className="gradient-text">Enterprise-grade Security,</span><br />
                   SMB Pricing
                 </h2>
                 
                 <ul className="space-y-4">
-                  {[
-                    'End-to-end encryption for all transactions',
-                    'GDPR-ready data policies and storage',
-                    'Daily automated backups of your critical data',
-                    '99.99% uptime guarantee with 24/7 monitoring'
-                  ].map((item, index) => (
-                    <motion.li 
-                      key={index}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
+                  {['End-to-end encryption for all transactions', 'GDPR-ready data policies and storage', 'Daily automated backups of your critical data', '99.99% uptime guarantee with 24/7 monitoring'].map((item, index) => <motion.li key={index} className="flex items-center gap-3" initial={{
+                  opacity: 0,
+                  y: 10
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} viewport={{
+                  once: true
+                }} transition={{
+                  duration: 0.5,
+                  delay: index * 0.1
+                }}>
                       <div className="text-brandae-green">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
@@ -643,25 +636,24 @@ const Index = () => {
                         </svg>
                       </div>
                       <span>{item}</span>
-                    </motion.li>
-                  ))}
+                    </motion.li>)}
                 </ul>
               </motion.div>
               
-              <motion.div 
-                className="flex-shrink-0 w-full md:w-1/3"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
+              <motion.div className="flex-shrink-0 w-full md:w-1/3" initial={{
+              opacity: 0,
+              scale: 0.9
+            }} whileInView={{
+              opacity: 1,
+              scale: 1
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.8
+            }}>
                 <div className="relative">
                   <div className="absolute inset-0 bg-brandae-green/20 rounded-full blur-3xl"></div>
-                  <img 
-                    src="/placeholder.svg"
-                    alt="Security"
-                    className="relative z-10 w-full h-auto"
-                  />
+                  <img src="/placeholder.svg" alt="Security" className="relative z-10 w-full h-auto" />
                 </div>
               </motion.div>
             </div>
@@ -672,34 +664,49 @@ const Index = () => {
       {/* Call to Action Section with Form Popup */}
       <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker relative">
         <div className="absolute inset-0 bg-gradient-to-br from-brandae-purple/20 to-transparent opacity-50"></div>
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-10 px-0">
           <div className="max-w-3xl mx-auto text-center">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.h2 className="text-3xl md:text-4xl font-bold mb-6" initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }}>
               Ready to <span className="gradient-text">Boost Your Revenue?</span>
             </motion.h2>
             
-            <motion.p 
-              className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            <motion.p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto" initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }}>
               Join thousands of local businesses who have taken control of their online ordering experience and increased their revenue by up to 30%.
             </motion.p>
             
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }}>
               <Popover>
                 <PopoverTrigger asChild>
                   <div className="inline-block">
@@ -714,13 +721,16 @@ const Index = () => {
               </Popover>
             </motion.div>
             
-            <motion.div 
-              className="mt-8 flex flex-wrap justify-center gap-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <motion.div className="mt-8 flex flex-wrap justify-center gap-6" initial={{
+            opacity: 0
+          }} whileInView={{
+            opacity: 1
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.3
+          }}>
               <div className="flex items-center gap-2 text-sm text-gray-300">
                 <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
@@ -751,14 +761,18 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-brandae-purple/20 to-transparent"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] aspect-square bg-gradient-radial from-brandae-green/10 to-transparent opacity-50"></div>
         
-        <div className="container mx-auto relative z-10">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <div className="container mx-auto relative z-10 px-0">
+          <motion.div className="text-center max-w-3xl mx-auto" initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.8
+        }}>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Launch Your Branded Ordering App <span className="gradient-text">Today</span>
             </h2>
@@ -806,7 +820,7 @@ const Index = () => {
       
       {/* Footer */}
       <footer className="px-6 md:px-12 lg:px-24 py-12 bg-brandae-darker border-t border-white/5">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-[10px]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div>
               <h3 className="font-bold mb-4 text-lg">Product</h3>
@@ -868,8 +882,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
