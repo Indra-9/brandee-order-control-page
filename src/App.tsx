@@ -7,20 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
-
-// Update the Index page colors
-// This is a temporary fix for the Index page until we update that file directly
-// The error was: Type '"purple"' is not assignable to type '"blue" | "green" | "orange" | "pink" | "mixed"'
-document.addEventListener('DOMContentLoaded', () => {
-  // This will run after the page loads to fix any color issues in the Index page
-  setTimeout(() => {
-    const purpleElements = document.querySelectorAll('[data-gradient="purple"]');
-    purpleElements.forEach(el => {
-      el.setAttribute('data-gradient', 'mixed');
-    });
-  }, 100);
-});
 
 const queryClient = new QueryClient();
 
@@ -34,6 +23,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

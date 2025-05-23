@@ -13,7 +13,7 @@ const navItems = [
   { name: 'How It Works', href: '#how-it-works' },
   { name: 'Solutions', href: '#solutions' },
   { name: 'Dashboard', href: '#dashboard' },
-  { name: 'Testimonials', href: '#testimonials' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Pricing', href: '/pricing' }
 ];
 
@@ -32,7 +32,7 @@ export default function Navbar() {
             className="flex-shrink-0"
           >
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-brandae-purple to-brandae-green flex items-center justify-center text-white font-bold text-xl">B</div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#093d30] to-brandae-green flex items-center justify-center text-white font-bold text-xl">B</div>
               <span className="text-white text-xl font-bold">Brandae</span>
             </Link>
           </motion.div>
@@ -48,11 +48,11 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
               >
                 {item.href.startsWith('/') ? (
-                  <Link to={item.href} className="text-gray-300 hover:text-white transition-colors">
+                  <Link to={item.href} className="text-gray-300 hover:text-brandae-green transition-colors">
                     {item.name}
                   </Link>
                 ) : (
-                  <a href={item.href} className="text-gray-300 hover:text-white transition-colors">
+                  <a href={item.href} className="text-gray-300 hover:text-brandae-green transition-colors">
                     {item.name}
                   </a>
                 )}
@@ -104,11 +104,11 @@ export default function Navbar() {
           {navItems.map((item) => (
             <div key={item.name} onClick={() => setIsMenuOpen(false)}>
               {item.href.startsWith('/') ? (
-                <Link to={item.href} className="text-gray-300 hover:text-white transition-colors py-2 block">
+                <Link to={item.href} className="text-gray-300 hover:text-brandae-green transition-colors py-2 block">
                   {item.name}
                 </Link>
               ) : (
-                <a href={item.href} className="text-gray-300 hover:text-white transition-colors py-2 block">
+                <a href={item.href} className="text-gray-300 hover:text-brandae-green transition-colors py-2 block">
                   {item.name}
                 </a>
               )}

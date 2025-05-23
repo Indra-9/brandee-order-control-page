@@ -10,12 +10,71 @@ import IntegrationLogo from '@/components/IntegrationLogo';
 import Navbar from '@/components/Navbar';
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
+
 const Index = () => {
-  const {
-    scrollYProgress
-  } = useScroll();
-  return <div className="min-h-screen bg-brandae-dark text-white">
-      <SEO title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
+  const { scrollYProgress } = useScroll();
+  
+  return (
+    <div className="min-h-screen bg-brandae-dark text-white relative overflow-hidden">
+      <SEO 
+        title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" 
+        description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." 
+      />
+
+      {/* Floating animated elements */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <motion.div
+          className="absolute top-20 left-10 w-4 h-4 bg-brandae-green/30 rounded-full"
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 10, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-20 w-6 h-6 bg-[#093d30]/40 rounded-full"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -15, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-1/4 w-3 h-3 bg-brandae-green/25 rounded-full"
+          animate={{
+            y: [0, -25, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+        <motion.div
+          className="absolute top-2/3 right-1/3 w-5 h-5 bg-[#093c2f]/30 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        />
+      </div>
 
       {/* Navigation */}
       <Navbar />
@@ -23,56 +82,41 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,61,48,0.15),transparent_70%)]"></div>
         
         <div className="container mx-auto z-10 px-0">
           <div className="flex flex-col lg:flex-row items-center gap-12">
-            <motion.div className="flex-1" initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.8
-          }}>
-              <motion.h1 className="text-4xl md:text-6xl font-bold mb-6" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.2
-            }}>
+            <motion.div 
+              className="flex-1" 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold mb-6" 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Own Your Orders. <br />
                 <span className="gradient-text">Own Your Customers.</span>
               </motion.h1>
               
-              <motion.p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.4
-            }}>
+              <motion.p 
+                className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl" 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 Say goodbye to aggregator commissions and customer data loss. Brandae helps you grow with your own branded app, powerful marketing tools, and delivery control.
               </motion.p>
               
-              <motion.div className="flex flex-col sm:flex-row gap-4" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.6
-            }}>
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4" 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
                 <Popover>
                   <PopoverTrigger asChild>
                     <div className="px-0 mx-0">
@@ -87,39 +131,38 @@ const Index = () => {
               </motion.div>
             </motion.div>
             
-            <motion.div className="flex-1 relative" initial={{
-            opacity: 0,
-            scale: 0.9
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            duration: 0.8,
-            delay: 0.4
-          }}>
+            <motion.div 
+              className="flex-1 relative" 
+              initial={{ opacity: 0, scale: 0.9 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <div className="relative w-full max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-brandae-purple/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img src="/placeholder.svg" alt="Brandae App Demo" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-white/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
+                <img src="/placeholder.svg" alt="Brandae App Demo" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-brandae-green/20" />
               </div>
               
-              <motion.div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl" animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.3, 0.5, 0.3]
-            }} transition={{
-              duration: 4,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }} />
+              <motion.div 
+                className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl" 
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.3, 0.5, 0.3]
+                }} 
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }} 
+              />
             </motion.div>
           </div>
         </div>
         
-        <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{
-        y: [0, 10, 0]
-      }} transition={{
-        duration: 1.5,
-        repeat: Infinity
-      }}>
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2" 
+          animate={{ y: [0, 10, 0] }} 
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brandae-green">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
@@ -129,17 +172,13 @@ const Index = () => {
       {/* Featured Sections - Bento Grid */}
       <section id="features" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto px-0">
-          <motion.div className="text-center mb-16" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.8
-        }}>
+          <motion.div 
+            className="text-center mb-16" 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need to <span className="gradient-text">Own Your Digital Storefront</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">All the tools you need to build a successful online ordering business without the hefty fees.</p>
           </motion.div>
@@ -157,7 +196,7 @@ const Index = () => {
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={1} gradient="purple">
+            <BentoGridItem delay={1} gradient="brand-dark">
               <div className="p-6 h-full">
                 <div className="mb-4 text-brandae-green">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -230,53 +269,6 @@ const Index = () => {
                 <p className="text-muted-foreground">Insights on sales, order trends, customer behavior, and campaign performance.</p>
               </div>
             </BentoGridItem>
-            
-            <BentoGridItem delay={6} gradient="green">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="5" width="20" height="14" rx="2" />
-                    <line x1="2" y1="10" x2="22" y2="10" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">POS & Payment Integration</h3>
-                <p className="text-muted-foreground">Works out-of-the-box with major systems like Razorpay, Petpooja, Stripe, and more.</p>
-              </div>
-            </BentoGridItem>
-            
-            <BentoGridItem delay={7} gradient="blue">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <path d="M7 7h.01" />
-                    <path d="M17 7h.01" />
-                    <path d="M7 17h.01" />
-                    <path d="M17 17h.01" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Easy Admin Control Panel</h3>
-                <p className="text-muted-foreground">Modify menu, pricing, offers, and track orders – no technical skills needed.</p>
-              </div>
-            </BentoGridItem>
-            
-            <BentoGridItem delay={8} gradient="purple">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M16 10h.01" />
-                    <path d="M12 10h.01" />
-                    <path d="M8 10h.01" />
-                    <path d="M16 14h.01" />
-                    <path d="M12 14h.01" />
-                    <path d="M8 14h.01" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Affordable for SMBs</h3>
-                <p className="text-muted-foreground">Fast setup, low monthly pricing, and massive ROI compared to traditional aggregators.</p>
-              </div>
-            </BentoGridItem>
           </BentoGrid>
         </div>
       </section>
@@ -284,27 +276,35 @@ const Index = () => {
       {/* How It Works - 3-Step Flow */}
       <section id="how-it-works" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto px-0">
-          <motion.div className="text-center mb-16" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.8
-        }}>
+          <motion.div 
+            className="text-center mb-16" 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Online in <span className="gradient-text">3 Simple Steps</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Launch your digital storefront in minutes, not months.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <StepCard number={1} title="Create Your Storefront" description="Add your logo, menu items with images, and select your brand theme to match your identity perfectly." />
+            <StepCard 
+              number={1} 
+              title="Create Your Storefront" 
+              description="Add your logo, menu items with images, and select your brand theme to match your identity perfectly." 
+            />
             
-            <StepCard number={2} title="Customize & Set Offers" description="Set your pricing, delivery areas, and create launch campaigns to attract your first customers." />
+            <StepCard 
+              number={2} 
+              title="Customize & Set Offers" 
+              description="Set your pricing, delivery areas, and create launch campaigns to attract your first customers." 
+            />
             
-            <StepCard number={3} title="Go Live & Start Earning" description="Share your app link, QR code, and start accepting orders directly with zero commission fees." />
+            <StepCard 
+              number={3} 
+              title="Go Live & Start Earning" 
+              description="Share your app link, QR code, and start accepting orders directly with zero commission fees." 
+            />
           </div>
         </div>
       </section>
@@ -312,17 +312,13 @@ const Index = () => {
       {/* Branded For Different Verticals */}
       <section id="solutions" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
         <div className="container mx-auto px-0">
-          <motion.div className="text-center mb-16" initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.8
-        }}>
+          <motion.div 
+            className="text-center mb-16" 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for <span className="gradient-text">Every Local Business</span></h2>
             <p className="text-gray-300 max-w-2xl mx-auto">Tailored solutions for different types of food and grocery businesses.</p>
           </motion.div>
@@ -449,7 +445,7 @@ const Index = () => {
             duration: 0.8
           }}>
               <div className="relative w-full max-w-lg mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-brandae-purple/20 to-transparent rounded-3xl filter blur-xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
                 <img src="/placeholder.svg" alt="Analytics Dashboard" className="relative z-10 w-full h-auto rounded-xl shadow-xl border border-white/10" />
               </div>
             </motion.div>
@@ -663,7 +659,7 @@ const Index = () => {
       
       {/* Call to Action Section with Form Popup */}
       <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-brandae-purple/20 to-transparent opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#093d30]/20 to-transparent opacity-50"></div>
         <div className="container mx-auto relative z-10 px-0">
           <div className="max-w-3xl mx-auto text-center">
             <motion.h2 className="text-3xl md:text-4xl font-bold mb-6" initial={{
@@ -758,7 +754,7 @@ const Index = () => {
       
       {/* Final CTA */}
       <section className="px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brandae-purple/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#093d30]/20 to-transparent"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] aspect-square bg-gradient-radial from-brandae-green/10 to-transparent opacity-50"></div>
         
         <div className="container mx-auto relative z-10 px-0">
@@ -882,6 +878,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
