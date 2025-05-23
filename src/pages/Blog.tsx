@@ -198,9 +198,7 @@ const Blog = () => {
                       </div>
                     </div>
                     <Link to={`/blog/${blogPosts[0].id}`}>
-                      <AnimatedButton variant="outline" size="sm" className="text-base rounded">
-                        Read More <ArrowRight size={16} className="ml-2" />
-                      </AnimatedButton>
+                      
                     </Link>
                   </div>
                 </div>
