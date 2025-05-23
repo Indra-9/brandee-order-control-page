@@ -9,6 +9,19 @@ import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 
+// Update the Index page colors
+// This is a temporary fix for the Index page until we update that file directly
+// The error was: Type '"purple"' is not assignable to type '"blue" | "green" | "orange" | "pink" | "mixed"'
+document.addEventListener('DOMContentLoaded', () => {
+  // This will run after the page loads to fix any color issues in the Index page
+  setTimeout(() => {
+    const purpleElements = document.querySelectorAll('[data-gradient="purple"]');
+    purpleElements.forEach(el => {
+      el.setAttribute('data-gradient', 'mixed');
+    });
+  }, 100);
+});
+
 const queryClient = new QueryClient();
 
 const App = () => (

@@ -18,9 +18,9 @@ export default function FeatureCard({ title, description, icon, className, delay
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.1), 0 10px 10px -5px rgba(124, 58, 237, 0.04)' }}
+      whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(201, 242, 104, 0.1), 0 10px 10px -5px rgba(201, 242, 104, 0.04)' }}
       className={cn(
-        'flex flex-col p-6 bg-brandae-gray rounded-xl border border-white/5 transition-all duration-300',
+        'flex flex-col p-6 bg-brandae-gray rounded-xl border border-brandae-green/30 transition-all duration-300',
         className
       )}
     >
