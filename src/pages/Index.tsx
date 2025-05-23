@@ -75,8 +75,8 @@ const Index = () => {
             }}>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div>
-                      <AnimatedButton variant="primary" size="lg">Book a Demo</AnimatedButton>
+                    <div className="px-0 mx-0">
+                      <AnimatedButton variant="primary" size="lg" className="px-[100px]">Book a Demo</AnimatedButton>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
