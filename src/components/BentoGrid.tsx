@@ -66,9 +66,9 @@ export function BentoGridItem({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(201, 242, 104, 0.1), 0 10px 10px -5px rgba(201, 242, 104, 0.04)" }}
+      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
       className={cn(
-        'bg-brandae-gray rounded-xl border-2 border-brandae-green/40 overflow-hidden relative group shadow-lg shadow-brandae-green/5',
+        'bg-brandae-gray rounded-xl border border-brandae-green/40 overflow-hidden relative group',
         'before:absolute before:inset-0 before:opacity-40 before:rounded-xl before:z-0',
         gradient && gradientClasses[gradient],
         colSpanClasses[colSpan as keyof typeof colSpanClasses],
