@@ -1,12 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, ArrowLeft, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 
@@ -118,7 +121,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
   if (showPreview) {
     return (
       <div className="min-h-screen bg-brandae-dark text-white">
-        <SEO title="Blog Preview" />
+        <SEO title="Blog Preview" description="Preview of blog post content" />
         <Navbar />
         
         <div className="pt-32 px-6 md:px-12 lg:px-24">
@@ -190,7 +193,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
 
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
-      <SEO title={post ? "Edit Blog Post" : "Create Blog Post"} />
+      <SEO title={post ? "Edit Blog Post" : "Create Blog Post"} description="Blog post editor for creating and editing content" />
       <Navbar />
       
       <div className="pt-32 px-6 md:px-12 lg:px-24">

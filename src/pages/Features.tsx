@@ -115,22 +115,24 @@ export default function Features() {
       {/* Tabs Navigation */}
       <div className="container mx-auto px-4 mb-16">
         <Tabs defaultValue="features" onValueChange={setActiveTab} className="w-full">
-          <TabsList className="bg-brandae-gray/50 mx-auto border border-white/10 rounded-none px-0">
-            <TabsTrigger value="features" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20">
-              <Layers className="mr-2 h-4 w-4" />
-              Core Features
+          <TabsList className="bg-brandae-gray/50 mx-auto border border-white/10 rounded-none px-0 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 h-auto">
+            <TabsTrigger value="features" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+              <Layers className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Core </span>Features
             </TabsTrigger>
-            <TabsTrigger value="integrations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20">
-              <Link className="mr-2 h-4 w-4" />
-              Integrations
+            <TabsTrigger value="integrations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+              <Link className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Integrations</span>
+              <span className="sm:hidden">Plugins</span>
             </TabsTrigger>
-            <TabsTrigger value="dashboard" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20">
-              <Settings className="mr-2 h-4 w-4" />
+            <TabsTrigger value="dashboard" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+              <Settings className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               Dashboard
             </TabsTrigger>
-            <TabsTrigger value="marketplace" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20">
-              <Store className="mr-2 h-4 w-4" />
-              Marketplace
+            <TabsTrigger value="marketplace" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+              <Store className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Marketplace</span>
+              <span className="sm:hidden">Market</span>
             </TabsTrigger>
           </TabsList>
 
