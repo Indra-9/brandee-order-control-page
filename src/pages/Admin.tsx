@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
@@ -179,7 +178,6 @@ const Admin = () => {
       <SEO 
         title="Admin Dashboard - Brandae" 
         description="Manage your blog posts and content"
-        noIndex={true}
       />
       
       <Navbar />

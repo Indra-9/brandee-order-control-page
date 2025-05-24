@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, ArrowLeft, Eye } from 'lucide-react';
@@ -119,7 +118,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
   if (showPreview) {
     return (
       <div className="min-h-screen bg-brandae-dark text-white">
-        <SEO title="Blog Preview" noIndex={true} />
+        <SEO title="Blog Preview" />
         <Navbar />
         
         <div className="pt-32 px-6 md:px-12 lg:px-24">
@@ -191,7 +190,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onSave, onCancel }) => {
 
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
-      <SEO title={post ? "Edit Blog Post" : "Create Blog Post"} noIndex={true} />
+      <SEO title={post ? "Edit Blog Post" : "Create Blog Post"} />
       <Navbar />
       
       <div className="pt-32 px-6 md:px-12 lg:px-24">
