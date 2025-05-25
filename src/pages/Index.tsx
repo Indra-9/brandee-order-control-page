@@ -138,7 +138,7 @@ const Index = () => {
           }}>
               <div className="relative w-full max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img src="/placeholder.svg" alt="Brandae App Demo" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-brandae-green/20" />
+                <img alt="Brandae App Demo" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-brandae-green/20" src="/lovable-uploads/b7b83b2d-2567-4919-a07d-da4094321086.png" />
               </div>
               
               <motion.div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl" animate={{
