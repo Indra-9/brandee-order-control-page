@@ -6,6 +6,7 @@ import { Calendar, User, Clock, ArrowLeft, Share2, BookmarkPlus, ChevronRight } 
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 import AnimatedButton from '@/components/AnimatedButton';
+import Footer from '@/components/Footer';
 
 // Mock blog post data - in a real app, this would come from an API
 const blogPost = {
@@ -380,6 +381,7 @@ const BlogPost = () => {
           </Link>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { 
   Layers, CreditCard, Check, Settings, Link, Zap, TrendingUp, Info, 
   Clock, Globe, Shield, MessageSquare, Bell, Package, Search, 
@@ -862,6 +863,7 @@ export default function Features() {
           </Popover>
         </div>
       </motion.div>
+      <Footer />
     </div>;
 }
 

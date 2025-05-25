@@ -15,7 +15,7 @@ export default function StepCard({ number, title, description, className }: Step
     <motion.div
       whileHover={{ y: -5 }}
       className={cn(
-        'flex flex-col p-6 bg-brandae-gray rounded-xl border border-white/5 relative',
+        'flex flex-col p-6 bg-brandae-gray/60 backdrop-blur-md rounded-xl border border-white/10 relative',
         className
       )}
     >

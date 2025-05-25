@@ -7,6 +7,7 @@ import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import Footer from '@/components/Footer';
 
 interface AuthFormData {
   email: string;
@@ -189,6 +190,7 @@ export default function AuthPage() {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

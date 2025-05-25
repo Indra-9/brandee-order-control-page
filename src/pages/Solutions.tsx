@@ -5,6 +5,7 @@ import { Store, ShoppingBag, Calendar, Users, Truck, CreditCard, Star, BarChart3
 import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 
 export default function Solutions() {
   const solutions = [
@@ -273,6 +274,7 @@ export default function Solutions() {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

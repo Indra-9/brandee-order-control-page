@@ -51,7 +51,7 @@ export default function Navbar() {
     });
     return () => subscription.unsubscribe();
   }, []);
-  return <nav className="fixed top-0 left-0 right-0 z-50 bg-brandae-dark/80 backdrop-blur-md border-b border-white/5">
+  return <nav className="fixed top-0 left-0 right-0 z-50 bg-brandae-dark/70 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -131,7 +131,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className={cn("md:hidden transition-all duration-300 overflow-hidden", isMenuOpen ? "max-h-80 border-t border-white/5" : "max-h-0")}>
+      <div className={cn("md:hidden transition-all duration-300 overflow-hidden", isMenuOpen ? "max-h-96 border-t border-white/5 bg-brandae-dark/70 backdrop-blur-md" : "max-h-0")}>
         <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
           {navItems.map(item => <div key={item.name} onClick={() => setIsMenuOpen(false)}>
               {item.href.startsWith('/') ? <Link to={item.href} className="text-gray-300 hover:text-brandae-green transition-colors py-2 block">

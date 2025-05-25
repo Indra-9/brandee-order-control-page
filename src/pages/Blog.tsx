@@ -7,6 +7,7 @@ import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 import AnimatedButton from '@/components/AnimatedButton';
+import Footer from '@/components/Footer';
 
 interface BlogPost {
   id: string;
@@ -346,6 +347,7 @@ const Blog = () => {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

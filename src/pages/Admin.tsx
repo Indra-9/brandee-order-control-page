@@ -13,6 +13,7 @@ import SEO from '@/components/SEO';
 import AuthWrapper from '@/components/AuthWrapper';
 import ContactSubmissions from '@/components/ContactSubmissions';
 import WebhookManager from '@/components/WebhookManager';
+import Footer from '@/components/Footer';
 
 interface BlogPost {
   id: string;
@@ -384,6 +385,7 @@ const AdminContent = () => {
           </Tabs>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

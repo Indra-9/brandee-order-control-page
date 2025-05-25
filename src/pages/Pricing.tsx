@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import ContactForm from '@/components/ContactForm';
 import { Check, CreditCard } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import Footer from '@/components/Footer';
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
@@ -385,6 +386,7 @@ export default function Pricing() {
           </div>
         </div>
       </motion.div>
+      <Footer />
     </div>
   );
 }

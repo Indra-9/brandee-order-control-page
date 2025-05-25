@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 
 export default function HowItWorks() {
   const steps = [
@@ -446,6 +447,7 @@ export default function HowItWorks() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

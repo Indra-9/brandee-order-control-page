@@ -68,7 +68,7 @@ export function BentoGridItem({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
       className={cn(
-        'bg-brandae-gray rounded-xl border border-brandae-green/40 overflow-hidden relative group',
+        'bg-brandae-gray/60 backdrop-blur-md rounded-xl border border-white/10 hover:border-brandae-green/50 transition-colors duration-300 overflow-hidden relative group',
         'before:absolute before:inset-0 before:opacity-40 before:rounded-xl before:z-0',
         gradient && gradientClasses[gradient],
         colSpanClasses[colSpan as keyof typeof colSpanClasses],
