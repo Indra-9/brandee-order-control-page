@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AnimatedButton from '@/components/AnimatedButton';
 import FeatureCard from '@/components/FeatureCard';
 import { BentoGrid, BentoGridItem } from '@/components/BentoGrid';
@@ -8,7 +8,7 @@ import StepCard from '@/components/StepCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import IntegrationLogo from '@/components/IntegrationLogo';
 import Navbar from '@/components/Navbar';
-import ContactForm from '@/components/ContactForm';
+import EnhancedContactForm from '@/components/EnhancedContactForm';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
@@ -124,17 +124,17 @@ const Index = () => {
               duration: 0.8,
               delay: 0.6
             }}>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <div className="rounded mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="mx-0 px-0">
+                      <AnimatedButton variant="primary" size="lg" className="mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
                     </div>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                    <ContactForm />
-                  </PopoverContent>
-                </Popover>
-                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <EnhancedContactForm />
+                  </DialogContent>
+                </Dialog>
+                <AnimatedButton variant="outline" size="lg" className="font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
             
@@ -333,7 +333,7 @@ const Index = () => {
           </motion.div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            <motion.div className="relative h-64 rounded overflow-hidden group" whileHover={{
             y: -5
           }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
@@ -344,7 +344,9 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div className="relative h-64 rounded-xl overflow-hidden group" whileHover={{
+            <motion.div className="relative h-64 rounded overflow-hidden group" whileHover={{
+            <motion.div className="relative h-64 rounded overflow-hidden group" whileHover={{
+            <motion.div className="relative h-64 rounded overflow-hidden group" whileHover={{
             y: -5
           }}>
               <div className="absolute inset-0 bg-black/50 z-10"></div>
@@ -455,7 +457,7 @@ const Index = () => {
           }}>
               <div className="relative w-full max-w-lg mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img src="/placeholder.svg" alt="Analytics Dashboard" className="relative z-10 w-full h-auto rounded-xl shadow-xl border border-white/10" />
+                <img src="/placeholder.svg" alt="Analytics Dashboard" className="relative z-10 w-full h-auto rounded shadow-xl border border-white/10" />
               </div>
             </motion.div>
           </div>
@@ -518,12 +520,12 @@ const Index = () => {
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            <motion.div className="bg-brandae-gray p-6 rounded border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
             y: -5
           }}>
               <h3 className="text-xl font-semibold mb-4">Menu Editor</h3>
               <p className="text-muted-foreground mb-6">Easily update your menu items, prices, descriptions, and availability in real-time.</p>
-              <div className="relative h-48 rounded-lg overflow-hidden">
+              <div className="relative h-48 rounded overflow-hidden">
                 <img src="/placeholder.svg" alt="Menu Editor" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 flex items-end p-4 transition-opacity duration-300">
                   <span className="text-sm text-white">Intuitive drag-and-drop interface</span>
@@ -531,12 +533,12 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            <motion.div className="bg-brandae-gray p-6 rounded border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
             y: -5
           }}>
               <h3 className="text-xl font-semibold mb-4">Campaign Builder</h3>
               <p className="text-muted-foreground mb-6">Create and launch marketing campaigns with customizable templates in minutes.</p>
-              <div className="relative h-48 rounded-lg overflow-hidden">
+              <div className="relative h-48 rounded overflow-hidden">
                 <img src="/placeholder.svg" alt="Campaign Builder" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 flex items-end p-4 transition-opacity duration-300">
                   <span className="text-sm text-white">Track performance in real-time</span>
@@ -544,12 +546,12 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            <motion.div className="bg-brandae-gray p-6 rounded border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
             y: -5
           }}>
               <h3 className="text-xl font-semibold mb-4">Live Order Feed</h3>
               <p className="text-muted-foreground mb-6">Monitor incoming orders, kitchen status, and delivery progress from one dashboard.</p>
-              <div className="relative h-48 rounded-lg overflow-hidden">
+              <div className="relative h-48 rounded overflow-hidden">
                 <img src="/placeholder.svg" alt="Live Order Feed" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 flex items-end p-4 transition-opacity duration-300">
                   <span className="text-sm text-white">Real-time notifications</span>
@@ -557,12 +559,12 @@ const Index = () => {
               </div>
             </motion.div>
             
-            <motion.div className="bg-brandae-gray p-6 rounded-xl border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
+            <motion.div className="bg-brandae-gray p-6 rounded border border-white/5 group hover:border-brandae-green transition-colors duration-300" whileHover={{
             y: -5
           }}>
               <h3 className="text-xl font-semibold mb-4">Driver Assignment</h3>
               <p className="text-muted-foreground mb-6">Manage your delivery fleet, optimize routes, and track deliveries in real-time.</p>
-              <div className="relative h-48 rounded-lg overflow-hidden">
+              <div className="relative h-48 rounded overflow-hidden">
                 <img src="/placeholder.svg" alt="Driver Assignment" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 flex items-end p-4 transition-opacity duration-300">
                   <span className="text-sm text-white">Automated route optimization</span>
@@ -595,7 +597,7 @@ const Index = () => {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(index => <motion.div key={index} whileHover={{
             y: -5,
             scale: 1.05
-          }} className="bg-brandae-gray p-4 rounded-xl flex items-center justify-center h-24 border border-white/5">
+          }} className="bg-brandae-gray p-4 rounded flex items-center justify-center h-24 border border-white/5">
                 <img src="/placeholder.svg" alt={`Integration ${index}`} className="max-h-12" />
               </motion.div>)}
           </div>
@@ -712,18 +714,18 @@ const Index = () => {
             duration: 0.6,
             delay: 0.2
           }}>
-              <Popover>
-                <PopoverTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <div className="inline-block">
                     <AnimatedButton variant="primary" size="lg">
                       Schedule Your Free Demo
                     </AnimatedButton>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
-                </PopoverContent>
-              </Popover>
+                </DialogTrigger>
+                <DialogContent>
+                  <EnhancedContactForm />
+                </DialogContent>
+              </Dialog>
             </motion.div>
             
             <motion.div className="mt-8 flex flex-wrap justify-center gap-6" initial={{

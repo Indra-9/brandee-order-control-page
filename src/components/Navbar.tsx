@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import EnhancedContactForm from './EnhancedContactForm';
 import AnimatedButton from './AnimatedButton';
@@ -98,8 +98,8 @@ export default function Navbar() {
                 
               </Link>}
             
-            <Popover>
-              <PopoverTrigger asChild>
+            <Dialog>
+              <DialogTrigger asChild>
                 <motion.div initial={{
                 opacity: 0,
                 scale: 0.9
@@ -112,13 +112,13 @@ export default function Navbar() {
               }} whileHover={{
                 scale: 1.05
               }}>
-                  <AnimatedButton variant="primary" size="md" className="py-2 rounded-xl font-semibold flex items-center justify-center gap-2">Book a Demo</AnimatedButton>
+                  <AnimatedButton variant="primary" size="md" className="py-2 rounded font-semibold flex items-center justify-center gap-2">Book a Demo</AnimatedButton>
                 </motion.div>
-              </PopoverTrigger>
-              <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
+              </DialogTrigger>
+              <DialogContent>
                 <EnhancedContactForm />
-              </PopoverContent>
-            </Popover>
+              </DialogContent>
+            </Dialog>
           </div>
 
           {/* Mobile menu button */}
@@ -147,18 +147,18 @@ export default function Navbar() {
               </Link>
             </div>}
           
-          <Popover>
-            <PopoverTrigger asChild>
+          <Dialog>
+            <DialogTrigger asChild>
               <div className="py-2">
                 <AnimatedButton variant="primary" size="md" className="w-full justify-center">
                   Book a Demo
                 </AnimatedButton>
               </div>
-            </PopoverTrigger>
-            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
+            </DialogTrigger>
+            <DialogContent>
               <EnhancedContactForm />
-            </PopoverContent>
-          </Popover>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </nav>;

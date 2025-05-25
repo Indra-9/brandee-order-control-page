@@ -16,7 +16,7 @@ export default function TestimonialCard({ quote, author, company, image, classNa
     <motion.div
       whileHover={{ y: -5 }}
       className={cn(
-        'flex flex-col p-6 bg-brandae-gray/60 backdrop-blur-md rounded-xl border border-white/10',
+        'flex flex-col p-6 bg-brandae-gray/60 backdrop-blur-md rounded border border-white/10',
         className
       )}
     >
