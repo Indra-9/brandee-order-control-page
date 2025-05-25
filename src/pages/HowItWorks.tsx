@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Store, Users, Calendar, ShoppingBag, Truck, Star, ArrowRight, CheckCircle } from 'lucide-react';
+import { Store, Users, Calendar, ShoppingBag, Truck, Star, ArrowRight, CheckCircle, Play, Zap, Globe, Shield } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
+import SEO from '@/components/SEO';
 
 export default function HowItWorks() {
   const steps = [
@@ -69,8 +70,20 @@ export default function HowItWorks() {
     }
   ];
 
+  const platformStats = [
+    { number: "500+", label: "Active Businesses", icon: <Store className="w-6 h-6" /> },
+    { number: "10K+", label: "Daily Orders", icon: <ShoppingBag className="w-6 h-6" /> },
+    { number: "50K+", label: "Happy Customers", icon: <Users className="w-6 h-6" /> },
+    { number: "99.9%", label: "Uptime", icon: <Zap className="w-6 h-6" /> }
+  ];
+
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
+      <SEO 
+        title="How It Works - Brandae Multi-Vendor Platform"
+        description="Learn how Brandae's multi-vendor e-commerce marketplace with integrated booking system works. From seller registration to customer satisfaction."
+        keywords="how it works, multi-vendor platform, booking system, e-commerce marketplace, seller registration, customer experience"
+      />
       <Navbar />
       
       {/* Hero Section */}
@@ -89,6 +102,33 @@ export default function HowItWorks() {
               Discover how our multi-vendor e-commerce marketplace with integrated booking system 
               revolutionizes the way businesses connect with customers.
             </p>
+            
+            {/* Video/Demo Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative bg-gradient-to-br from-brandae-green/20 to-brandae-purple/20 rounded-2xl p-8 border border-brandae-green/20 mb-8"
+            >
+              <div className="relative aspect-video bg-brandae-gray rounded-xl overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-6 hover:bg-white/20 transition-all duration-300"
+                  >
+                    <Play className="w-12 h-12 text-white ml-1" />
+                  </motion.button>
+                </div>
+                <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-lg px-3 py-1">
+                  <span className="text-sm text-white">Watch Demo (2:30)</span>
+                </div>
+              </div>
+              <p className="text-sm text-gray-400 mt-4">
+                See how businesses are increasing revenue by 40% with our platform
+              </p>
+            </motion.div>
+
             <div className="bg-brandae-gray/50 rounded-2xl p-8 border border-brandae-green/20">
               <h2 className="text-2xl font-semibold mb-4 gradient-text">Our Platform Offering</h2>
               <p className="text-lg text-gray-300 leading-relaxed">
@@ -99,6 +139,32 @@ export default function HowItWorks() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Platform Stats */}
+      <section className="py-16 px-6 md:px-12 lg:px-24 bg-brandae-gray/20">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {platformStats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="w-12 h-12 bg-brandae-green/20 rounded-full flex items-center justify-center text-brandae-green">
+                    {stat.icon}
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -130,22 +196,35 @@ export default function HowItWorks() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="bg-brandae-gray rounded-2xl p-8 border border-brandae-green/20 hover:border-brandae-green/40 transition-all duration-300 h-full">
+                <motion.div
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-brandae-gray rounded-2xl p-8 border border-brandae-green/20 hover:border-brandae-green/40 transition-all duration-300 h-full"
+                >
                   <div className="flex items-center justify-between mb-6">
-                    <div className="text-brandae-green">
+                    <motion.div 
+                      className="text-brandae-green"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
                       {step.icon}
-                    </div>
+                    </motion.div>
                     <div className="w-12 h-12 bg-brandae-green rounded-full flex items-center justify-center text-brandae-dark font-bold text-lg">
                       {step.number}
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
                   <p className="text-gray-300 leading-relaxed">{step.description}</p>
-                </div>
+                </motion.div>
                 
                 {index < steps.length - 1 && index % 3 !== 2 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-brandae-green/50" />
+                    <motion.div
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-6 h-6 text-brandae-green/50" />
+                    </motion.div>
                   </div>
                 )}
               </motion.div>
@@ -154,8 +233,96 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Key Features */}
+      {/* Interactive Features Demo */}
       <section className="py-20 px-6 md:px-12 lg:px-24 bg-brandae-gray/30">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="gradient-text">Interactive Experience</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Experience the power of our platform through interactive demonstrations of key features.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="space-y-6">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-brandae-dark/50 rounded-xl p-6 border border-brandae-green/20 cursor-pointer hover:border-brandae-green/40 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <Globe className="w-8 h-8 text-brandae-green" />
+                    <h3 className="text-lg font-semibold">Global Reach</h3>
+                  </div>
+                  <p className="text-gray-400 text-sm">Connect with customers worldwide through our scalable platform</p>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-brandae-dark/50 rounded-xl p-6 border border-brandae-purple/20 cursor-pointer hover:border-brandae-purple/40 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <Shield className="w-8 h-8 text-brandae-purple" />
+                    <h3 className="text-lg font-semibold">Secure Transactions</h3>
+                  </div>
+                  <p className="text-gray-400 text-sm">Bank-grade security for all payments and customer data</p>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-brandae-dark/50 rounded-xl p-6 border border-blue-500/20 cursor-pointer hover:border-blue-500/40 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <Zap className="w-8 h-8 text-blue-400" />
+                    <h3 className="text-lg font-semibold">Lightning Fast</h3>
+                  </div>
+                  <p className="text-gray-400 text-sm">Optimized performance ensuring quick load times and smooth interactions</p>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-brandae-green/10 to-brandae-purple/10 rounded-2xl p-8 border border-brandae-green/20">
+                <div className="aspect-square bg-brandae-gray rounded-xl overflow-hidden mb-6">
+                  <div className="h-full flex items-center justify-center">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      className="w-32 h-32 border-4 border-brandae-green/30 border-t-brandae-green rounded-full"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-center">Real-time Dashboard</h3>
+                <p className="text-gray-300 text-center">
+                  Monitor your business performance with live analytics and insights
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Features */}
+      <section className="py-20 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -188,7 +355,7 @@ export default function HowItWorks() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 px-6 md:px-12 lg:px-24">
+      <section className="py-20 px-6 md:px-12 lg:px-24 bg-brandae-gray/20">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -241,19 +408,40 @@ export default function HowItWorks() {
                 and improve customer experiences.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                <motion.div 
+                  className="flex items-center gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <div className="w-8 h-8 bg-brandae-green rounded-full flex items-center justify-center text-brandae-dark font-bold text-sm">1</div>
                   <span>Sign up and create your account</span>
-                </div>
-                <div className="flex items-center gap-3">
+                </motion.div>
+                <motion.div 
+                  className="flex items-center gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <div className="w-8 h-8 bg-brandae-green rounded-full flex items-center justify-center text-brandae-dark font-bold text-sm">2</div>
                   <span>Set up your storefront and services</span>
-                </div>
-                <div className="flex items-center gap-3">
+                </motion.div>
+                <motion.div 
+                  className="flex items-center gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <div className="w-8 h-8 bg-brandae-green rounded-full flex items-center justify-center text-brandae-dark font-bold text-sm">3</div>
                   <span>Start selling and booking customers</span>
-                </div>
+                </motion.div>
               </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full mt-8 bg-gradient-to-r from-brandae-purple to-brandae-green text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2"
+              >
+                Get Started Today
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
             </motion.div>
           </div>
         </div>

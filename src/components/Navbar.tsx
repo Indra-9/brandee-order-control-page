@@ -14,8 +14,8 @@ import { Session } from '@supabase/supabase-js';
 const navItems = [
   { name: 'Features', href: '/features' },
   { name: 'How It Works', href: '/how-it-works' },
-  { name: 'Solutions', href: '#solutions' },
-  { name: 'Dashboard', href: '#dashboard' },
+  { name: 'Solutions', href: '/solutions' },
+  { name: 'Case Studies', href: '/case-studies' },
   { name: 'Blog', href: '/blog' },
   { name: 'Pricing', href: '/pricing' }
 ];

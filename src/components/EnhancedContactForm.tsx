@@ -73,36 +73,54 @@ export default function EnhancedContactForm() {
         return;
       }
 
+      if (!webhooks || webhooks.length === 0) {
+        console.log('No active webhooks found');
+        return;
+      }
+
+      console.log(`Found ${webhooks.length} active webhooks`);
+
       // Trigger each webhook with complete form data
-      const webhookPromises = webhooks?.map(async (webhook) => {
+      const webhookPromises = webhooks.map(async (webhook) => {
         try {
-          await fetch(webhook.url, {
+          console.log(`Triggering webhook: ${webhook.name} at ${webhook.url}`);
+          
+          const payload = {
+            type: 'contact_submission',
+            form_data: {
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+              business: formData.business,
+              message: formData.message || ''
+            },
+            timestamp: new Date().toISOString(),
+            webhook_name: webhook.name,
+            source: 'brandae_contact_form'
+          };
+
+          console.log('Webhook payload:', JSON.stringify(payload, null, 2));
+
+          const response = await fetch(webhook.url, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              type: 'contact_submission',
-              data: {
-                name: formData.name,
-                email: formData.email,
-                phone: formData.phone,
-                business: formData.business,
-                message: formData.message,
-                submitted_at: new Date().toISOString()
-              },
-              timestamp: new Date().toISOString(),
-              webhook_name: webhook.name
-            }),
+            body: JSON.stringify(payload),
           });
+
+          console.log(`Webhook ${webhook.name} response status:`, response.status);
+          
+          if (!response.ok) {
+            console.error(`Webhook ${webhook.name} failed with status:`, response.status);
+          }
         } catch (error) {
           console.error(`Error triggering webhook ${webhook.name}:`, error);
         }
       });
 
-      if (webhookPromises) {
-        await Promise.all(webhookPromises);
-      }
+      await Promise.all(webhookPromises);
+      console.log('All webhooks triggered');
     } catch (error) {
       console.error('Error in webhook triggering:', error);
     }
