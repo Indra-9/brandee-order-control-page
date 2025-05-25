@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import ContactForm from './ContactForm';
+import EnhancedContactForm from './EnhancedContactForm';
 import AnimatedButton from './AnimatedButton';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -73,8 +73,8 @@ export default function Navbar() {
                   <AnimatedButton variant="primary" size="md">Book a Demo</AnimatedButton>
                 </motion.div>
               </PopoverTrigger>
-              <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                <ContactForm />
+              <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0">
+                <EnhancedContactForm />
               </PopoverContent>
             </Popover>
           </div>
@@ -122,8 +122,8 @@ export default function Navbar() {
                 </AnimatedButton>
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-              <ContactForm />
+            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white p-0">
+              <EnhancedContactForm />
             </PopoverContent>
           </Popover>
         </div>
