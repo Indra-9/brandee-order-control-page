@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -42,7 +41,7 @@ export default function EnhancedContactForm() {
         throw insertError;
       }
 
-      // Trigger webhooks
+      // Trigger webhooks with complete form data
       await triggerWebhooks(data);
 
       setIsSubmitted(true);
@@ -74,7 +73,7 @@ export default function EnhancedContactForm() {
         return;
       }
 
-      // Trigger each webhook
+      // Trigger each webhook with complete form data
       const webhookPromises = webhooks?.map(async (webhook) => {
         try {
           await fetch(webhook.url, {
@@ -84,7 +83,14 @@ export default function EnhancedContactForm() {
             },
             body: JSON.stringify({
               type: 'contact_submission',
-              data: formData,
+              data: {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                business: formData.business,
+                message: formData.message,
+                submitted_at: new Date().toISOString()
+              },
               timestamp: new Date().toISOString(),
               webhook_name: webhook.name
             }),

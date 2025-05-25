@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Settings } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import EnhancedContactForm from './EnhancedContactForm';
@@ -13,7 +13,7 @@ import { Session } from '@supabase/supabase-js';
 
 const navItems = [
   { name: 'Features', href: '/features' },
-  { name: 'How It Works', href: '#how-it-works' },
+  { name: 'How It Works', href: '/how-it-works' },
   { name: 'Solutions', href: '#solutions' },
   { name: 'Dashboard', href: '#dashboard' },
   { name: 'Blog', href: '/blog' },
@@ -78,28 +78,13 @@ export default function Navbar() {
                 )}
               </motion.div>
             ))}
-            
-            {/* Admin Link for authenticated users */}
-            {session && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Link to="/admin" className="text-gray-300 hover:text-brandae-green transition-colors flex items-center gap-1">
-                  <Settings className="w-4 h-4" />
-                  Admin
-                </Link>
-              </motion.div>
-            )}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
             {!session && (
               <Link to="/auth">
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-lg">
                   Sign In
                 </Button>
               </Link>
@@ -116,7 +101,7 @@ export default function Navbar() {
                   <AnimatedButton variant="primary" size="md">Book a Demo</AnimatedButton>
                 </motion.div>
               </PopoverTrigger>
-              <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0">
+              <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
                 <EnhancedContactForm />
               </PopoverContent>
             </Popover>
@@ -158,15 +143,6 @@ export default function Navbar() {
             </div>
           ))}
           
-          {session && (
-            <div onClick={() => setIsMenuOpen(false)}>
-              <Link to="/admin" className="text-gray-300 hover:text-brandae-green transition-colors py-2 block flex items-center gap-1">
-                <Settings className="w-4 h-4" />
-                Admin
-              </Link>
-            </div>
-          )}
-          
           {!session && (
             <div onClick={() => setIsMenuOpen(false)}>
               <Link to="/auth" className="text-gray-300 hover:text-brandae-green transition-colors py-2 block">
@@ -183,7 +159,7 @@ export default function Navbar() {
                 </AnimatedButton>
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white p-0">
+            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
               <EnhancedContactForm />
             </PopoverContent>
           </Popover>
