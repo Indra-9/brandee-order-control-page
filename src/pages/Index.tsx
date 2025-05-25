@@ -115,14 +115,14 @@ const Index = () => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <div className="rounded mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="rounded">Book a Demo</AnimatedButton>
+                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
                     <ContactForm />
                   </PopoverContent>
                 </Popover>
-                <AnimatedButton variant="outline" size="lg" className="rounded font-normal">Watch How it Works</AnimatedButton>
+                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
             
