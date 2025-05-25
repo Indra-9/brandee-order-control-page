@@ -1,12 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Settings } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import EnhancedContactForm from './EnhancedContactForm';
 import AnimatedButton from './AnimatedButton';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { Session } from '@supabase/supabase-js';
 
 const navItems = [
   { name: 'Features', href: '/features' },
@@ -19,6 +22,23 @@ const navItems = [
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-brandae-dark/80 backdrop-blur-md border-b border-white/5">
@@ -58,10 +78,33 @@ export default function Navbar() {
                 )}
               </motion.div>
             ))}
+            
+            {/* Admin Link for authenticated users */}
+            {session && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Link to="/admin" className="text-gray-300 hover:text-brandae-green transition-colors flex items-center gap-1">
+                  <Settings className="w-4 h-4" />
+                  Admin
+                </Link>
+              </motion.div>
+            )}
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            {!session && (
+              <Link to="/auth">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  Sign In
+                </Button>
+              </Link>
+            )}
+            
             <Popover>
               <PopoverTrigger asChild>
                 <motion.div
@@ -114,6 +157,24 @@ export default function Navbar() {
               )}
             </div>
           ))}
+          
+          {session && (
+            <div onClick={() => setIsMenuOpen(false)}>
+              <Link to="/admin" className="text-gray-300 hover:text-brandae-green transition-colors py-2 block flex items-center gap-1">
+                <Settings className="w-4 h-4" />
+                Admin
+              </Link>
+            </div>
+          )}
+          
+          {!session && (
+            <div onClick={() => setIsMenuOpen(false)}>
+              <Link to="/auth" className="text-gray-300 hover:text-brandae-green transition-colors py-2 block">
+                Sign In
+              </Link>
+            </div>
+          )}
+          
           <Popover>
             <PopoverTrigger asChild>
               <div className="py-2">
