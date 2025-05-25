@@ -53,14 +53,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				brandae: {
-					"green": "#c9f268",
-					"purple": "#7c3aed",
-					"dark": "#0f1015",
-					"darker": "#090a0d",
-					"gray": "#1f1f23",
-					"light-gray": "#8e8e8e"
-				},
+        'yellow-accent': 'hsl(var(--yellow-accent-hsl))',
+        'yellow-accent-foreground': 'hsl(var(--yellow-accent-foreground-hsl))',
+        'deep-forest-green': 'hsl(var(--primary))',
+        'soft-lime-green': 'hsl(var(--accent))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -72,6 +68,25 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+      fontFamily: {
+        sans: [
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          '"Noto Sans"',
+          'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],
+      },
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

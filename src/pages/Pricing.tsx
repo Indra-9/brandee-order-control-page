@@ -3,11 +3,39 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import AnimatedButton from '@/components/AnimatedButton';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import ContactForm from '@/components/ContactForm';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import EnhancedContactForm from '@/components/EnhancedContactForm';
 import { Check, CreditCard } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Footer from '@/components/Footer';
+
+// Define new feature sets for the plans
+const essentialFeatures = [
+  "Basic Ordering System",
+  "Standard Analytics",
+  "Email Support",
+  "Up to 50 Menu Items",
+  "Single Location"
+];
+
+const premiumFeatures = [
+  "Advanced Ordering System",
+  "Advanced Analytics & Reporting",
+  "Priority Email & Chat Support",
+  "Up to 200 Menu Items",
+  "Multi-Location Support (up to 5)",
+  "Basic Marketing Tools"
+];
+
+const businessFeatures = [
+  "Full Ordering Suite",
+  "Premium Analytics & Custom Reports",
+  "Dedicated Account Manager & Phone Support",
+  "Unlimited Menu Items",
+  "Multi-Location Support (unlimited)",
+  "Advanced Marketing Suite & API Access"
+];
+
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
@@ -38,7 +66,7 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       
       {/* Hero Section */}
@@ -48,28 +76,28 @@ export default function Pricing() {
         variants={fadeIn}
         className="container mx-auto pt-32 pb-16 px-4"
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
-          Simple, Transparent <span className="gradient-text">Pricing</span>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center text-primary">
+          Simple, Transparent Pricing
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto text-center mb-8">
+        <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto text-center mb-8">
           No hidden fees, no commissions. Just one predictable monthly fee for all the tools you need.
         </p>
 
         {/* Billing Toggle */}
         <div className="flex justify-center items-center mb-12">
-          <span className={`mr-3 ${!isYearly ? "text-white" : "text-gray-400"}`}>Monthly</span>
+          <span className={`mr-3 ${!isYearly ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
           <div 
-            className="w-14 h-7 bg-brandae-gray rounded-full p-1 cursor-pointer relative"
+            className="w-14 h-7 bg-gray-200 rounded-full p-1 cursor-pointer relative"
             onClick={() => setIsYearly(!isYearly)}
           >
             <motion.div 
-              className="w-5 h-5 bg-brandae-green rounded-full absolute"
+              className="w-5 h-5 bg-primary rounded-full absolute"
               animate={{ x: isYearly ? 26 : 2 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             />
           </div>
-          <span className={`ml-3 ${isYearly ? "text-white" : "text-gray-400"}`}>
-            Yearly <span className="text-brandae-green text-xs">Save 20%</span>
+          <span className={`ml-3 ${isYearly ? "text-foreground" : "text-muted-foreground"}`}>
+            Yearly <span className="text-accent text-xs">Save 20%</span>
           </span>
         </div>
       </motion.div>
@@ -82,198 +110,118 @@ export default function Pricing() {
         className="container mx-auto px-4 pb-16"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Single Store Plan */}
+          {/* Essential Plan */}
           <motion.div 
             variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all"
+            className="bg-white shadow-lg rounded border border-border hover:border-primary/40 transition-all"
           >
             <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Single Store</div>
+              <div className="text-sm text-accent mb-3">Essential</div>
               <div className="flex items-end mb-6">
-                <span className="text-4xl font-bold">${isYearly ? (99 * 10) : 99}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
+                <span className="text-4xl font-bold text-primary">${isYearly ? (49 * 10) : 49}</span>
+                <span className="text-muted-foreground ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
-              <p className="text-gray-300 mb-6">For Custom Store App</p>
+              <p className="text-muted-foreground mb-6">Ideal for new businesses and single locations.</p>
               
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Single Store</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Web | iOS | Android</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Marketing Automation</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Inbuilt Chat System</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Inbuilt POS System + App</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Realtime Order Tracking</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Table Reservation system</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Detailed Analytics and more</span>
-                </li>
+                {essentialFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-center">
+                    <Check className="h-5 w-5 mr-2 text-accent" />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <div>
                     <AnimatedButton variant="outline" className="w-full">
                       Get Started
                     </AnimatedButton>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
-                </PopoverContent>
-              </Popover>
+                </DialogTrigger>
+                <DialogContent>
+                  <EnhancedContactForm />
+                </DialogContent>
+              </Dialog>
             </div>
           </motion.div>
 
-          {/* Brand Stores Plan */}
+          {/* Premium Plan */}
           <motion.div 
             variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-brandae-purple/50 overflow-hidden relative hover:border-brandae-purple transition-all transform scale-[1.02] shadow-xl shadow-brandae-purple/20"
+            className="bg-white shadow-lg rounded border border-primary shadow-xl shadow-primary/20 overflow-hidden relative hover:border-primary/60 transition-all transform scale-[1.02]"
           >
-            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-brandae-purple to-brandae-green h-1"></div>
-            <div className="bg-gradient-to-r from-brandae-purple/10 to-brandae-green/10 text-white text-center py-2">
+            <div className="bg-primary h-1.5 w-full"></div>
+            <div className="bg-accent text-accent-foreground px-3 py-1 text-xs font-semibold rounded-full absolute -top-3 right-4">
               Most Popular
             </div>
             <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Brand Stores</div>
-              <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? (399 * 10) : 399}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
+              <div className="text-sm text-accent mb-3">Premium</div>
+              <div className="flex items-end mb-6">
+                <span className="text-4xl font-bold text-primary">${isYearly ? (149 * 10) : 149}</span>
+                <span className="text-muted-foreground ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
-              <p className="text-sm text-brandae-purple mb-4">12 Outlets</p>
-              <p className="text-gray-300 mb-6">For Multi-outlet Brand App</p>
+              <p className="text-muted-foreground mb-6">Perfect for growing businesses with multiple outlets.</p>
               
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>All in Single Store +</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Up-to 12 Outlets</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Auto Nearest Outlet Assign</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Central Dashboard</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Integrated POS System</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>QR Scan & Ordering</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Zero commission Fee*</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Custom Franchise App</span>
-                </li>
+                {premiumFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-center">
+                    <Check className="h-5 w-5 mr-2 text-accent" />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <div>
-                    <AnimatedButton variant="primary" className="w-full">
+                    <AnimatedButton variant="default" className="w-full">
                       Get Started
                     </AnimatedButton>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
-                </PopoverContent>
-              </Popover>
+                </DialogTrigger>
+                <DialogContent>
+                  <EnhancedContactForm />
+                </DialogContent>
+              </Dialog>
             </div>
           </motion.div>
 
-          {/* Marketplace Plan */}
+          {/* Business Plan */}
           <motion.div 
             variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all"
+            className="bg-white shadow-lg rounded border border-border hover:border-primary/40 transition-all"
           >
             <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Marketplace</div>
-              <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? (449 * 10) : 449}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
+              <div className="text-sm text-accent mb-3">Business</div>
+              <div className="flex items-end mb-6">
+                <span className="text-4xl font-bold text-primary">${isYearly ? (299 * 10) : 299}</span>
+                <span className="text-muted-foreground ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
-              <p className="text-sm text-brandae-purple mb-4">Aggregator</p>
-              <p className="text-gray-300 mb-6">For Multivendor Marketplaces</p>
+              <p className="text-muted-foreground mb-6">For established businesses and marketplaces.</p>
               
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Unlimited Stores</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Web | iOS | Android</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Custom Report</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Marketing Automation</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Fully Customisable Design</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Zero commission Fee*</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Create Dynamic Offers</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>And 100+ more features</span>
-                </li>
+                {businessFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-center">
+                    <Check className="h-5 w-5 mr-2 text-accent" />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
+              <Dialog>
+                <DialogTrigger asChild>
                   <div>
                     <AnimatedButton variant="outline" className="w-full">
                       Get Started
                     </AnimatedButton>
                   </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
-                </PopoverContent>
-              </Popover>
+                </DialogTrigger>
+                <DialogContent>
+                  <EnhancedContactForm />
+                </DialogContent>
+              </Dialog>
             </div>
           </motion.div>
         </div>
@@ -342,13 +290,13 @@ export default function Pricing() {
         className="container mx-auto px-4 py-16"
       >
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-primary">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-brandae-gray p-6 rounded-lg border border-white/10">
-                <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
-                <p className="text-gray-300">{faq.answer}</p>
+              <div key={idx} className="bg-white shadow-sm rounded p-6 border border-border">
+                <h3 className="text-xl font-bold mb-2 text-primary">{faq.question}</h3>
+                <p className="text-foreground">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -363,22 +311,22 @@ export default function Pricing() {
         viewport={{ once: true }}
         className="container mx-auto px-4 py-16 text-center"
       >
-        <div className="max-w-3xl mx-auto bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 p-8 md:p-12 rounded-2xl border border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to grow your business?</h2>
-          <p className="text-gray-300 mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
+        <div className="max-w-3xl mx-auto bg-secondary p-8 md:p-12 rounded border border-border">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Ready to grow your business?</h2>
+          <p className="text-foreground mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
           <div className="flex flex-col md:flex-row justify-center gap-4">
-            <Popover>
-              <PopoverTrigger asChild>
+            <Dialog>
+              <DialogTrigger asChild>
                 <div>
-                  <AnimatedButton variant="primary" size="lg">
+                  <AnimatedButton variant="default" size="lg">
                     Book a Free Demo
                   </AnimatedButton>
                 </div>
-              </PopoverTrigger>
-              <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                <ContactForm />
-              </PopoverContent>
-            </Popover>
+              </DialogTrigger>
+              <DialogContent>
+                <EnhancedContactForm />
+              </DialogContent>
+            </Dialog>
             
             <AnimatedButton variant="outline" size="lg">
               <CreditCard className="mr-2 h-5 w-5" /> View Enterprise Plans
@@ -391,23 +339,23 @@ export default function Pricing() {
   );
 }
 
-// Comparison table features
+// Updated Comparison table features
 const comparisonFeatures = [
-  { name: "Number of Locations", singleStore: "1", brandStores: "Up to 12", marketplace: "Unlimited" },
-  { name: "Branded Mobile App", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Web Ordering", singleStore: true, brandStores: true, marketplace: true },
-  { name: "POS Integration", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Marketing Tools", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Customer Database", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Multi-outlet Management", singleStore: false, brandStores: true, marketplace: true },
-  { name: "Centralized Dashboard", singleStore: false, brandStores: true, marketplace: true },
-  { name: "QR Code Ordering", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Vendor Management", singleStore: false, brandStores: false, marketplace: true },
-  { name: "Commission Control", singleStore: false, brandStores: false, marketplace: true },
-  { name: "White Label Option", singleStore: "Add-on", brandStores: "Add-on", marketplace: true },
+  { name: "Menu Items", essential: "Up to 50", premium: "Up to 200", business: "Unlimited" },
+  { name: "Locations", essential: "1", premium: "Up to 5", business: "Unlimited" },
+  { name: "Basic Ordering", essential: true, premium: true, business: true },
+  { name: "Standard Analytics", essential: true, premium: true, business: true },
+  { name: "Advanced Analytics", essential: false, premium: true, business: true },
+  { name: "Custom Reports", essential: false, premium: false, business: true },
+  { name: "Basic Marketing Tools", essential: false, premium: true, business: true },
+  { name: "Advanced Marketing Suite", essential: false, premium: false, business: true },
+  { name: "API Access", essential: false, premium: false, business: true },
+  { name: "Email Support", essential: true, premium: true, business: true },
+  { name: "Priority Chat Support", essential: false, premium: true, business: true },
+  { name: "Dedicated Account Manager", essential: false, premium: false, business: true },
 ];
 
-// FAQs
+// Updated FAQs
 const faqs = [
   {
     question: "Is there a setup fee?",

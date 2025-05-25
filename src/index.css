@@ -5,11 +5,47 @@
 @tailwind utilities;
 
 :root {
+  /* Existing brandae colors (will be phased out) */
   --brandae-dark: #0a0b0d;
   --brandae-darker: #050608;
   --brandae-gray: #1a1b1f;
   --brandae-purple: #7c3aed;
   --brandae-green: #c9f268;
+
+  /* New HSL Color Palette (Light Theme) */
+  --background: 0 0% 98%; /* Off-white */
+  --foreground: 222 47% 11%; /* Dark gray/near-black */
+  
+  --card: 0 0% 98%;
+  --card-foreground: 222 47% 11%;
+  
+  --popover: 0 0% 98%;
+  --popover-foreground: 222 47% 11%;
+  
+  --primary: 152 47% 23%; /* Deep forest green */
+  --primary-foreground: 0 0% 98%; /* Off-white for text on primary */
+  
+  --secondary: 210 40% 96.1%; /* Light gray */
+  --secondary-foreground: 222 47% 11%; /* Dark text for on secondary */
+  
+  --muted: 210 40% 88%; /* Slightly darker gray for muted text/borders */
+  --muted-foreground: 215 20% 45%; /* Medium gray text */
+  
+  --accent: 130 60% 85%; /* Soft lime green */
+  --accent-foreground: 152 47% 18%; /* Darker green for text on lime accent */
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --border: 210 40% 91%; /* Light gray border */
+  --input: 210 40% 91%; /* Light gray for input borders */
+  --ring: 152 47% 30%; /* Forest green for focus rings */
+
+  /* New Custom Named Colors (HSL) */
+  --yellow-accent-hsl: 45 93% 88%; /* Pastel yellow */
+  --yellow-accent-foreground-hsl: 43 96% 27%; /* Darker color for text on yellow accent */
+  /* --deep-forest-green-hsl is same as --primary */
+  /* --soft-lime-green-hsl is same as --accent */
 }
 
 * {

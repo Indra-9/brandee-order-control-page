@@ -9,6 +9,7 @@ import TestimonialCard from '@/components/TestimonialCard';
 import IntegrationLogo from '@/components/IntegrationLogo';
 import Navbar from '@/components/Navbar';
 import EnhancedContactForm from '@/components/EnhancedContactForm';
+import { Users, ShieldCheck, Heart } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
@@ -16,12 +17,12 @@ const Index = () => {
   const {
     scrollYProgress
   } = useScroll();
-  return <div className="min-h-screen bg-brandae-dark text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <SEO title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
 
       {/* Floating animated elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <motion.div className="absolute top-20 left-10 w-16 h-16 bg-brandae-green/20 rounded-full filter blur-xl" animate={{
+        <motion.div className="absolute top-20 left-10 w-16 h-16 bg-soft-lime-green/20 rounded-full filter blur-xl" animate={{
         y: [0, -20, 0],
         x: [0, 10, 0],
         scale: [1, 1.05, 1],
@@ -32,7 +33,7 @@ const Index = () => {
         ease: "easeInOut",
         repeatType: "reverse"
       }} />
-        <motion.div className="absolute top-1/3 right-20 w-24 h-24 bg-[#093d30]/30 rounded-full filter blur-2xl" animate={{
+        <motion.div className="absolute top-1/3 right-20 w-24 h-24 bg-yellow-accent/20 rounded-full filter blur-2xl" animate={{
         y: [0, 30, 0],
         x: [0, -15, 0],
         scale: [1, 1.03, 1],
@@ -44,7 +45,7 @@ const Index = () => {
         repeatType: "reverse",
         delay: 1
       }} />
-        <motion.div className="absolute bottom-1/4 left-1/4 w-20 h-20 bg-brandae-green/25 rounded-full filter blur-xl" animate={{
+        <motion.div className="absolute bottom-1/4 left-1/4 w-20 h-20 bg-soft-lime-green/20 rounded-full filter blur-xl" animate={{
         y: [0, -25, 0],
         x: [0, 20, 0],
         scale: [1, 1.06, 1],
@@ -56,7 +57,7 @@ const Index = () => {
         repeatType: "reverse",
         delay: 2
       }} />
-        <motion.div className="absolute top-2/3 right-1/3 w-28 h-28 bg-[#093c2f]/20 rounded-full filter blur-2xl" animate={{
+        <motion.div className="absolute top-2/3 right-1/3 w-28 h-28 bg-yellow-accent/20 rounded-full filter blur-2xl" animate={{
         scale: [1, 1.04, 1],
         opacity: [0.4, 0.7, 0.4]
       }} transition={{
@@ -72,9 +73,9 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,61,48,0.15),transparent_70%)]"></div>
+      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-20 overflow-hidden bg-background">
+        {/* Removed: <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div> */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(130,180,130,0.05),transparent_70%)]"></div> {/* Subtle new radial */}
         
         <div className="container mx-auto z-10 px-0">
           <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -87,7 +88,7 @@ const Index = () => {
           }} transition={{
             duration: 0.8
           }}>
-              <motion.h1 className="text-4xl md:text-6xl font-bold mb-6" initial={{
+              <motion.h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary" initial={{
               opacity: 0,
               y: 20
             }} animate={{
@@ -98,10 +99,10 @@ const Index = () => {
               delay: 0.2
             }}>
                 Own Your Orders. <br />
-                <span className="gradient-text">Own Your Customers.</span>
+                <span>Own Your Customers.</span>
               </motion.h1>
               
-              <motion.p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl" initial={{
+              <motion.p className="text-lg md:text-xl text-foreground mb-8 max-w-xl" initial={{
               opacity: 0,
               y: 20
             }} animate={{
@@ -127,7 +128,7 @@ const Index = () => {
                 <Dialog>
                   <DialogTrigger asChild>
                     <div className="mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
+                      <AnimatedButton variant="default" size="lg" className="mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Get Started Free</AnimatedButton>
                     </div>
                   </DialogTrigger>
                   <DialogContent>
@@ -136,6 +137,14 @@ const Index = () => {
                 </Dialog>
                 <AnimatedButton variant="outline" size="lg" className="font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
               </motion.div>
+
+              <div className="mt-8 flex flex-wrap justify-center lg:justify-start items-center gap-4">
+                <p className="text-sm text-muted-foreground mr-4">Trusted by:</p>
+                <div className="w-24 h-10 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Badge 1</div>
+                <div className="w-24 h-10 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Badge 2</div>
+                <div className="w-24 h-10 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Badge 3</div>
+              </div>
+
             </motion.div>
             
             <motion.div className="flex-1 relative" initial={{
@@ -149,11 +158,11 @@ const Index = () => {
             delay: 0.4
           }}>
               <div className="relative w-full max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-soft-lime-green/20 to-transparent rounded-3xl filter blur-xl"></div>
                 <img alt="Brandae App Demo" src="/lovable-uploads/b7b83b2d-2567-4919-a07d-da4094321086.png" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-brandae-green/20 object-cover" />
               </div>
               
-              <motion.div className="absolute -bottom-10 -right-10 w-48 h-48 bg-brandae-green/25 rounded-full filter blur-3xl" animate={{
+              <motion.div className="absolute -bottom-10 -right-10 w-48 h-48 bg-soft-lime-green/25 rounded-full filter blur-3xl" animate={{
               scale: [1, 1.07, 1],
               opacity: [0.4, 0.6, 0.4]
             }} transition={{
@@ -172,14 +181,14 @@ const Index = () => {
         duration: 1.5,
         repeat: Infinity
       }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brandae-green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </motion.div>
       </section>
       
       {/* Featured Sections - Bento Grid */}
-      <section id="features" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="features" className="px-6 md:px-12 lg:px-24 py-20 bg-secondary">
         <div className="container mx-auto px-0">
           <motion.div className="text-center mb-16" initial={{
           opacity: 0,
@@ -192,94 +201,32 @@ const Index = () => {
         }} transition={{
           duration: 0.8
         }}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need to <span className="gradient-text">Own Your Digital Storefront</span></h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">All the tools you need to build a successful online ordering business without the hefty fees.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Key Benefits for Your Business</h2>
+            <p className="text-foreground max-w-2xl mx-auto">Discover how Brandae empowers your operations and enhances team productivity.</p>
           </motion.div>
           
-          <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <BentoGridItem delay={0} gradient="green">
+          <BentoGrid className="grid-cols-1 md:grid-cols-3 gap-6"> {/* Ensure 3 columns on medium screens and up */}
+            <BentoGridItem delay={0}>
               <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Zero Commission Ordering System</h3>
-                <p className="text-muted-foreground">Keep 100% of profits from every order – no more sharing 20-30% with aggregators.</p>
+                <Users className="w-8 h-8 mb-3 text-primary" />
+                <h3 className="text-lg font-semibold text-primary mb-2">Workforce Optimization</h3>
+                <p className="text-sm text-foreground">Streamline scheduling, manage shifts effectively, and empower your team to perform their best.</p>
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={1} gradient="brand-dark">
+            <BentoGridItem delay={1}>
               <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <line x1="8" y1="21" x2="16" y2="21" />
-                    <line x1="12" y1="17" x2="12" y2="21" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Branded Mobile Apps & Website</h3>
-                <p className="text-muted-foreground">Your own ordering channels with your logo, colors, and brand identity.</p>
+                <ShieldCheck className="w-8 h-8 mb-3 text-primary" />
+                <h3 className="text-lg font-semibold text-primary mb-2">Compliance Management</h3>
+                <p className="text-sm text-foreground">Navigate complex regulations with ease. Ensure adherence to labor laws and industry standards effortlessly.</p>
               </div>
             </BentoGridItem>
             
-            <BentoGridItem delay={2} gradient="blue">
+            <BentoGridItem delay={2}>
               <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 7h-9" />
-                    <path d="M14 17H5" />
-                    <circle cx="17" cy="17" r="3" />
-                    <circle cx="7" cy="7" r="3" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Customer Data Ownership</h3>
-                <p className="text-muted-foreground">Full access to user data for remarketing and analytics to build lasting relationships.</p>
-              </div>
-            </BentoGridItem>
-            
-            <BentoGridItem delay={3} gradient="pink">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 5a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12Z" />
-                    <path d="M18 18h4" />
-                    <path d="M18 14h4" />
-                    <path d="M18 10h4" />
-                    <path d="M18 6h4" />
-                    <path d="M2 17v-3a4 4 0 0 1 8 0v3" />
-                    <path d="M4 17h4" />
-                    <circle cx="6" cy="10" r="2" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Advanced Marketing Tools</h3>
-                <p className="text-muted-foreground">Push, SMS, email, referral, cashback, and loyalty engines built-in to retain customers.</p>
-              </div>
-            </BentoGridItem>
-            
-            <BentoGridItem delay={4} gradient="orange">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                    <path d="M9.9 12.1L11.5 14l2.6-4" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Delivery Management System</h3>
-                <p className="text-muted-foreground">Assign drivers, track orders in real-time, and auto-optimize delivery routes.</p>
-              </div>
-            </BentoGridItem>
-            
-            <BentoGridItem delay={5} gradient="mixed">
-              <div className="p-6 h-full">
-                <div className="mb-4 text-brandae-green">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M5 12v4.604a1 1 0 0 0 .32.734l3.058 2.688a1 1 0 0 0 1.524-.281L12 16M19 12V5.604a1 1 0 0 0-.32-.734l-3.058-2.688a1 1 0 0 0-1.524.281L12 6" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Real-Time Analytics</h3>
-                <p className="text-muted-foreground">Insights on sales, order trends, customer behavior, and campaign performance.</p>
+                <Heart className="w-8 h-8 mb-3 text-primary" />
+                <h3 className="text-lg font-semibold text-primary mb-2">Employee Engagement</h3>
+                <p className="text-sm text-foreground">Boost morale and motivation. Foster a positive work environment with tools for feedback and recognition.</p>
               </div>
             </BentoGridItem>
           </BentoGrid>
@@ -465,7 +412,7 @@ const Index = () => {
       </section>
       
       {/* Testimonials */}
-      <section id="testimonials" className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker">
+      <section id="testimonials" className="px-6 md:px-12 lg:px-24 py-20 bg-secondary">
         <div className="container mx-auto px-0">
           <motion.div className="text-center mb-16" initial={{
           opacity: 0,
@@ -478,8 +425,8 @@ const Index = () => {
         }} transition={{
           duration: 0.8
         }}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by <span className="gradient-text">1,000+ Local Businesses</span></h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">See what our customers are saying about their experience with Brandae.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Trusted by 1,000+ Local Businesses</h2>
+            <p className="text-foreground max-w-2xl mx-auto">See what our customers are saying about their experience with Brandae.</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
