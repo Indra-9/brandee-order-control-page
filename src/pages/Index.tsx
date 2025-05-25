@@ -114,15 +114,15 @@ const Index = () => {
             }}>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="px-0 mx-0">
-                      <AnimatedButton variant="primary" size="lg" className="py-2 rounded-xl font-semibold flex items-center justify-center gap-2 px-[75px]">Book a Demo</AnimatedButton>
+                    <div className="rounded mx-0 px-0">
+                      <AnimatedButton variant="primary" size="lg" className="rounded">Book a Demo</AnimatedButton>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
                     <ContactForm />
                   </PopoverContent>
                 </Popover>
-                <AnimatedButton variant="outline" size="lg" className="py-2 rounded-xl font-semibold flex items-center justify-center gap-2">Watch How it Works</AnimatedButton>
+                <AnimatedButton variant="outline" size="lg" className="rounded font-normal">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
             
