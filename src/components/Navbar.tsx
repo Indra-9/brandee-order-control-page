@@ -112,7 +112,7 @@ export default function Navbar() {
               }} whileHover={{
                 scale: 1.05
               }}>
-                  <AnimatedButton variant="primary" size="md">Book a Demo</AnimatedButton>
+                  <AnimatedButton variant="primary" size="md" className="py-2 rounded-xl font-semibold flex items-center justify-center gap-2">Book a Demo</AnimatedButton>
                 </motion.div>
               </PopoverTrigger>
               <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
