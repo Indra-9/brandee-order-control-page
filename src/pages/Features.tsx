@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,16 +7,10 @@ import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
-import { 
-  Layers, CreditCard, Check, Settings, Link, Zap, TrendingUp, Info, 
-  Clock, Globe, Shield, MessageSquare, Bell, Package, Search, 
-  Users, Store, Building, ShoppingCart, DollarSign, Database,
-  ExternalLink, BarChart3, Medal, CircleUser, Truck, ArrowRight
-} from 'lucide-react';
+import { Layers, CreditCard, Check, Settings, Link, Zap, TrendingUp, Info, Clock, Globe, Shield, MessageSquare, Bell, Package, Search, Users, Store, Building, ShoppingCart, DollarSign, Database, ExternalLink, BarChart3, Medal, CircleUser, Truck, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import FeatureCard from '@/components/FeatureCard';
-
 export default function Features() {
   const [activeTab, setActiveTab] = useState('features');
   const moveAnimation = useAnimation();
@@ -27,17 +20,15 @@ export default function Features() {
     const animateMovement = async () => {
       await moveAnimation.start({
         y: [0, -10, 0],
-        transition: { 
-          repeat: Infinity, 
-          duration: 3, 
-          ease: "easeInOut" 
+        transition: {
+          repeat: Infinity,
+          duration: 3,
+          ease: "easeInOut"
         }
       });
     };
-    
     animateMovement();
   }, [moveAnimation]);
-
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -51,7 +42,6 @@ export default function Features() {
       }
     }
   };
-  
   const staggerContainer = {
     hidden: {
       opacity: 0
@@ -64,7 +54,6 @@ export default function Features() {
       }
     }
   };
-  
   return <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
       <SEO title="Features - Brandae | Grow Your Business with Advanced Ordering Tools" description="Explore the powerful features of Brandae that help restaurants and grocery stores grow with branded ordering apps, marketing tools, and delivery control." />
       
@@ -73,23 +62,17 @@ export default function Features() {
       {/* Hero Section with Moving Elements */}
       <motion.div initial="hidden" animate="visible" variants={fadeIn} className="container mx-auto pt-32 pb-16 px-4 relative">
         {/* Moving Element 1 - Top Left */}
-        <motion.div 
-          animate={moveAnimation}
-          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-gradient-to-r from-[#093d30]/30 to-brandae-green/30 blur-xl"
-        />
+        <motion.div animate={moveAnimation} className="absolute top-20 left-10 w-20 h-20 rounded-full bg-gradient-to-r from-[#093d30]/30 to-brandae-green/30 blur-xl" />
         {/* Moving Element 2 - Top Right */}
-        <motion.div 
-          animate={{
-            y: [0, -15, 0],
-            transition: { 
-              repeat: Infinity, 
-              duration: 4, 
-              ease: "easeInOut",
-              delay: 0.5
-            }
-          }}
-          className="absolute top-24 right-10 w-16 h-16 rounded-full bg-brandae-green/20 blur-lg"
-        />
+        <motion.div animate={{
+        y: [0, -15, 0],
+        transition: {
+          repeat: Infinity,
+          duration: 4,
+          ease: "easeInOut",
+          delay: 0.5
+        }
+      }} className="absolute top-24 right-10 w-16 h-16 rounded-full bg-brandae-green/20 blur-lg" />
         
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
           Powerful <span className="text-brandae-green">Features</span> to Grow Your Business
@@ -99,17 +82,14 @@ export default function Features() {
         </p>
         
         {/* Moving Element 3 - Bottom Center */}
-        <motion.div 
-          animate={{
-            x: [0, 10, 0, -10, 0],
-            transition: { 
-              repeat: Infinity, 
-              duration: 6, 
-              ease: "easeInOut" 
-            }
-          }}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-8 rounded-full bg-[#093d30]/40 blur-md"
-        />
+        <motion.div animate={{
+        x: [0, 10, 0, -10, 0],
+        transition: {
+          repeat: Infinity,
+          duration: 6,
+          ease: "easeInOut"
+        }
+      }} className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-8 rounded-full bg-[#093d30]/40 blur-md" />
       </motion.div>
 
       {/* Tabs Navigation */}
@@ -365,12 +345,15 @@ export default function Features() {
                   
                   {/* Additional Dashboard Sections */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 }}
-                      className="md:col-span-2 bg-brandae-dark rounded-lg border border-brandae-green/20 p-4"
-                    >
+                    <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    delay: 0.6
+                  }} className="md:col-span-2 bg-brandae-dark rounded-lg border border-brandae-green/20 p-4">
                       <h4 className="font-medium mb-2 flex items-center">
                         <BarChart3 className="h-4 w-4 mr-2 text-brandae-green" />
                         Revenue Overview
@@ -380,12 +363,15 @@ export default function Features() {
                       </div>
                     </motion.div>
                     
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.7 }}
-                      className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4"
-                    >
+                    <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    delay: 0.7
+                  }} className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4">
                       <h4 className="font-medium mb-2 flex items-center">
                         <Users className="h-4 w-4 mr-2 text-brandae-green" />
                         Customer Growth
@@ -397,37 +383,39 @@ export default function Features() {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8 }}
-                      className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4"
-                    >
+                    <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    delay: 0.8
+                  }} className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4">
                       <h4 className="font-medium mb-2">Recent Orders</h4>
                       <ul className="space-y-2">
-                        {[1, 2, 3].map(i => (
-                          <li key={i} className="flex justify-between items-center border-b border-white/5 pb-2">
+                        {[1, 2, 3].map(i => <li key={i} className="flex justify-between items-center border-b border-white/5 pb-2">
                             <span className="text-sm">Order #{10243 + i}</span>
                             <span className="text-xs text-brandae-green">$47.{20 + i}</span>
-                          </li>
-                        ))}
+                          </li>)}
                       </ul>
                     </motion.div>
                     
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.9 }}
-                      className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4"
-                    >
+                    <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    delay: 0.9
+                  }} className="bg-brandae-dark rounded-lg border border-brandae-green/20 p-4">
                       <h4 className="font-medium mb-2">Popular Items</h4>
                       <ul className="space-y-2">
-                        {['Classic Burger', 'Chicken Wings', 'Veggie Salad'].map((item, i) => (
-                          <li key={i} className="flex justify-between items-center border-b border-white/5 pb-2">
+                        {['Classic Burger', 'Chicken Wings', 'Veggie Salad'].map((item, i) => <li key={i} className="flex justify-between items-center border-b border-white/5 pb-2">
                             <span className="text-sm">{item}</span>
-                            <span className="text-xs text-gray-400">{93 - (i * 12)}% popularity</span>
-                          </li>
-                        ))}
+                            <span className="text-xs text-gray-400">{93 - i * 12}% popularity</span>
+                          </li>)}
                       </ul>
                     </motion.div>
                   </div>
@@ -448,13 +436,17 @@ export default function Features() {
               
               {/* Marketplace Features */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.1
+              }} className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30">
                   <div className="mb-4 p-3 rounded-full bg-[#093d30]/20 w-fit">
                     <Store className="h-8 w-8 text-brandae-green" />
                   </div>
@@ -475,13 +467,17 @@ export default function Features() {
                   </ul>
                 </motion.div>
                 
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.2
+              }} className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30">
                   <div className="mb-4 p-3 rounded-full bg-[#093d30]/20 w-fit">
                     <ShoppingCart className="h-8 w-8 text-brandae-green" />
                   </div>
@@ -502,13 +498,17 @@ export default function Features() {
                   </ul>
                 </motion.div>
                 
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.3
+              }} className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30">
                   <div className="mb-4 p-3 rounded-full bg-[#093d30]/20 w-fit">
                     <DollarSign className="h-8 w-8 text-brandae-green" />
                   </div>
@@ -529,13 +529,17 @@ export default function Features() {
                   </ul>
                 </motion.div>
                 
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} viewport={{
+                once: true
+              }} transition={{
+                delay: 0.4
+              }} className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/30">
                   <div className="mb-4 p-3 rounded-full bg-[#093d30]/20 w-fit">
                     <Truck className="h-8 w-8 text-brandae-green" />
                   </div>
@@ -558,12 +562,15 @@ export default function Features() {
               </div>
               
               {/* Marketplace Comparison */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-brandae-gray rounded-xl border border-brandae-green/30 p-6 max-w-5xl mx-auto"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              y: 30
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} viewport={{
+              once: true
+            }} className="bg-brandae-gray rounded-xl border border-brandae-green/30 p-6 max-w-5xl mx-auto">
                 <h3 className="text-xl font-bold mb-4">Why Build Your Own Marketplace?</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -613,10 +620,9 @@ export default function Features() {
                 </div>
                 
                 <div className="mt-6 flex justify-center">
-                  <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#093d30] to-brandae-green/90 rounded-lg text-white"
-                  >
+                  <motion.div whileHover={{
+                  scale: 1.05
+                }} className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#093d30] to-brandae-green/90 rounded-lg text-white">
                     <ExternalLink className="h-4 w-4" />
                     <span>Learn more about marketplace solutions</span>
                   </motion.div>
@@ -851,7 +857,7 @@ export default function Features() {
           <Popover>
             <PopoverTrigger asChild>
               <div>
-                <AnimatedButton variant="primary" size="lg">
+                <AnimatedButton variant="primary" size="lg" className="rounded">
                   Book a Free Demo
                 </AnimatedButton>
               </div>
