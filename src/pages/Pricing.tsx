@@ -348,9 +348,7 @@ export default function Pricing() {
               </PopoverContent>
             </Popover>
             
-            <AnimatedButton variant="outline" size="lg" className="px-8 py-4 font-semibold flex items-center gap-2 justify-center rounded hover:bg-lime-300 text-lime-400">
-              <CreditCard className="mr-2 h-5 w-5" /> View Enterprise Plans
-            </AnimatedButton>
+            
           </div>
         </div>
       </motion.div>
