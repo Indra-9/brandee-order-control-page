@@ -212,11 +212,11 @@ const AdminContent = () => {
                 <FileText className="mr-2 h-4 w-4" />
                 Case Studies
               </TabsTrigger>
-              <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <Users className="mr-2 h-4 w-4" />
                 Contact Submissions
               </TabsTrigger>
-              <TabsTrigger value="webhooks" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="webhooks" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <SettingsIcon className="mr-2 h-4 w-4" />
                 Webhook Settings
               </TabsTrigger>
@@ -289,7 +289,7 @@ const AdminContent = () => {
                                   By {post.author} • {new Date(post.created_at).toLocaleDateString()}
                                 </p>
                               </div>
-                              {post.image_url && <img src={post.image_url} alt={post.title} className="w-24 h-16 object-cover rounded ml-4" />}
+                              {post.image_url && <img src={post.image_url} alt={post.title} className="w-50 h-30 rounded ml-4 object-cover" />}
                             </div>
                           </CardHeader>
                           <CardContent className="rounded">
