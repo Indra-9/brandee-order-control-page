@@ -175,7 +175,7 @@ const CaseStudyManager = () => {
       duration: 0.4
     }} className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold">Case Studies Management</h2>
-        <Button onClick={handleCreateNew} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
+        <Button onClick={handleCreateNew} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90 rounded-xl">
           <Plus size={20} className="mr-2" />
           Create New Case Study
         </Button>

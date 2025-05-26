@@ -212,11 +212,11 @@ const AdminContent = () => {
                 <FileText className="mr-2 h-4 w-4" />
                 Case Studies
               </TabsTrigger>
-              <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <Users className="mr-2 h-4 w-4" />
                 Contact Submissions
               </TabsTrigger>
-              <TabsTrigger value="webhooks" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="webhooks" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <SettingsIcon className="mr-2 h-4 w-4" />
                 Webhook Settings
               </TabsTrigger>
