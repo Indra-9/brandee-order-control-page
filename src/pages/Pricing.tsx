@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -7,21 +6,25 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import ContactForm from '@/components/ContactForm';
 import { Check, CreditCard } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
-
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: {
+        duration: 0.6
+      }
     }
   };
-
   const staggerContainer = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0
+    },
     visible: {
       opacity: 1,
       transition: {
@@ -30,23 +33,15 @@ export default function Pricing() {
       }
     }
   };
-
   const getYearlyPrice = (monthlyPrice: number) => {
     const yearly = monthlyPrice * 10; // 2 months free
     return yearly;
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
+  return <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
       <Navbar />
       
       {/* Hero Section */}
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-        className="container mx-auto pt-32 pb-16 px-4"
-      >
+      <motion.div initial="hidden" animate="visible" variants={fadeIn} className="container mx-auto pt-32 pb-16 px-4">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
           Simple, Transparent <span className="gradient-text">Pricing</span>
         </h1>
@@ -57,15 +52,14 @@ export default function Pricing() {
         {/* Billing Toggle */}
         <div className="flex justify-center items-center mb-12">
           <span className={`mr-3 ${!isYearly ? "text-white" : "text-gray-400"}`}>Monthly</span>
-          <div 
-            className="w-14 h-7 bg-brandae-gray rounded-full p-1 cursor-pointer relative"
-            onClick={() => setIsYearly(!isYearly)}
-          >
-            <motion.div 
-              className="w-5 h-5 bg-brandae-green rounded-full absolute"
-              animate={{ x: isYearly ? 26 : 2 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            />
+          <div className="w-14 h-7 bg-brandae-gray rounded-full p-1 cursor-pointer relative" onClick={() => setIsYearly(!isYearly)}>
+            <motion.div className="w-5 h-5 bg-brandae-green rounded-full absolute" animate={{
+            x: isYearly ? 26 : 2
+          }} transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 20
+          }} />
           </div>
           <span className={`ml-3 ${isYearly ? "text-white" : "text-gray-400"}`}>
             Yearly <span className="text-brandae-green text-xs">Save 20%</span>
@@ -74,22 +68,14 @@ export default function Pricing() {
       </motion.div>
 
       {/* Pricing Cards */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-        className="container mx-auto px-4 pb-16"
-      >
+      <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="container mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Single Store Plan */}
-          <motion.div 
-            variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all"
-          >
+          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all">
             <div className="p-8">
               <div className="text-sm text-brandae-green mb-3">Single Store</div>
               <div className="flex items-end mb-6">
-                <span className="text-4xl font-bold">${isYearly ? (99 * 10) : 99}</span>
+                <span className="text-4xl font-bold">${isYearly ? 99 * 10 : 99}</span>
                 <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
               <p className="text-gray-300 mb-6">For Custom Store App</p>
@@ -145,10 +131,7 @@ export default function Pricing() {
           </motion.div>
 
           {/* Brand Stores Plan */}
-          <motion.div 
-            variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-brandae-purple/50 overflow-hidden relative hover:border-brandae-purple transition-all transform scale-[1.02] shadow-xl shadow-brandae-purple/20"
-          >
+          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-brandae-purple/50 overflow-hidden relative hover:border-brandae-purple transition-all transform scale-[1.02] shadow-xl shadow-brandae-purple/20">
             <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-brandae-purple to-brandae-green h-1"></div>
             <div className="bg-gradient-to-r from-brandae-purple/10 to-brandae-green/10 text-white text-center py-2">
               Most Popular
@@ -156,7 +139,7 @@ export default function Pricing() {
             <div className="p-8">
               <div className="text-sm text-brandae-green mb-3">Brand Stores</div>
               <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? (399 * 10) : 399}</span>
+                <span className="text-4xl font-bold">${isYearly ? 399 * 10 : 399}</span>
                 <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
               <p className="text-sm text-brandae-purple mb-4">12 Outlets</p>
@@ -213,14 +196,11 @@ export default function Pricing() {
           </motion.div>
 
           {/* Marketplace Plan */}
-          <motion.div 
-            variants={fadeIn}
-            className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all"
-          >
+          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all">
             <div className="p-8">
               <div className="text-sm text-brandae-green mb-3">Marketplace</div>
               <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? (449 * 10) : 449}</span>
+                <span className="text-4xl font-bold">${isYearly ? 449 * 10 : 449}</span>
                 <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
               </div>
               <p className="text-sm text-brandae-purple mb-4">Aggregator</p>
@@ -280,13 +260,17 @@ export default function Pricing() {
 
       {/* Comparison Table */}
       <div className="container mx-auto px-4 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="bg-brandae-gray rounded-xl border border-white/10 p-6 overflow-x-auto"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.7
+      }} viewport={{
+        once: true
+      }} className="bg-brandae-gray rounded-xl border border-white/10 p-6 overflow-x-auto">
           <h2 className="text-2xl font-bold mb-6">Compare Plans</h2>
           <Table>
             <TableHeader>
@@ -298,70 +282,55 @@ export default function Pricing() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {comparisonFeatures.map((feature, idx) => (
-                <TableRow key={idx}>
+              {comparisonFeatures.map((feature, idx) => <TableRow key={idx}>
                   <TableCell className="font-medium">{feature.name}</TableCell>
                   <TableCell>
-                    {feature.singleStore ? 
-                      typeof feature.singleStore === 'boolean' ? 
-                        <Check className="h-5 w-5 text-brandae-green" /> : 
-                        feature.singleStore : 
-                      <span className="text-gray-500">—</span>
-                    }
+                    {feature.singleStore ? typeof feature.singleStore === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.singleStore : <span className="text-gray-500">—</span>}
                   </TableCell>
                   <TableCell>
-                    {feature.brandStores ? 
-                      typeof feature.brandStores === 'boolean' ? 
-                        <Check className="h-5 w-5 text-brandae-green" /> : 
-                        feature.brandStores : 
-                      <span className="text-gray-500">—</span>
-                    }
+                    {feature.brandStores ? typeof feature.brandStores === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.brandStores : <span className="text-gray-500">—</span>}
                   </TableCell>
                   <TableCell>
-                    {feature.marketplace ? 
-                      typeof feature.marketplace === 'boolean' ? 
-                        <Check className="h-5 w-5 text-brandae-green" /> : 
-                        feature.marketplace : 
-                      <span className="text-gray-500">—</span>
-                    }
+                    {feature.marketplace ? typeof feature.marketplace === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.marketplace : <span className="text-gray-500">—</span>}
                   </TableCell>
-                </TableRow>
-              ))}
+                </TableRow>)}
             </TableBody>
           </Table>
         </motion.div>
       </div>
 
       {/* FAQ Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-16"
-      >
+      <motion.div initial={{
+      opacity: 0
+    }} whileInView={{
+      opacity: 1
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-brandae-gray p-6 rounded-lg border border-white/10">
+            {faqs.map((faq, idx) => <div key={idx} className="bg-brandae-gray p-6 rounded-lg border border-white/10">
                 <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
                 <p className="text-gray-300">{faq.answer}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </motion.div>
 
       {/* CTA Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="container mx-auto px-4 py-16 text-center"
-      >
+      <motion.div initial={{
+      opacity: 0
+    }} whileInView={{
+      opacity: 1
+    }} transition={{
+      duration: 0.8
+    }} viewport={{
+      once: true
+    }} className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-3xl mx-auto bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 p-8 md:p-12 rounded-2xl border border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to grow your business?</h2>
           <p className="text-gray-300 mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
@@ -385,46 +354,86 @@ export default function Pricing() {
           </div>
         </div>
       </motion.div>
-    </div>
-  );
+    </div>;
 }
 
 // Comparison table features
-const comparisonFeatures = [
-  { name: "Number of Locations", singleStore: "1", brandStores: "Up to 12", marketplace: "Unlimited" },
-  { name: "Branded Mobile App", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Web Ordering", singleStore: true, brandStores: true, marketplace: true },
-  { name: "POS Integration", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Marketing Tools", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Customer Database", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Multi-outlet Management", singleStore: false, brandStores: true, marketplace: true },
-  { name: "Centralized Dashboard", singleStore: false, brandStores: true, marketplace: true },
-  { name: "QR Code Ordering", singleStore: true, brandStores: true, marketplace: true },
-  { name: "Vendor Management", singleStore: false, brandStores: false, marketplace: true },
-  { name: "Commission Control", singleStore: false, brandStores: false, marketplace: true },
-  { name: "White Label Option", singleStore: "Add-on", brandStores: "Add-on", marketplace: true },
-];
+const comparisonFeatures = [{
+  name: "Number of Locations",
+  singleStore: "1",
+  brandStores: "Up to 12",
+  marketplace: "Unlimited"
+}, {
+  name: "Branded Mobile App",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Web Ordering",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "POS Integration",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Marketing Tools",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Customer Database",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Multi-outlet Management",
+  singleStore: false,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Centralized Dashboard",
+  singleStore: false,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "QR Code Ordering",
+  singleStore: true,
+  brandStores: true,
+  marketplace: true
+}, {
+  name: "Vendor Management",
+  singleStore: false,
+  brandStores: false,
+  marketplace: true
+}, {
+  name: "Commission Control",
+  singleStore: false,
+  brandStores: false,
+  marketplace: true
+}, {
+  name: "White Label Option",
+  singleStore: "Add-on",
+  brandStores: "Add-on",
+  marketplace: true
+}];
 
 // FAQs
-const faqs = [
-  {
-    question: "Is there a setup fee?",
-    answer: "No, there are no hidden setup fees. The monthly subscription price covers everything you need to get started."
-  },
-  {
-    question: "What does 'zero commission fee' mean?",
-    answer: "Unlike aggregator apps that charge 20-30% commission on each order, Brandae lets you keep 100% of your order value. You pay only the fixed monthly subscription."
-  },
-  {
-    question: "How long does it take to get my app live?",
-    answer: "Typically, we can have your branded app ready within 2-3 weeks from signing up, including app store approval time."
-  },
-  {
-    question: "Do I need technical knowledge to use Brandae?",
-    answer: "Not at all. Our platform is designed to be user-friendly, and we provide full onboarding support to help you get comfortable with all features."
-  },
-  {
-    question: "Can I migrate my existing customer data?",
-    answer: "Yes, we provide tools and support to help you migrate customer data from your existing platforms into Brandae."
-  }
-];
+const faqs = [{
+  question: "Is there a setup fee?",
+  answer: "No, there are no hidden setup fees. The monthly subscription price covers everything you need to get started."
+}, {
+  question: "What does 'zero commission fee' mean?",
+  answer: "Unlike aggregator apps that charge 20-30% commission on each order, Brandae lets you keep 100% of your order value. You pay only the fixed monthly subscription."
+}, {
+  question: "How long does it take to get my app live?",
+  answer: "Typically, we can have your branded app ready within 2-3 weeks from signing up, including app store approval time."
+}, {
+  question: "Do I need technical knowledge to use Brandae?",
+  answer: "Not at all. Our platform is designed to be user-friendly, and we provide full onboarding support to help you get comfortable with all features."
+}, {
+  question: "Can I migrate my existing customer data?",
+  answer: "Yes, we provide tools and support to help you migrate customer data from your existing platforms into Brandae."
+}];
