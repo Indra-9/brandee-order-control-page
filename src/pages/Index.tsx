@@ -592,7 +592,7 @@ const Index = () => {
       {/* Security & Reliability */}
       <section id="security" className="px-6 md:px-12 lg:px-24 py-20">
         <div className="container mx-auto px-0">
-          <div className="bg-brandae-gray rounded-2xl p-8 md:p-12 border border-white/5">
+          <div className="bg-brandae-gray p-8 md:p-12 border border-white/5 bg-brandae-dark/50 p-6 border border-brandae-purple/20 cursor-pointer hover:border-brandae-purple/40 transition-all duration-300 rounded-3xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <motion.div className="flex-1" initial={{
               opacity: 0
