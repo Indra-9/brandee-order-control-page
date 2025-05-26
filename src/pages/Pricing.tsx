@@ -118,7 +118,7 @@ export default function Pricing() {
               <Popover>
                 <PopoverTrigger asChild>
                   <div>
-                    <AnimatedButton variant="outline" className="w-full">
+                    <AnimatedButton variant="outline" className="w-full rounded">
                       Get Started
                     </AnimatedButton>
                   </div>
@@ -183,7 +183,7 @@ export default function Pricing() {
               <Popover>
                 <PopoverTrigger asChild>
                   <div>
-                    <AnimatedButton variant="primary" className="w-full">
+                    <AnimatedButton variant="primary" className="w-full rounded">
                       Get Started
                     </AnimatedButton>
                   </div>
@@ -244,7 +244,7 @@ export default function Pricing() {
               <Popover>
                 <PopoverTrigger asChild>
                   <div>
-                    <AnimatedButton variant="outline" className="w-full">
+                    <AnimatedButton variant="outline" className="w-full rounded">
                       Get Started
                     </AnimatedButton>
                   </div>
@@ -313,7 +313,7 @@ export default function Pricing() {
           <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
-            {faqs.map((faq, idx) => <div key={idx} className="bg-brandae-gray p-6 rounded-lg border border-white/10">
+            {faqs.map((faq, idx) => <div key={idx} className="bg-brandae-gray p-6 border border-white/10 rounded">
                 <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
                 <p className="text-gray-300">{faq.answer}</p>
               </div>)}
@@ -338,7 +338,7 @@ export default function Pricing() {
             <Popover>
               <PopoverTrigger asChild>
                 <div>
-                  <AnimatedButton variant="primary" size="lg">
+                  <AnimatedButton variant="primary" size="lg" className="rounded">
                     Book a Free Demo
                   </AnimatedButton>
                 </div>
@@ -348,7 +348,7 @@ export default function Pricing() {
               </PopoverContent>
             </Popover>
             
-            <AnimatedButton variant="outline" size="lg">
+            <AnimatedButton variant="outline" size="lg" className="rounded">
               <CreditCard className="mr-2 h-5 w-5" /> View Enterprise Plans
             </AnimatedButton>
           </div>
