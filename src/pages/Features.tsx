@@ -622,7 +622,7 @@ export default function Features() {
                 <div className="mt-6 flex justify-center">
                   <motion.div whileHover={{
                   scale: 1.05
-                }} className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#093d30] to-brandae-green/90 rounded-lg text-white">
+                }} className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#093d30] to-brandae-green/90 text-white rounded">
                     <ExternalLink className="h-4 w-4" />
                     <span>Learn more about marketplace solutions</span>
                   </motion.div>
