@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Eye, Share2, Calendar, Building2, Tag } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Share2, CheckCircle, ArrowRight, User, Building, Target, TrendingUp } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
+import ContactForm from '@/components/ContactForm';
 
 interface CaseStudy {
   id: string;
@@ -170,7 +172,7 @@ export default function CaseStudyDetails() {
             
             <div className="flex flex-wrap gap-4 mb-6">
               <Badge className="bg-brandae-green/20 text-brandae-green">
-                <Building2 size={14} className="mr-1" />
+                <Building size={14} className="mr-1" />
                 {caseStudy.industry}
               </Badge>
               {caseStudy.featured && (
@@ -190,7 +192,7 @@ export default function CaseStudyDetails() {
 
             <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 mb-8">
               <div className="flex items-center gap-2">
-                <Building2 size={16} />
+                <Building size={16} />
                 <span>{caseStudy.client_name}</span>
               </div>
               <div className="flex items-center gap-2">

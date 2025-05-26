@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText, BookOpen } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +14,7 @@ import AuthWrapper from '@/components/AuthWrapper';
 import ContactSubmissions from '@/components/ContactSubmissions';
 import WebhookManager from '@/components/WebhookManager';
 import CaseStudyManager from '@/components/CaseStudyManager';
+import DocumentationManager from '@/components/DocumentationManager';
 
 interface BlogPost {
   id: string;
@@ -232,6 +233,10 @@ const AdminContent = () => {
                 <Edit className="mr-2 h-4 w-4" />
                 Blog Posts
               </TabsTrigger>
+              <TabsTrigger value="docs" className="data-[state=active]:bg-brandae-green/20">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Documentation
+              </TabsTrigger>
               <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20">
                 <FileText className="mr-2 h-4 w-4" />
                 Case Studies
@@ -365,6 +370,16 @@ const AdminContent = () => {
                   )}
                 </motion.div>
               )}
+            </TabsContent>
+
+            <TabsContent value="docs">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <DocumentationManager />
+              </motion.div>
             </TabsContent>
 
             <TabsContent value="case-studies">
