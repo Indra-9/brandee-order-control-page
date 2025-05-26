@@ -100,16 +100,16 @@ export default function Features() {
               <Layers className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Core </span>Features
             </TabsTrigger>
-            <TabsTrigger value="integrations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+            <TabsTrigger value="integrations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2 rounded">
               <Link className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Integrations</span>
               <span className="sm:hidden">Plugins</span>
             </TabsTrigger>
-            <TabsTrigger value="dashboard" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+            <TabsTrigger value="dashboard" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2 rounded">
               <Settings className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               Dashboard
             </TabsTrigger>
-            <TabsTrigger value="marketplace" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+            <TabsTrigger value="marketplace" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2 rounded">
               <Store className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Marketplace</span>
               <span className="sm:hidden">Market</span>
