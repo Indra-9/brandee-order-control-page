@@ -224,7 +224,7 @@ export default function Solutions() {
               scale: 1.05
             }} whileTap={{
               scale: 0.95
-            }} className="border border-brandae-green text-brandae-green px-8 py-4 rounded-xl font-semibold hover:bg-brandae-green/10 transition-colors">
+            }} className="border border-brandae-green text-brandae-green px-8 py-4 font-semibold hover:bg-brandae-green/10 transition-colors rounded">
                 Schedule Demo
               </motion.button>
             </div>
