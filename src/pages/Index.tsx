@@ -115,14 +115,14 @@ const Index = () => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <div className="rounded mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
+                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] font-normal text-justify text-base">Book a Demo</AnimatedButton>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
                     <ContactForm />
                   </PopoverContent>
                 </Popover>
-                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
+                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-[35px] py-0">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
             
@@ -481,7 +481,7 @@ const Index = () => {
         }} viewport={{
           once: true
         }}>
-            <AnimatedButton variant="outline" size="md">See More Success Stories</AnimatedButton>
+            <AnimatedButton variant="outline" size="md" className="rounded">See More Success Stories</AnimatedButton>
           </motion.div>
         </div>
       </section>
@@ -702,7 +702,7 @@ const Index = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <div className="inline-block">
-                    <AnimatedButton variant="primary" size="lg">
+                    <AnimatedButton variant="primary" size="lg" className="rounded">
                       Schedule Your Free Demo
                     </AnimatedButton>
                   </div>
@@ -774,8 +774,8 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <AnimatedButton variant="primary" size="lg">Start Free Trial</AnimatedButton>
-              <AnimatedButton variant="outline" size="lg">Talk to Sales</AnimatedButton>
+              <AnimatedButton variant="primary" size="lg" className="rounded">Start Free Trial</AnimatedButton>
+              <AnimatedButton variant="outline" size="lg" className="rounded">Talk to Sales</AnimatedButton>
             </div>
             
             <div className="flex flex-wrap justify-center gap-6">
