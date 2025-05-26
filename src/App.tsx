@@ -13,8 +13,6 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetails from "./pages/CaseStudyDetails";
-import Docs from "./pages/Docs";
-import DocDetails from "./pages/DocDetails";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Admin from "./pages/Admin";
@@ -40,8 +38,6 @@ const App = () => (
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-studies/:slug" element={<CaseStudyDetails />} />
-            <Route path="/docs" element={<Docs />} />
-            <Route path="/docs/:slug" element={<DocDetails />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/admin" element={<Admin />} />
