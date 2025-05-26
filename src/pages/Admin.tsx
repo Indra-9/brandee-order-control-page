@@ -199,16 +199,16 @@ const AdminContent = () => {
           </motion.div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-brandae-gray/50 border border-white/10 mb-8">
+            <TabsList className="bg-brandae-gray/50 border border-white/10 mb-8 rounded">
               <TabsTrigger value="blog" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <Edit className="mr-2 h-4 w-4" />
                 Blog Posts
               </TabsTrigger>
-              <TabsTrigger value="docs" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="docs" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <BookOpen className="mr-2 h-4 w-4" />
                 Documentation
               </TabsTrigger>
-              <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20">
+              <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <FileText className="mr-2 h-4 w-4" />
                 Case Studies
               </TabsTrigger>
