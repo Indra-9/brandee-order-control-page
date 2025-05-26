@@ -289,7 +289,7 @@ const AdminContent = () => {
                                   By {post.author} • {new Date(post.created_at).toLocaleDateString()}
                                 </p>
                               </div>
-                              {post.image_url && <img src={post.image_url} alt={post.title} className="w-50 h-30 rounded ml-4 object-cover" />}
+                              {post.image_url && <img src={post.image_url} alt={post.title} className="w-50 h-30 rounded ml-4 object-contain" />}
                             </div>
                           </CardHeader>
                           <CardContent className="rounded">
