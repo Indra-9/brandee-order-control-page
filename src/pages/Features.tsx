@@ -96,7 +96,7 @@ export default function Features() {
       <div className="container mx-auto px-4 mb-16">
         <Tabs defaultValue="features" onValueChange={setActiveTab} className="w-full">
           <TabsList className="bg-brandae-gray/50 mx-auto border border-white/10 rounded-none px-0 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 h-auto">
-            <TabsTrigger value="features" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2">
+            <TabsTrigger value="features" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#093d30]/20 data-[state=active]:to-brandae-green/20 text-xs md:text-sm px-2 md:px-4 py-3 md:py-2 rounded">
               <Layers className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Core </span>Features
             </TabsTrigger>
