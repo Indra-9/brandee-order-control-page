@@ -11,19 +11,13 @@ import Navbar from '@/components/Navbar';
 import ContactForm from '@/components/ContactForm';
 import SEO from '@/components/SEO';
 import { ArrowRight, CheckCircle, Star, TrendingUp, Users, DollarSign, Shield, Zap, Globe, BarChart3, Clock, Smartphone, Play } from 'lucide-react';
-
 const Index = () => {
   const {
     scrollYProgress
   } = useScroll();
   const [showContactForm, setShowContactForm] = useState(false);
-
   return <div className="min-h-screen bg-brandae-dark text-white relative overflow-hidden">
-      <SEO 
-        title="Brandae - Zero Commission Restaurant Platform" 
-        description="Revolutionary zero-commission platform helping restaurants grow without high fees. Join thousands of successful restaurants and boost your revenue today."
-        keywords="zero commission restaurant platform, online ordering, restaurant growth, food delivery without fees"
-      />
+      <SEO title="Brandae - Zero Commission Restaurant Platform" description="Revolutionary zero-commission platform helping restaurants grow without high fees. Join thousands of successful restaurants and boost your revenue today." keywords="zero commission restaurant platform, online ordering, restaurant growth, food delivery without fees" />
 
       {/* Floating animated elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -123,14 +117,14 @@ const Index = () => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <div className="rounded mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] text-sm font-normal text-justify">Book a Demo</AnimatedButton>
+                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] font-normal text-justify px-[55px] text-lg">Book a Demo</AnimatedButton>
                     </div>
                   </PopoverTrigger>
                   <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
                     <ContactForm isOpen={showContactForm} onClose={() => setShowContactForm(false)} />
                   </PopoverContent>
                 </Popover>
-                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-0 py-[10px]">Watch How it Works</AnimatedButton>
+                <AnimatedButton variant="outline" size="lg" className="rounded font-normal py-[10px] px-[26px] text-justify">Watch How it Works</AnimatedButton>
               </motion.div>
             </motion.div>
             
@@ -884,5 +878,4 @@ const Index = () => {
       </footer>
     </div>;
 };
-
 export default Index;
