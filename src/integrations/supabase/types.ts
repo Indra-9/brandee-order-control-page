@@ -60,6 +60,105 @@ export type Database = {
         }
         Relationships: []
       }
+      case_studies: {
+        Row: {
+          canonical_url: string | null
+          challenge: string | null
+          client_logo_url: string | null
+          client_name: string
+          content: string | null
+          created_at: string
+          excerpt: string | null
+          featured: boolean | null
+          featured_image_url: string | null
+          id: string
+          industry: string
+          meta_description: string | null
+          meta_title: string | null
+          project_cost_range: string | null
+          project_duration: string | null
+          published: boolean | null
+          reading_time: number | null
+          results: string | null
+          results_summary: string | null
+          seo_keywords: string | null
+          slug: string
+          solution: string | null
+          tags: string[] | null
+          technologies_used: string[] | null
+          testimonial: string | null
+          testimonial_author: string | null
+          testimonial_position: string | null
+          title: string
+          updated_at: string
+          views_count: number | null
+        }
+        Insert: {
+          canonical_url?: string | null
+          challenge?: string | null
+          client_logo_url?: string | null
+          client_name: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string | null
+          featured?: boolean | null
+          featured_image_url?: string | null
+          id?: string
+          industry: string
+          meta_description?: string | null
+          meta_title?: string | null
+          project_cost_range?: string | null
+          project_duration?: string | null
+          published?: boolean | null
+          reading_time?: number | null
+          results?: string | null
+          results_summary?: string | null
+          seo_keywords?: string | null
+          slug: string
+          solution?: string | null
+          tags?: string[] | null
+          technologies_used?: string[] | null
+          testimonial?: string | null
+          testimonial_author?: string | null
+          testimonial_position?: string | null
+          title: string
+          updated_at?: string
+          views_count?: number | null
+        }
+        Update: {
+          canonical_url?: string | null
+          challenge?: string | null
+          client_logo_url?: string | null
+          client_name?: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string | null
+          featured?: boolean | null
+          featured_image_url?: string | null
+          id?: string
+          industry?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          project_cost_range?: string | null
+          project_duration?: string | null
+          published?: boolean | null
+          reading_time?: number | null
+          results?: string | null
+          results_summary?: string | null
+          seo_keywords?: string | null
+          slug?: string
+          solution?: string | null
+          tags?: string[] | null
+          technologies_used?: string[] | null
+          testimonial?: string | null
+          testimonial_author?: string | null
+          testimonial_position?: string | null
+          title?: string
+          updated_at?: string
+          views_count?: number | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           business: string | null

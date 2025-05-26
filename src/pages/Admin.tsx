@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +13,7 @@ import SEO from '@/components/SEO';
 import AuthWrapper from '@/components/AuthWrapper';
 import ContactSubmissions from '@/components/ContactSubmissions';
 import WebhookManager from '@/components/WebhookManager';
+import CaseStudyManager from '@/components/CaseStudyManager';
 
 interface BlogPost {
   id: string;
@@ -231,6 +232,10 @@ const AdminContent = () => {
                 <Edit className="mr-2 h-4 w-4" />
                 Blog Posts
               </TabsTrigger>
+              <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20">
+                <FileText className="mr-2 h-4 w-4" />
+                Case Studies
+              </TabsTrigger>
               <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20">
                 <Users className="mr-2 h-4 w-4" />
                 Contact Submissions
@@ -360,6 +365,16 @@ const AdminContent = () => {
                   )}
                 </motion.div>
               )}
+            </TabsContent>
+
+            <TabsContent value="case-studies">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <CaseStudyManager />
+              </motion.div>
             </TabsContent>
 
             <TabsContent value="contacts">
