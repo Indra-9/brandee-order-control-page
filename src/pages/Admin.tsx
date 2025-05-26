@@ -178,7 +178,7 @@ const AdminContent = () => {
       
       <Navbar />
       
-      <div className="pt-32 px-6 md:px-12 lg:px-24">
+      <div className="pt-32 px-6 md:px-12 lg:px-24 py-[55px]">
         <div className="container mx-auto rounded">
           <motion.div initial={{
           opacity: 0,
