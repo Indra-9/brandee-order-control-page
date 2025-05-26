@@ -1,50 +1,53 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, TrendingUp, Building, ArrowLeft, ArrowRight, ExternalLink, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Clock, Eye, Share2, Calendar, Building2, Tag } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import Navbar from '@/components/Navbar';
-import SEO from '@/components/SEO';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import SEO from '@/components/SEO';
 
 interface CaseStudy {
   id: string;
   title: string;
   slug: string;
-  meta_title: string;
-  meta_description: string;
-  excerpt: string;
-  content: string;
-  featured_image_url: string;
+  meta_title: string | null;
+  meta_description: string | null;
+  excerpt: string | null;
+  content: string | null;
+  featured_image_url: string | null;
   client_name: string;
-  client_logo_url: string;
+  client_logo_url: string | null;
   industry: string;
-  project_duration: string;
-  project_cost_range: string;
-  results_summary: string;
-  tags: string[];
-  technologies_used: string[];
-  challenge: string;
-  solution: string;
-  results: string;
-  testimonial: string;
-  testimonial_author: string;
-  testimonial_position: string;
+  project_duration: string | null;
+  project_cost_range: string | null;
+  results_summary: string | null;
+  tags: string[] | null;
+  technologies_used: string[] | null;
+  challenge: string | null;
+  solution: string | null;
+  results: string | null;
+  testimonial: string | null;
+  testimonial_author: string | null;
+  testimonial_position: string | null;
   featured: boolean;
   published: boolean;
-  seo_keywords: string;
-  reading_time: number;
+  seo_keywords: string | null;
+  canonical_url: string | null;
+  reading_time: number | null;
   views_count: number;
   created_at: string;
+  updated_at: string;
 }
 
-const CaseStudyDetails = () => {
+export default function CaseStudyDetails() {
   const { slug } = useParams<{ slug: string }>();
   const [caseStudy, setCaseStudy] = useState<CaseStudy | null>(null);
   const [relatedStudies, setRelatedStudies] = useState<CaseStudy[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (slug) {
@@ -54,8 +57,8 @@ const CaseStudyDetails = () => {
 
   const fetchCaseStudy = async () => {
     try {
-      // Fetch the main case study
-      const { data: studyData, error: studyError } = await supabase
+      // Fetch the main case study with all fields
+      const { data: study, error: studyError } = await supabase
         .from('case_studies')
         .select('*')
         .eq('slug', slug)
@@ -64,28 +67,34 @@ const CaseStudyDetails = () => {
 
       if (studyError) throw studyError;
 
-      setCaseStudy(studyData);
+      if (study) {
+        setCaseStudy(study);
+        
+        // Increment view count
+        await supabase
+          .from('case_studies')
+          .update({ views_count: (study.views_count || 0) + 1 })
+          .eq('id', study.id);
 
-      // Update view count
-      await supabase
-        .from('case_studies')
-        .update({ views_count: (studyData.views_count || 0) + 1 })
-        .eq('id', studyData.id);
+        // Fetch related case studies with all required fields
+        const { data: related, error: relatedError } = await supabase
+          .from('case_studies')
+          .select('*')
+          .eq('published', true)
+          .neq('id', study.id)
+          .eq('industry', study.industry)
+          .limit(3);
 
-      // Fetch related case studies from the same industry
-      const { data: relatedData, error: relatedError } = await supabase
-        .from('case_studies')
-        .select('id, title, slug, excerpt, featured_image_url, client_name, industry, reading_time')
-        .eq('industry', studyData.industry)
-        .eq('published', true)
-        .neq('id', studyData.id)
-        .limit(3);
-
-      if (relatedError) throw relatedError;
-      setRelatedStudies(relatedData || []);
-
+        if (relatedError) throw relatedError;
+        setRelatedStudies(related || []);
+      }
     } catch (error) {
       console.error('Error fetching case study:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load case study",
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
@@ -161,7 +170,7 @@ const CaseStudyDetails = () => {
             
             <div className="flex flex-wrap gap-4 mb-6">
               <Badge className="bg-brandae-green/20 text-brandae-green">
-                <Building size={14} className="mr-1" />
+                <Building2 size={14} className="mr-1" />
                 {caseStudy.industry}
               </Badge>
               {caseStudy.featured && (
@@ -181,7 +190,7 @@ const CaseStudyDetails = () => {
 
             <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400 mb-8">
               <div className="flex items-center gap-2">
-                <Building size={16} />
+                <Building2 size={16} />
                 <span>{caseStudy.client_name}</span>
               </div>
               <div className="flex items-center gap-2">
@@ -193,7 +202,7 @@ const CaseStudyDetails = () => {
                 <span>{caseStudy.reading_time} min read</span>
               </div>
               <div className="flex items-center gap-2">
-                <TrendingUp size={16} />
+                <Eye size={16} />
                 <span>{caseStudy.views_count} views</span>
               </div>
             </div>
@@ -435,5 +444,3 @@ const CaseStudyDetails = () => {
     </div>
   );
 };
-
-export default CaseStudyDetails;
