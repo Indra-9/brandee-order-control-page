@@ -1,12 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Eye, Share2, Calendar, Building2, Tag } from 'lucide-react';
+import { ArrowLeft, Clock, Eye, Share2, Calendar, Building2, Tag, CheckCircle, ArrowRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 
 interface CaseStudy {
