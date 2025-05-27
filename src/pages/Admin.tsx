@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText, Book } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,12 +8,14 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import BlogEditor from '@/components/BlogEditor';
+import DocumentationEditor from '@/components/DocumentationEditor';
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 import AuthWrapper from '@/components/AuthWrapper';
 import ContactSubmissions from '@/components/ContactSubmissions';
 import WebhookManager from '@/components/WebhookManager';
 import CaseStudyManager from '@/components/CaseStudyManager';
+
 interface BlogPost {
   id: string;
   title: string;
@@ -30,17 +32,44 @@ interface BlogPost {
   created_at: string;
   updated_at: string;
 }
+
+interface Documentation {
+  id: string;
+  title: string;
+  slug: string;
+  meta_title: string;
+  meta_description: string;
+  excerpt: string;
+  content: string;
+  featured_image_url: string;
+  category: string;
+  tags: string[];
+  author: string;
+  featured: boolean;
+  published: boolean;
+  seo_keywords: string;
+  canonical_url: string;
+  reading_time: number;
+  views_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
 const AdminContent = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [docs, setDocs] = useState<Documentation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [editingDoc, setEditingDoc] = useState<Documentation | null>(null);
   const [showEditor, setShowEditor] = useState(false);
+  const [showDocEditor, setShowDocEditor] = useState(false);
   const [activeTab, setActiveTab] = useState('blog');
   const {
     toast
   } = useToast();
   useEffect(() => {
     fetchPosts();
+    fetchDocumentation();
   }, []);
   const handleSignOut = async () => {
     try {
@@ -77,6 +106,25 @@ const AdminContent = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+  const fetchDocumentation = async () => {
+    try {
+      const {
+        data,
+        error
+      } = await supabase.from('documentation').select('*').order('created_at', {
+        ascending: false
+      });
+      if (error) throw error;
+      setDocs(data || []);
+    } catch (error) {
+      console.error('Error fetching documentation:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch documentation",
+        variant: "destructive"
+      });
     }
   };
   const handleCreateNew = () => {
@@ -166,11 +214,112 @@ const AdminContent = () => {
       });
     }
   };
+  const handleCreateNewDoc = () => {
+    setEditingDoc(null);
+    setShowDocEditor(true);
+  };
+  const handleEditDoc = (doc: Documentation) => {
+    setEditingDoc(doc);
+    setShowDocEditor(true);
+  };
+  const handleDeleteDoc = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this documentation?')) return;
+    try {
+      const {
+        error
+      } = await supabase.from('documentation').delete().eq('id', id);
+      if (error) throw error;
+      setDocs(docs.filter(doc => doc.id !== id));
+      toast({
+        title: "Success",
+        description: "Documentation deleted successfully"
+      });
+    } catch (error) {
+      console.error('Error deleting documentation:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete documentation",
+        variant: "destructive"
+      });
+    }
+  };
+  const toggleDocPublished = async (doc: Documentation) => {
+    try {
+      const {
+        error
+      } = await supabase.from('documentation').update({
+        published: !doc.published
+      }).eq('id', doc.id);
+      if (error) throw error;
+      setDocs(docs.map(d => d.id === doc.id ? {
+        ...d,
+        published: !d.published
+      } : d));
+      toast({
+        title: "Success",
+        description: `Documentation ${!doc.published ? 'published' : 'unpublished'} successfully`
+      });
+    } catch (error) {
+      console.error('Error updating documentation:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update documentation status",
+        variant: "destructive"
+      });
+    }
+  };
+  const handleSaveDoc = async (docData: Partial<Documentation>) => {
+    try {
+      if (editingDoc) {
+        const {
+          error
+        } = await supabase.from('documentation').update(docData).eq('id', editingDoc.id);
+        if (error) throw error;
+        toast({
+          title: "Success",
+          description: "Documentation updated successfully"
+        });
+      } else {
+        const {
+          error
+        } = await supabase.from('documentation').insert([docData]);
+        if (error) throw error;
+        toast({
+          title: "Success",
+          description: "Documentation created successfully"
+        });
+      }
+      setShowDocEditor(false);
+      setEditingDoc(null);
+      fetchDocumentation();
+    } catch (error) {
+      console.error('Error saving documentation:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save documentation",
+        variant: "destructive"
+      });
+    }
+  };
   if (showEditor) {
-    return <BlogEditor post={editingPost} onSave={handleSavePost} onCancel={() => {
-      setShowEditor(false);
-      setEditingPost(null);
-    }} />;
+    return <BlogEditor 
+      post={editingPost} 
+      onSave={handleSavePost} 
+      onCancel={() => {
+        setShowEditor(false);
+        setEditingPost(null);
+      }} 
+    />;
+  }
+  if (showDocEditor) {
+    return <DocumentationEditor 
+      doc={editingDoc} 
+      onSave={handleSaveDoc} 
+      onCancel={() => {
+        setShowDocEditor(false);
+        setEditingDoc(null);
+      }} 
+    />;
   }
   return <div className="min-h-screen bg-brandae-dark text-white">
       <SEO title="Admin Dashboard - Brandae" description="Manage your blog posts and content" />
@@ -202,6 +351,10 @@ const AdminContent = () => {
               <TabsTrigger value="blog" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <Edit className="mr-2 h-4 w-4" />
                 Blog Posts
+              </TabsTrigger>
+              <TabsTrigger value="documentation" className="data-[state=active]:bg-brandae-green/20 rounded">
+                <Book className="mr-2 h-4 w-4" />
+                Documentation
               </TabsTrigger>
               <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20 rounded">
                 <FileText className="mr-2 h-4 w-4" />
@@ -308,6 +461,98 @@ const AdminContent = () => {
                 </motion.div>}
             </TabsContent>
 
+            <TabsContent value="documentation">
+              <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.4
+            }} className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-semibold">Documentation Management</h2>
+                <Button onClick={handleCreateNewDoc} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90 rounded">
+                  <Plus size={20} className="mr-2" />
+                  Create New Doc
+                </Button>
+              </motion.div>
+
+              <motion.div className="grid gap-6" initial={{
+              opacity: 0
+            }} animate={{
+              opacity: 1
+            }} transition={{
+              duration: 0.6,
+              delay: 0.2
+            }}>
+                {docs.length === 0 ? <Card className="bg-brandae-gray border-brandae-green/20">
+                    <CardContent className="text-center py-12">
+                      <h3 className="text-xl font-semibold mb-2 text-white">No documentation yet</h3>
+                      <p className="text-gray-400 mb-4">Create your first documentation article to get started</p>
+                      <Button onClick={handleCreateNewDoc} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
+                        <Plus size={20} className="mr-2" />
+                        Create Your First Article
+                      </Button>
+                    </CardContent>
+                  </Card> : docs.map((doc, index) => <motion.div key={doc.id} initial={{
+                opacity: 0,
+                y: 20
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.4,
+                delay: index * 0.1
+              }}>
+                    <Card className="bg-brandae-gray border-brandae-green/20 hover:border-brandae-green/40 transition-colors">
+                      <CardHeader>
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <CardTitle className="text-white mb-2">{doc.title}</CardTitle>
+                            <div className="flex flex-wrap gap-2 mb-2">
+                              <Badge variant="outline" className="border-brandae-green/50 text-brandae-green">
+                                {doc.category}
+                              </Badge>
+                              {doc.featured && <Badge className="bg-brandae-green/20 text-brandae-green">
+                                  Featured
+                                </Badge>}
+                              <Badge variant={doc.published ? "default" : "secondary"} className={doc.published ? "bg-green-600" : "bg-gray-600"}>
+                                {doc.published ? "Published" : "Draft"}
+                              </Badge>
+                            </div>
+                            <p className="text-gray-300 text-sm mb-2">{doc.excerpt}</p>
+                            <div className="flex items-center gap-4 text-gray-500 text-xs">
+                              <span>By {doc.author}</span>
+                              <span>{doc.reading_time} min read</span>
+                              <span>{doc.views_count} views</span>
+                              <span>{new Date(doc.created_at).toLocaleDateString()}</span>
+                            </div>
+                          </div>
+                          {doc.featured_image_url && <img src={doc.featured_image_url} alt={doc.title} className="w-24 h-16 object-cover rounded ml-4" />}
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline" onClick={() => handleEditDoc(doc)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
+                            <Edit size={16} className="mr-1" />
+                            Edit
+                          </Button>
+                          <Button size="sm" variant="outline" onClick={() => toggleDocPublished(doc)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
+                            {doc.published ? <EyeOff size={16} className="mr-1" /> : <Eye size={16} className="mr-1" />}
+                            {doc.published ? 'Unpublish' : 'Publish'}
+                          </Button>
+                          <Button size="sm" variant="outline" onClick={() => handleDeleteDoc(doc.id)} className="border-red-500/50 text-red-400 hover:bg-red-500/10 rounded">
+                            <Trash2 size={16} className="mr-1" />
+                            Delete
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>)}
+              </motion.div>
+            </TabsContent>
+
             <TabsContent value="case-studies">
               <motion.div initial={{
               opacity: 0,
@@ -354,6 +599,7 @@ const AdminContent = () => {
       </div>
     </div>;
 };
+
 const Admin = () => {
   return <AuthWrapper>
       <AdminContent />
