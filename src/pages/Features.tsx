@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from '@/components/Navbar';
@@ -14,6 +14,7 @@ import FeatureCard from '@/components/FeatureCard';
 export default function Features() {
   const [activeTab, setActiveTab] = useState('features');
   const moveAnimation = useAnimation();
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   // Animation for moving elements
   useEffect(() => {
@@ -863,7 +864,10 @@ export default function Features() {
               </div>
             </PopoverTrigger>
             <PopoverContent className="w-[350px] bg-brandae-gray border-brandae-green/20 text-white">
-              <ContactForm />
+              <ContactForm 
+                isOpen={isContactFormOpen} 
+                onClose={() => setIsContactFormOpen(false)} 
+              />
             </PopoverContent>
           </Popover>
         </div>

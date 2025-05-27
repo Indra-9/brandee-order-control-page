@@ -8,6 +8,7 @@ import { Check, CreditCard } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -124,7 +125,10 @@ export default function Pricing() {
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
+                  <ContactForm 
+                    isOpen={isContactFormOpen} 
+                    onClose={() => setIsContactFormOpen(false)} 
+                  />
                 </PopoverContent>
               </Popover>
             </div>
@@ -189,7 +193,10 @@ export default function Pricing() {
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
+                  <ContactForm 
+                    isOpen={isContactFormOpen} 
+                    onClose={() => setIsContactFormOpen(false)} 
+                  />
                 </PopoverContent>
               </Popover>
             </div>
@@ -250,7 +257,10 @@ export default function Pricing() {
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm />
+                  <ContactForm 
+                    isOpen={isContactFormOpen} 
+                    onClose={() => setIsContactFormOpen(false)} 
+                  />
                 </PopoverContent>
               </Popover>
             </div>
@@ -344,7 +354,10 @@ export default function Pricing() {
                 </div>
               </PopoverTrigger>
               <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                <ContactForm />
+                <ContactForm 
+                  isOpen={isContactFormOpen} 
+                  onClose={() => setIsContactFormOpen(false)} 
+                />
               </PopoverContent>
             </Popover>
             
