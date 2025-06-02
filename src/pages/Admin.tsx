@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, Layout } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -12,6 +12,7 @@ import CaseStudyManager from '@/components/CaseStudyManager';
 import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
 import SitemapManager from '@/components/SitemapManager';
+import FooterManager from '@/components/FooterManager';
 
 const AdminDashboard = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const AdminDashboard = () => {
     { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/admin/webhooks' },
     { id: 'sitemap', label: 'Sitemap', icon: Map, path: '/admin/sitemap' },
+    { id: 'footer', label: 'Footer Manager', icon: Layout, path: '/admin/footer' },
   ];
 
   const DashboardOverview = () => (
@@ -75,7 +77,7 @@ const AdminDashboard = () => {
             <CardTitle className="text-brandae-green">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Link to="/admin/case-studies">
                 <Button className="w-full bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
                   <FileText size={18} className="mr-2" />
@@ -92,6 +94,12 @@ const AdminDashboard = () => {
                 <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
                   <Map size={18} className="mr-2" />
                   Update Sitemap
+                </Button>
+              </Link>
+              <Link to="/admin/footer">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
+                  <Layout size={18} className="mr-2" />
+                  Manage Footer
                 </Button>
               </Link>
             </div>
@@ -151,6 +159,7 @@ const AdminDashboard = () => {
                 <Route path="integrations" element={<IntegrationManager />} />
                 <Route path="webhooks" element={<WebhookManager />} />
                 <Route path="sitemap" element={<SitemapManager />} />
+                <Route path="footer" element={<FooterManager />} />
               </Routes>
             </div>
           </div>

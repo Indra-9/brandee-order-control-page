@@ -382,6 +382,167 @@ export type Database = {
           },
         ]
       }
+      footer_config: {
+        Row: {
+          about_text: string | null
+          copyright_text: string | null
+          created_at: string
+          id: string
+          logo_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          about_text?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          about_text?: string | null
+          copyright_text?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      footer_contact: {
+        Row: {
+          address: string | null
+          created_at: string
+          email: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      footer_link_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean | null
+          name: string
+          slug: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      footer_links: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          is_external: boolean | null
+          sort_order: number | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          is_external?: boolean | null
+          sort_order?: number | null
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          is_external?: boolean | null
+          sort_order?: number | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "footer_links_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "footer_link_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      footer_social_links: {
+        Row: {
+          created_at: string
+          icon_name: string
+          id: string
+          is_active: boolean | null
+          platform: string
+          sort_order: number | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          icon_name: string
+          id?: string
+          is_active?: boolean | null
+          platform: string
+          sort_order?: number | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          icon_name?: string
+          id?: string
+          is_active?: boolean | null
+          platform?: string
+          sort_order?: number | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       integrations: {
         Row: {
           canonical_url: string | null
@@ -463,6 +624,27 @@ export type Database = {
           updated_at?: string
           views_count?: number | null
           website_url?: string | null
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          email: string
+          id: string
+          is_active: boolean | null
+          subscribed_at: string
+        }
+        Insert: {
+          email: string
+          id?: string
+          is_active?: boolean | null
+          subscribed_at?: string
+        }
+        Update: {
+          email?: string
+          id?: string
+          is_active?: boolean | null
+          subscribed_at?: string
         }
         Relationships: []
       }
