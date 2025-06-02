@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Zap, Shield, Trending, Users, Globe } from 'lucide-react';
+import { Check, Zap, Shield, TrendingUp, Users, Globe } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
 import FeatureCard from '@/components/FeatureCard';
@@ -29,46 +30,40 @@ const Features = () => {
 
   const features = [
     {
-      id: 1,
       title: "AI-Powered Automation",
       description:
         "Automate repetitive tasks with our advanced AI, saving you time and resources.",
-      icon: Zap,
+      icon: <Zap size={32} />,
     },
     {
-      id: 2,
       title: "Enhanced Security",
       description:
         "Protect your data with state-of-the-art security measures and encryption protocols.",
-      icon: Shield,
+      icon: <Shield size={32} />,
     },
     {
-      id: 3,
       title: "Real-Time Analytics",
       description:
         "Gain valuable insights with real-time data analytics and customizable dashboards.",
-      icon: Trending,
+      icon: <TrendingUp size={32} />,
     },
     {
-      id: 4,
       title: "Team Collaboration",
       description:
         "Seamlessly collaborate with your team using our integrated communication tools.",
-      icon: Users,
+      icon: <Users size={32} />,
     },
     {
-      id: 5,
       title: "Global Accessibility",
       description:
         "Access your data and tools from anywhere in the world with our cloud-based platform.",
-      icon: Globe,
+      icon: <Globe size={32} />,
     },
     {
-      id: 6,
       title: "Customizable Solutions",
       description:
         "Tailor our platform to meet your specific needs with our flexible and customizable solutions.",
-      icon: Check,
+      icon: <Check size={32} />,
     },
   ];
 
@@ -106,8 +101,14 @@ const Features = () => {
             animate="animate"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {features.map((feature) => (
-              <FeatureCard key={feature.id} feature={feature} />
+            {features.map((feature, index) => (
+              <FeatureCard 
+                key={index}
+                title={feature.title}
+                description={feature.description}
+                icon={feature.icon}
+                delay={index}
+              />
             ))}
           </motion.div>
         </div>

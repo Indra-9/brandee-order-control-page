@@ -28,6 +28,9 @@ interface Integration {
   is_featured: boolean;
   is_active: boolean;
   views_count: number;
+  meta_title: string;
+  meta_description: string;
+  seo_keywords: string;
   created_at: string;
   updated_at: string;
 }
