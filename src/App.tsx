@@ -18,6 +18,8 @@ import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetails from "./pages/CaseStudyDetails";
 import Integrations from "./pages/Integrations";
 import IntegrationDetails from "./pages/IntegrationDetails";
+import Sitemap from "./pages/Sitemap";
+import SitemapXML from "./pages/SitemapXML";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Auth from "./pages/Auth";
@@ -48,6 +50,8 @@ const App = () => (
             <Route path="/case-studies/:slug" element={<CaseStudyDetails />} />
             <Route path="/integrations" element={<Integrations />} />
             <Route path="/integrations/:slug" element={<IntegrationDetails />} />
+            <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/sitemap.xml" element={<SitemapXML />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/auth" element={<Auth />} />

@@ -466,6 +466,54 @@ export type Database = {
         }
         Relationships: []
       }
+      sitemap_pages: {
+        Row: {
+          canonical_url: string | null
+          change_frequency: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean | null
+          last_modified: string
+          meta_keywords: string | null
+          page_type: string | null
+          priority: number | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          canonical_url?: string | null
+          change_frequency?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_modified?: string
+          meta_keywords?: string | null
+          page_type?: string | null
+          priority?: number | null
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          canonical_url?: string | null
+          change_frequency?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_modified?: string
+          meta_keywords?: string | null
+          page_type?: string | null
+          priority?: number | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       webhook_endpoints: {
         Row: {
           created_at: string
@@ -498,7 +546,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_sitemap_for_content: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

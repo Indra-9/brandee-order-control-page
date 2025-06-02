@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,6 +11,7 @@ import ContactSubmissions from '@/components/ContactSubmissions';
 import CaseStudyManager from '@/components/CaseStudyManager';
 import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
+import SitemapManager from '@/components/SitemapManager';
 
 const AdminDashboard = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
     { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
     { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/admin/webhooks' },
+    { id: 'sitemap', label: 'Sitemap', icon: Map, path: '/admin/sitemap' },
   ];
 
   const DashboardOverview = () => (
@@ -35,7 +37,7 @@ const AdminDashboard = () => {
         <p className="text-gray-400">Manage your content and monitor activity</p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {menuItems.slice(1).map((item, index) => (
           <motion.div
             key={item.id}
@@ -86,10 +88,10 @@ const AdminDashboard = () => {
                   Add Integration
                 </Button>
               </Link>
-              <Link to="/admin/webhooks">
+              <Link to="/admin/sitemap">
                 <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
-                  <Webhook size={18} className="mr-2" />
-                  Configure Webhooks
+                  <Map size={18} className="mr-2" />
+                  Update Sitemap
                 </Button>
               </Link>
             </div>
@@ -143,11 +145,12 @@ const AdminDashboard = () => {
             {/* Main Content */}
             <div className="flex-1 min-w-0">
               <Routes>
-                <Route path="/" element={<DashboardOverview />} />
-                <Route path="/contacts" element={<ContactSubmissions />} />
-                <Route path="/case-studies" element={<CaseStudyManager />} />
-                <Route path="/integrations" element={<IntegrationManager />} />
-                <Route path="/webhooks" element={<WebhookManager />} />
+                <Route index element={<DashboardOverview />} />
+                <Route path="contacts" element={<ContactSubmissions />} />
+                <Route path="case-studies" element={<CaseStudyManager />} />
+                <Route path="integrations" element={<IntegrationManager />} />
+                <Route path="webhooks" element={<WebhookManager />} />
+                <Route path="sitemap" element={<SitemapManager />} />
               </Routes>
             </div>
           </div>
