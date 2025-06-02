@@ -1,608 +1,160 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Plus, Edit, Trash2, Eye, EyeOff, LogOut, Users, Settings as SettingsIcon, FileText, Book } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useToast } from '@/hooks/use-toast';
-import BlogEditor from '@/components/BlogEditor';
-import DocumentationEditor from '@/components/DocumentationEditor';
 import Navbar from '@/components/Navbar';
-import SEO from '@/components/SEO';
-import AuthWrapper from '@/components/AuthWrapper';
 import ContactSubmissions from '@/components/ContactSubmissions';
-import WebhookManager from '@/components/WebhookManager';
 import CaseStudyManager from '@/components/CaseStudyManager';
+import WebhookManager from '@/components/WebhookManager';
+import IntegrationManager from '@/components/IntegrationManager';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  image_url: string;
-  author: string;
-  category: string;
-  tags: string[];
-  read_time: string;
-  featured: boolean;
-  published: boolean;
-  created_at: string;
-  updated_at: string;
-}
+const AdminDashboard = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
 
-interface Documentation {
-  id: string;
-  title: string;
-  slug: string;
-  meta_title: string;
-  meta_description: string;
-  excerpt: string;
-  content: string;
-  featured_image_url: string;
-  category: string;
-  tags: string[];
-  author: string;
-  featured: boolean;
-  published: boolean;
-  seo_keywords: string;
-  canonical_url: string;
-  reading_time: number;
-  views_count: number;
-  created_at: string;
-  updated_at: string;
-}
+  const menuItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/admin' },
+    { id: 'contacts', label: 'Contact Submissions', icon: MessageSquare, path: '/admin/contacts' },
+    { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
+    { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
+    { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/admin/webhooks' },
+  ];
 
-const AdminContent = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [docs, setDocs] = useState<Documentation[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
-  const [editingDoc, setEditingDoc] = useState<Documentation | null>(null);
-  const [showEditor, setShowEditor] = useState(false);
-  const [showDocEditor, setShowDocEditor] = useState(false);
-  const [activeTab, setActiveTab] = useState('blog');
-  const {
-    toast
-  } = useToast();
-  useEffect(() => {
-    fetchPosts();
-    fetchDocumentation();
-  }, []);
-  const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut();
-      toast({
-        title: "Success",
-        description: "Signed out successfully"
-      });
-    } catch (error) {
-      console.error('Error signing out:', error);
-      toast({
-        title: "Error",
-        description: "Failed to sign out",
-        variant: "destructive"
-      });
-    }
-  };
-  const fetchPosts = async () => {
-    try {
-      const {
-        data,
-        error
-      } = await supabase.from('blog_posts').select('*').order('created_at', {
-        ascending: false
-      });
-      if (error) throw error;
-      setPosts(data || []);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      toast({
-        title: "Error",
-        description: "Failed to fetch blog posts",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  const fetchDocumentation = async () => {
-    try {
-      const {
-        data,
-        error
-      } = await supabase.from('documentation').select('*').order('created_at', {
-        ascending: false
-      });
-      if (error) throw error;
-      setDocs(data || []);
-    } catch (error) {
-      console.error('Error fetching documentation:', error);
-      toast({
-        title: "Error",
-        description: "Failed to fetch documentation",
-        variant: "destructive"
-      });
-    }
-  };
-  const handleCreateNew = () => {
-    setEditingPost(null);
-    setShowEditor(true);
-  };
-  const handleEdit = (post: BlogPost) => {
-    setEditingPost(post);
-    setShowEditor(true);
-  };
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this post?')) return;
-    try {
-      const {
-        error
-      } = await supabase.from('blog_posts').delete().eq('id', id);
-      if (error) throw error;
-      setPosts(posts.filter(post => post.id !== id));
-      toast({
-        title: "Success",
-        description: "Blog post deleted successfully"
-      });
-    } catch (error) {
-      console.error('Error deleting post:', error);
-      toast({
-        title: "Error",
-        description: "Failed to delete blog post",
-        variant: "destructive"
-      });
-    }
-  };
-  const togglePublished = async (post: BlogPost) => {
-    try {
-      const {
-        error
-      } = await supabase.from('blog_posts').update({
-        published: !post.published
-      }).eq('id', post.id);
-      if (error) throw error;
-      setPosts(posts.map(p => p.id === post.id ? {
-        ...p,
-        published: !p.published
-      } : p));
-      toast({
-        title: "Success",
-        description: `Post ${!post.published ? 'published' : 'unpublished'} successfully`
-      });
-    } catch (error) {
-      console.error('Error updating post:', error);
-      toast({
-        title: "Error",
-        description: "Failed to update post status",
-        variant: "destructive"
-      });
-    }
-  };
-  const handleSavePost = async (postData: Partial<BlogPost>) => {
-    try {
-      if (editingPost) {
-        const {
-          error
-        } = await supabase.from('blog_posts').update(postData).eq('id', editingPost.id);
-        if (error) throw error;
-        toast({
-          title: "Success",
-          description: "Blog post updated successfully"
-        });
-      } else {
-        const {
-          error
-        } = await supabase.from('blog_posts').insert([postData]);
-        if (error) throw error;
-        toast({
-          title: "Success",
-          description: "Blog post created successfully"
-        });
-      }
-      setShowEditor(false);
-      setEditingPost(null);
-      fetchPosts();
-    } catch (error) {
-      console.error('Error saving post:', error);
-      toast({
-        title: "Error",
-        description: "Failed to save blog post",
-        variant: "destructive"
-      });
-    }
-  };
-  const handleCreateNewDoc = () => {
-    setEditingDoc(null);
-    setShowDocEditor(true);
-  };
-  const handleEditDoc = (doc: Documentation) => {
-    setEditingDoc(doc);
-    setShowDocEditor(true);
-  };
-  const handleDeleteDoc = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this documentation?')) return;
-    try {
-      const {
-        error
-      } = await supabase.from('documentation').delete().eq('id', id);
-      if (error) throw error;
-      setDocs(docs.filter(doc => doc.id !== id));
-      toast({
-        title: "Success",
-        description: "Documentation deleted successfully"
-      });
-    } catch (error) {
-      console.error('Error deleting documentation:', error);
-      toast({
-        title: "Error",
-        description: "Failed to delete documentation",
-        variant: "destructive"
-      });
-    }
-  };
-  const toggleDocPublished = async (doc: Documentation) => {
-    try {
-      const {
-        error
-      } = await supabase.from('documentation').update({
-        published: !doc.published
-      }).eq('id', doc.id);
-      if (error) throw error;
-      setDocs(docs.map(d => d.id === doc.id ? {
-        ...d,
-        published: !d.published
-      } : d));
-      toast({
-        title: "Success",
-        description: `Documentation ${!doc.published ? 'published' : 'unpublished'} successfully`
-      });
-    } catch (error) {
-      console.error('Error updating documentation:', error);
-      toast({
-        title: "Error",
-        description: "Failed to update documentation status",
-        variant: "destructive"
-      });
-    }
-  };
-  const handleSaveDoc = async (docData: Partial<Documentation>) => {
-    try {
-      if (editingDoc) {
-        const {
-          error
-        } = await supabase.from('documentation').update(docData).eq('id', editingDoc.id);
-        if (error) throw error;
-        toast({
-          title: "Success",
-          description: "Documentation updated successfully"
-        });
-      } else {
-        const {
-          error
-        } = await supabase.from('documentation').insert([docData]);
-        if (error) throw error;
-        toast({
-          title: "Success",
-          description: "Documentation created successfully"
-        });
-      }
-      setShowDocEditor(false);
-      setEditingDoc(null);
-      fetchDocumentation();
-    } catch (error) {
-      console.error('Error saving documentation:', error);
-      toast({
-        title: "Error",
-        description: "Failed to save documentation",
-        variant: "destructive"
-      });
-    }
-  };
-  if (showEditor) {
-    return <BlogEditor 
-      post={editingPost} 
-      onSave={handleSavePost} 
-      onCancel={() => {
-        setShowEditor(false);
-        setEditingPost(null);
-      }} 
-    />;
-  }
-  if (showDocEditor) {
-    return <DocumentationEditor 
-      doc={editingDoc} 
-      onSave={handleSaveDoc} 
-      onCancel={() => {
-        setShowDocEditor(false);
-        setEditingDoc(null);
-      }} 
-    />;
-  }
-  return <div className="min-h-screen bg-brandae-dark text-white">
-      <SEO title="Admin Dashboard - Brandae" description="Manage your blog posts and content" />
-      
+  const DashboardOverview = () => (
+    <div className="space-y-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <h1 className="text-3xl font-bold text-white mb-2">Admin Dashboard</h1>
+        <p className="text-gray-400">Manage your content and monitor activity</p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {menuItems.slice(1).map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+          >
+            <Card className="bg-brandae-gray border-brandae-green/20 hover:border-brandae-green/40 transition-colors cursor-pointer">
+              <Link to={item.path}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium text-white">
+                    {item.label}
+                  </CardTitle>
+                  <item.icon className="h-4 w-4 text-brandae-green" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-brandae-green">-</div>
+                  <p className="text-xs text-gray-400">
+                    Manage {item.label.toLowerCase()}
+                  </p>
+                </CardContent>
+              </Link>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <Card className="bg-brandae-gray border-brandae-green/20">
+          <CardHeader>
+            <CardTitle className="text-brandae-green">Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/admin/case-studies">
+                <Button className="w-full bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
+                  <FileText size={18} className="mr-2" />
+                  Create Case Study
+                </Button>
+              </Link>
+              <Link to="/admin/integrations">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
+                  <Layers size={18} className="mr-2" />
+                  Add Integration
+                </Button>
+              </Link>
+              <Link to="/admin/webhooks">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
+                  <Webhook size={18} className="mr-2" />
+                  Configure Webhooks
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-brandae-dark text-white">
       <Navbar />
       
-      <div className="pt-32 px-6 md:px-12 lg:px-24">
+      <div className="pt-24 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6
-        }} className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold">
-              Admin <span className="gradient-text">Dashboard</span>
-            </h1>
-            <Button onClick={handleSignOut} variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded">
-              <LogOut size={20} className="mr-2" />
-              Sign Out
-            </Button>
-          </motion.div>
-
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-brandae-gray/50 border border-white/10 mb-8">
-              <TabsTrigger value="blog" className="data-[state=active]:bg-brandae-green/20 rounded">
-                <Edit className="mr-2 h-4 w-4" />
-                Blog Posts
-              </TabsTrigger>
-              <TabsTrigger value="documentation" className="data-[state=active]:bg-brandae-green/20 rounded">
-                <Book className="mr-2 h-4 w-4" />
-                Documentation
-              </TabsTrigger>
-              <TabsTrigger value="case-studies" className="data-[state=active]:bg-brandae-green/20 rounded">
-                <FileText className="mr-2 h-4 w-4" />
-                Case Studies
-              </TabsTrigger>
-              <TabsTrigger value="contacts" className="data-[state=active]:bg-brandae-green/20 rounded">
-                <Users className="mr-2 h-4 w-4" />
-                Contact Submissions
-              </TabsTrigger>
-              <TabsTrigger value="webhooks" className="data-[state=active]:bg-brandae-green/20 rounded">
-                <SettingsIcon className="mr-2 h-4 w-4" />
-                Webhook Settings
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="blog">
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.4
-            }} className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-semibold">Blog Management</h2>
-                <Button onClick={handleCreateNew} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90 rounded">
-                  <Plus size={20} className="mr-2" />
-                  Create New Post
-                </Button>
+          <div className="flex gap-8">
+            {/* Sidebar */}
+            <div className="w-64 flex-shrink-0">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
+                className="sticky top-32"
+              >
+                <Card className="bg-brandae-gray border-brandae-green/20">
+                  <CardHeader>
+                    <CardTitle className="text-brandae-green">Navigation</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <nav className="space-y-1">
+                      {menuItems.map((item) => (
+                        <Link
+                          key={item.id}
+                          to={item.path}
+                          className={`flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-brandae-green/10 ${
+                            currentPath === item.path 
+                              ? 'bg-brandae-green/20 text-brandae-green border-r-2 border-brandae-green' 
+                              : 'text-gray-300 hover:text-white'
+                          }`}
+                        >
+                          <item.icon size={18} />
+                          {item.label}
+                        </Link>
+                      ))}
+                    </nav>
+                  </CardContent>
+                </Card>
               </motion.div>
+            </div>
 
-              {isLoading ? <div className="text-center py-12">
-                  <div className="text-gray-400">Loading posts...</div>
-                </div> : <motion.div className="grid gap-6" initial={{
-              opacity: 0
-            }} animate={{
-              opacity: 1
-            }} transition={{
-              duration: 0.6,
-              delay: 0.2
-            }}>
-                  {posts.length === 0 ? <Card className="bg-brandae-gray border-brandae-green/20">
-                      <CardContent className="text-center py-12">
-                        <h3 className="text-xl font-semibold mb-2 text-white">No blog posts yet</h3>
-                        <p className="text-gray-400 mb-4">Create your first blog post to get started</p>
-                        <Button onClick={handleCreateNew} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
-                          <Plus size={20} className="mr-2" />
-                          Create Your First Post
-                        </Button>
-                      </CardContent>
-                    </Card> : posts.map((post, index) => <motion.div key={post.id} initial={{
-                opacity: 0,
-                y: 20
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.4,
-                delay: index * 0.1
-              }}>
-                        <Card className="bg-brandae-gray border-brandae-green/20 hover:border-brandae-green/40 transition-colors">
-                          <CardHeader>
-                            <div className="flex justify-between items-start">
-                              <div className="flex-1">
-                                <CardTitle className="text-white mb-2">{post.title}</CardTitle>
-                                <div className="flex flex-wrap gap-2 mb-2">
-                                  <Badge variant="outline" className="border-brandae-green/50 text-brandae-green">
-                                    {post.category}
-                                  </Badge>
-                                  {post.featured && <Badge className="bg-brandae-green/20 text-brandae-green">
-                                      Featured
-                                    </Badge>}
-                                  <Badge variant={post.published ? "default" : "secondary"} className={post.published ? "bg-green-600" : "bg-gray-600"}>
-                                    {post.published ? "Published" : "Draft"}
-                                  </Badge>
-                                </div>
-                                <p className="text-gray-300 text-sm mb-2">{post.excerpt}</p>
-                                <p className="text-gray-500 text-xs">
-                                  By {post.author} • {new Date(post.created_at).toLocaleDateString()}
-                                </p>
-                              </div>
-                              {post.image_url && <img src={post.image_url} alt={post.title} className="w-24 h-16 object-cover rounded ml-4" />}
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" onClick={() => handleEdit(post)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
-                                <Edit size={16} className="mr-1" />
-                                Edit
-                              </Button>
-                              <Button size="sm" variant="outline" onClick={() => togglePublished(post)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
-                                {post.published ? <EyeOff size={16} className="mr-1" /> : <Eye size={16} className="mr-1" />}
-                                {post.published ? 'Unpublish' : 'Publish'}
-                              </Button>
-                              <Button size="sm" variant="outline" onClick={() => handleDelete(post.id)} className="border-red-500/50 text-red-400 hover:bg-red-500/10 rounded">
-                                <Trash2 size={16} className="mr-1" />
-                                Delete
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>)}
-                </motion.div>}
-            </TabsContent>
-
-            <TabsContent value="documentation">
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.4
-            }} className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-semibold">Documentation Management</h2>
-                <Button onClick={handleCreateNewDoc} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90 rounded">
-                  <Plus size={20} className="mr-2" />
-                  Create New Doc
-                </Button>
-              </motion.div>
-
-              <motion.div className="grid gap-6" initial={{
-              opacity: 0
-            }} animate={{
-              opacity: 1
-            }} transition={{
-              duration: 0.6,
-              delay: 0.2
-            }}>
-                {docs.length === 0 ? <Card className="bg-brandae-gray border-brandae-green/20">
-                    <CardContent className="text-center py-12">
-                      <h3 className="text-xl font-semibold mb-2 text-white">No documentation yet</h3>
-                      <p className="text-gray-400 mb-4">Create your first documentation article to get started</p>
-                      <Button onClick={handleCreateNewDoc} className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
-                        <Plus size={20} className="mr-2" />
-                        Create Your First Article
-                      </Button>
-                    </CardContent>
-                  </Card> : docs.map((doc, index) => <motion.div key={doc.id} initial={{
-                opacity: 0,
-                y: 20
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.4,
-                delay: index * 0.1
-              }}>
-                    <Card className="bg-brandae-gray border-brandae-green/20 hover:border-brandae-green/40 transition-colors">
-                      <CardHeader>
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <CardTitle className="text-white mb-2">{doc.title}</CardTitle>
-                            <div className="flex flex-wrap gap-2 mb-2">
-                              <Badge variant="outline" className="border-brandae-green/50 text-brandae-green">
-                                {doc.category}
-                              </Badge>
-                              {doc.featured && <Badge className="bg-brandae-green/20 text-brandae-green">
-                                  Featured
-                                </Badge>}
-                              <Badge variant={doc.published ? "default" : "secondary"} className={doc.published ? "bg-green-600" : "bg-gray-600"}>
-                                {doc.published ? "Published" : "Draft"}
-                              </Badge>
-                            </div>
-                            <p className="text-gray-300 text-sm mb-2">{doc.excerpt}</p>
-                            <div className="flex items-center gap-4 text-gray-500 text-xs">
-                              <span>By {doc.author}</span>
-                              <span>{doc.reading_time} min read</span>
-                              <span>{doc.views_count} views</span>
-                              <span>{new Date(doc.created_at).toLocaleDateString()}</span>
-                            </div>
-                          </div>
-                          {doc.featured_image_url && <img src={doc.featured_image_url} alt={doc.title} className="w-24 h-16 object-cover rounded ml-4" />}
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline" onClick={() => handleEditDoc(doc)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
-                            <Edit size={16} className="mr-1" />
-                            Edit
-                          </Button>
-                          <Button size="sm" variant="outline" onClick={() => toggleDocPublished(doc)} className="border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10 rounded">
-                            {doc.published ? <EyeOff size={16} className="mr-1" /> : <Eye size={16} className="mr-1" />}
-                            {doc.published ? 'Unpublish' : 'Publish'}
-                          </Button>
-                          <Button size="sm" variant="outline" onClick={() => handleDeleteDoc(doc.id)} className="border-red-500/50 text-red-400 hover:bg-red-500/10 rounded">
-                            <Trash2 size={16} className="mr-1" />
-                            Delete
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>)}
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="case-studies">
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.4
-            }}>
-                <CaseStudyManager />
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="contacts">
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.4
-            }}>
-                <ContactSubmissions />
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="webhooks">
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.4
-            }}>
-                <WebhookManager />
-              </motion.div>
-            </TabsContent>
-          </Tabs>
+            {/* Main Content */}
+            <div className="flex-1 min-w-0">
+              <Routes>
+                <Route path="/" element={<DashboardOverview />} />
+                <Route path="/contacts" element={<ContactSubmissions />} />
+                <Route path="/case-studies" element={<CaseStudyManager />} />
+                <Route path="/integrations" element={<IntegrationManager />} />
+                <Route path="/webhooks" element={<WebhookManager />} />
+              </Routes>
+            </div>
+          </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
-const Admin = () => {
-  return <AuthWrapper>
-      <AdminContent />
-    </AuthWrapper>;
-};
-export default Admin;
+export default AdminDashboard;

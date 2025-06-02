@@ -16,6 +16,8 @@ import DocDetails from "./pages/DocDetails";
 import DocCategory from "./pages/DocCategory";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetails from "./pages/CaseStudyDetails";
+import Integrations from "./pages/Integrations";
+import IntegrationDetails from "./pages/IntegrationDetails";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Auth from "./pages/Auth";
@@ -44,10 +46,12 @@ const App = () => (
             <Route path="/docs/:slug" element={<DocDetails />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-studies/:slug" element={<CaseStudyDetails />} />
+            <Route path="/integrations" element={<Integrations />} />
+            <Route path="/integrations/:slug" element={<IntegrationDetails />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/*" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

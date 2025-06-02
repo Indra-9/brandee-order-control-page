@@ -382,6 +382,90 @@ export type Database = {
           },
         ]
       }
+      integrations: {
+        Row: {
+          canonical_url: string | null
+          category: string
+          created_at: string
+          description: string | null
+          detailed_description: string | null
+          difficulty_level: string | null
+          documentation_url: string | null
+          features: string[] | null
+          id: string
+          integration_type: string | null
+          is_active: boolean | null
+          is_featured: boolean | null
+          logo_url: string | null
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          pricing_info: string | null
+          seo_keywords: string | null
+          setup_time: string | null
+          slug: string
+          sort_order: number | null
+          supported_platforms: string[] | null
+          updated_at: string
+          views_count: number | null
+          website_url: string | null
+        }
+        Insert: {
+          canonical_url?: string | null
+          category: string
+          created_at?: string
+          description?: string | null
+          detailed_description?: string | null
+          difficulty_level?: string | null
+          documentation_url?: string | null
+          features?: string[] | null
+          id?: string
+          integration_type?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          logo_url?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          pricing_info?: string | null
+          seo_keywords?: string | null
+          setup_time?: string | null
+          slug: string
+          sort_order?: number | null
+          supported_platforms?: string[] | null
+          updated_at?: string
+          views_count?: number | null
+          website_url?: string | null
+        }
+        Update: {
+          canonical_url?: string | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          detailed_description?: string | null
+          difficulty_level?: string | null
+          documentation_url?: string | null
+          features?: string[] | null
+          id?: string
+          integration_type?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          logo_url?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          pricing_info?: string | null
+          seo_keywords?: string | null
+          setup_time?: string | null
+          slug?: string
+          sort_order?: number | null
+          supported_platforms?: string[] | null
+          updated_at?: string
+          views_count?: number | null
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       webhook_endpoints: {
         Row: {
           created_at: string
