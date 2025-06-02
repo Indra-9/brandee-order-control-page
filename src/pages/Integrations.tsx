@@ -198,7 +198,7 @@ export default function Integrations() {
         }} className="flex flex-col lg:flex-row gap-4 mb-8">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              <Input placeholder="Search integrations..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-brandae-gray border-brandae-green/20 text-white" />
+              <Input placeholder="Search integrations..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-brandae-gray border-brandae-green/20 text-white rounded" />
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full lg:w-48 bg-brandae-gray border-brandae-green/20 text-white">
