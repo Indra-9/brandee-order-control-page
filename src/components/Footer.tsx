@@ -140,15 +140,23 @@ const Footer = () => {
     }
   };
 
-  const getSocialIcon = (iconName: string) => {
-    const icons = {
-      twitter: Twitter,
-      linkedin: Linkedin,
-      facebook: Facebook,
-      instagram: Instagram,
-      youtube: Youtube,
-    };
-    return icons[iconName.toLowerCase() as keyof typeof icons] || Mail;
+  const renderSocialIcon = (iconName: string) => {
+    const iconProps = { size: 20 };
+    
+    switch (iconName.toLowerCase()) {
+      case 'twitter':
+        return <Twitter {...iconProps} />;
+      case 'linkedin':
+        return <Linkedin {...iconProps} />;
+      case 'facebook':
+        return <Facebook {...iconProps} />;
+      case 'instagram':
+        return <Instagram {...iconProps} />;
+      case 'youtube':
+        return <Youtube {...iconProps} />;
+      default:
+        return <Mail {...iconProps} />;
+    }
   };
 
   const getLinksByCategory = (categoryId: string) => {
@@ -326,23 +334,20 @@ const Footer = () => {
 
           {/* Social Media Links */}
           <div className="flex space-x-4">
-            {socialLinks.map((social) => {
-              const IconComponent = getSocialIcon(social.icon_name);
-              return (
-                <motion.a
-                  key={social.platform}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-brandae-green transition-colors"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <IconComponent size={20} />
-                </motion.a>
-              );
-            })}
+            {socialLinks.map((social) => (
+              <motion.a
+                key={social.platform}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-brandae-green transition-colors"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              >
+                {renderSocialIcon(social.icon_name)}
+              </motion.a>
+            ))}
           </div>
         </motion.div>
       </div>
