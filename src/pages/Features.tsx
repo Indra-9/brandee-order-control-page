@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Check, 
@@ -28,21 +28,22 @@ import {
   Clock,
   DollarSign,
   ChevronRight,
-  Play
+  Play,
+  Eye,
+  Headphones,
+  Database,
+  Layers,
+  MonitorIcon as Monitor,
+  Percent,
+  RefreshCw
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import SEO from '@/components/SEO';
-import FeatureCard from '@/components/FeatureCard';
 import AnimatedButton from '@/components/AnimatedButton';
 import Footer from '@/components/Footer';
 
 const Features = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const [activeSection, setActiveSection] = useState(0);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const [activeTab, setActiveTab] = useState(0);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -59,199 +60,237 @@ const Features = () => {
     },
   };
 
-  // Core Platform Features
-  const coreFeatures = [
+  // Feature categories with comprehensive features
+  const featureCategories = [
     {
-      title: "Multi-Store Management",
-      description: "Manage multiple stores from a single dashboard with centralized inventory, orders, and customer management.",
-      icon: <Package size={32} />,
+      title: "E-commerce & Store",
+      description: "Complete online store management with advanced e-commerce capabilities",
+      features: [
+        {
+          title: "App Commission Billing",
+          description: "Flexible commission structures with automated billing and transparent fee management.",
+          icon: <CreditCard size={24} />
+        },
+        {
+          title: "Branded Mobile Apps",
+          description: "Custom-branded iOS and Android apps with your logo, colors, and complete customization.",
+          icon: <Smartphone size={24} />
+        },
+        {
+          title: "Customer Data Ownership",
+          description: "Complete ownership and control of your customer data with advanced analytics and insights.",
+          icon: <Database size={24} />
+        },
+        {
+          title: "Advanced Marketing Tools",
+          description: "Push notifications, email campaigns, loyalty programs, and targeted marketing automation.",
+          icon: <Target size={24} />
+        },
+        {
+          title: "Delivery Management System",
+          description: "End-to-end delivery management with real-time tracking and route optimization.",
+          icon: <Truck size={24} />
+        },
+        {
+          title: "Inventory Management",
+          description: "Real-time stock tracking, automated reorder points, and multi-location inventory sync.",
+          icon: <Package size={24} />
+        }
+      ]
     },
     {
-      title: "Advanced Analytics",
-      description: "Real-time insights with comprehensive reporting, sales analytics, and performance tracking across all channels.",
-      icon: <BarChart3 size={32} />,
+      title: "Analytics & Insights",
+      description: "Powerful analytics and business intelligence tools",
+      features: [
+        {
+          title: "Real-Time Analytics",
+          description: "Live dashboard with sales metrics, customer behavior, and performance indicators.",
+          icon: <BarChart3 size={24} />
+        },
+        {
+          title: "Sales Forecasting",
+          description: "AI-powered sales predictions and trend analysis for better business planning.",
+          icon: <TrendingUp size={24} />
+        },
+        {
+          title: "Customer Insights",
+          description: "Detailed customer analytics including purchase patterns and lifetime value.",
+          icon: <Users size={24} />
+        },
+        {
+          title: "Multi-Channel Reports",
+          description: "Comprehensive reporting across all sales channels with exportable data.",
+          icon: <Globe size={24} />
+        }
+      ]
     },
     {
-      title: "Mobile-First Design",
-      description: "Fully responsive platform optimized for mobile devices with native iOS and Android applications.",
-      icon: <Smartphone size={32} />,
-    },
-    {
-      title: "AI-Powered Automation",
-      description: "Intelligent automation for inventory management, pricing optimization, and customer engagement.",
-      icon: <Brain size={32} />,
-    },
+      title: "Customer Experience",
+      description: "Enhanced customer engagement and satisfaction tools",
+      features: [
+        {
+          title: "Live Chat Support",
+          description: "Integrated customer support with live chat, ticket management, and help desk.",
+          icon: <MessageSquare size={24} />
+        },
+        {
+          title: "Loyalty Programs",
+          description: "Customizable reward systems with points, cashback, and referral programs.",
+          icon: <Gift size={24} />
+        },
+        {
+          title: "Push Notifications",
+          description: "Targeted messaging with personalization and automated campaign management.",
+          icon: <Bell size={24} />
+        },
+        {
+          title: "Review & Rating System",
+          description: "Customer feedback collection with review management and response tools.",
+          icon: <Star size={24} />
+        }
+      ]
+    }
   ];
 
-  // E-commerce Capabilities
-  const ecommerceFeatures = [
+  // Additional comprehensive features
+  const additionalFeatures = [
     {
-      title: "Product Catalog Management",
-      description: "Advanced product management with bulk upload, variant handling, and rich media support.",
-      icon: <Package size={28} />,
+      category: "Secure Payment Processing",
+      items: [
+        "50+ Payment Gateways",
+        "Secure Payment Processing",
+        "Multi-Currency Support",
+        "Subscription Management"
+      ]
     },
     {
-      title: "Order Processing",
-      description: "Streamlined order workflow with automated processing, status tracking, and fulfillment management.",
-      icon: <Settings size={28} />,
+      category: "In-App Live Support",
+      items: [
+        "24/7 Customer Support",
+        "Live Chat Integration",
+        "Help Desk Management",
+        "Knowledge Base"
+      ]
     },
     {
-      title: "Payment Gateway Integration",
-      description: "Support for 50+ payment gateways with secure processing and multi-currency support.",
-      icon: <CreditCard size={28} />,
+      category: "Inventory Management",
+      items: [
+        "Real-time Stock Tracking",
+        "Multi-location Management",
+        "Automated Reordering",
+        "Product Variants"
+      ]
     },
     {
-      title: "Inventory Management",
-      description: "Real-time stock tracking, automated reorder points, and multi-warehouse management.",
-      icon: <BarChart3 size={28} />,
+      category: "Loyalty Programs",
+      items: [
+        "Points & Rewards System",
+        "Referral Programs",
+        "Cashback Management",
+        "Customer Tiers"
+      ]
     },
+    {
+      category: "Customer Profile",
+      items: [
+        "Complete Customer Database",
+        "Purchase History",
+        "Behavior Analytics",
+        "Segmentation Tools"
+      ]
+    },
+    {
+      category: "Social Login",
+      items: [
+        "Facebook Login",
+        "Google Authentication",
+        "Apple Sign-in",
+        "Phone Number Verification"
+      ]
+    }
   ];
 
-  // Marketing & Customer Engagement
-  const marketingFeatures = [
+  // Success stories data
+  const successStories = [
     {
-      title: "Push Notifications",
-      description: "Targeted push notifications with advanced segmentation and A/B testing capabilities.",
-      icon: <Bell size={28} />,
+      name: "Alem Gebeta",
+      role: "CEO, Fresh Market",
+      image: "/lovable-uploads/b7b83b2d-2567-4919-a07d-da4094321086.png",
+      rating: 5,
+      quote: "Brandae transformed our local grocery store into a thriving online business. Sales increased by 300% in just 6 months!",
+      results: "300% Sales Growth"
     },
     {
-      title: "Loyalty Programs",
-      description: "Customizable loyalty programs with points, rewards, and referral system integration.",
-      icon: <Gift size={28} />,
+      name: "Food Market",
+      role: "Restaurant Chain",
+      image: "/lovable-uploads/a14793e5-192f-4f20-b156-b312a832363a.png",
+      rating: 5,
+      quote: "The delivery management system is incredible. We reduced delivery time by 40% and customer satisfaction is at an all-time high.",
+      results: "40% Faster Delivery"
     },
     {
-      title: "Email Marketing",
-      description: "Automated email campaigns with personalization, drip sequences, and performance tracking.",
-      icon: <MessageSquare size={28} />,
-    },
-    {
-      title: "Social Media Integration",
-      description: "Seamless integration with social platforms for marketing campaigns and customer engagement.",
-      icon: <Users size={28} />,
-    },
+      name: "Burger Bros",
+      role: "Fast Food Chain",
+      image: "/lovable-uploads/b7b83b2d-2567-4919-a07d-da4094321086.png",
+      rating: 5,
+      quote: "Zero commission model saved us thousands monthly. The branded app gave us complete control over our customer experience.",
+      results: "Zero Commission Savings"
+    }
   ];
 
-  // Delivery & Logistics
-  const logisticsFeatures = [
+  // Why choose Brandae reasons
+  const whyChooseBrandae = [
     {
-      title: "Real-time Tracking",
-      description: "Live order tracking with GPS integration and automated customer notifications.",
-      icon: <MapPin size={28} />,
+      title: "Development & Setup",
+      description: "Complete setup and development of your custom platform with ongoing technical support.",
+      icon: <Settings size={32} />
     },
     {
-      title: "Route Optimization",
-      description: "AI-powered route planning for efficient delivery with cost and time optimization.",
-      icon: <Truck size={28} />,
+      title: "Integration & Training",
+      description: "Seamless integration with existing systems and comprehensive team training programs.",
+      icon: <Globe size={32} />
     },
     {
-      title: "Delivery Scheduling",
-      description: "Flexible delivery slots with calendar integration and capacity management.",
-      icon: <Calendar size={28} />,
-    },
-    {
-      title: "Driver Management",
-      description: "Complete driver portal with performance tracking, payment management, and communication tools.",
-      icon: <Users size={28} />,
-    },
+      title: "Launch & Grow",
+      description: "Successful platform launch with growth strategies and continuous optimization support.",
+      icon: <Rocket size={32} />
+    }
   ];
 
-  // Customer Management
-  const customerFeatures = [
+  // FAQ data
+  const faqData = [
     {
-      title: "Customer Profiles",
-      description: "Comprehensive customer database with purchase history, preferences, and behavior analysis.",
-      icon: <Users size={28} />,
+      question: "How long does it take to set up?",
+      answer: "Our standard setup takes 2-4 weeks depending on customization requirements. We provide a detailed timeline during onboarding."
     },
     {
-      title: "Support System",
-      description: "Integrated help desk with live chat, ticket management, and knowledge base.",
-      icon: <MessageSquare size={28} />,
+      question: "Do you provide ongoing support?",
+      answer: "Yes, we offer 24/7 technical support, regular updates, and dedicated account management for all our clients."
     },
     {
-      title: "Review Management",
-      description: "Customer review system with moderation, response management, and rating analytics.",
-      icon: <Star size={28} />,
+      question: "Can I customize the mobile apps?",
+      answer: "Absolutely! Our branded mobile apps are fully customizable with your logo, colors, themes, and specific features."
     },
     {
-      title: "Feedback Collection",
-      description: "Automated feedback collection with surveys, NPS scoring, and improvement insights.",
-      icon: <Target size={28} />,
-    },
-  ];
-
-  // Business Intelligence
-  const businessFeatures = [
-    {
-      title: "Sales Analytics",
-      description: "Detailed sales reports with trend analysis, forecasting, and performance metrics.",
-      icon: <TrendingUp size={28} />,
+      question: "What about data ownership?",
+      answer: "You have complete ownership of all your customer data, sales data, and business analytics. We never share or sell your data."
     },
     {
-      title: "Financial Reports",
-      description: "Comprehensive financial reporting with P&L statements, tax reports, and reconciliation.",
-      icon: <DollarSign size={28} />,
+      question: "Is there a commission fee?",
+      answer: "No, we operate on a zero-commission model. You keep 100% of your sales revenue and only pay our platform fee."
     },
     {
-      title: "Operational Insights",
-      description: "Operational metrics including delivery performance, customer satisfaction, and efficiency KPIs.",
-      icon: <BarChart3 size={28} />,
-    },
-    {
-      title: "Custom Dashboards",
-      description: "Personalized dashboards with drag-and-drop widgets and real-time data visualization.",
-      icon: <Settings size={28} />,
-    },
-  ];
-
-  // Integration & API
-  const integrationFeatures = [
-    {
-      title: "Third-party Integrations",
-      description: "Pre-built integrations with popular tools including CRM, ERP, and accounting software.",
-      icon: <Globe size={28} />,
-    },
-    {
-      title: "API Access",
-      description: "RESTful APIs with comprehensive documentation for custom integrations and development.",
-      icon: <Settings size={28} />,
-    },
-    {
-      title: "Webhook Support",
-      description: "Real-time webhook notifications for seamless data synchronization across platforms.",
-      icon: <Zap size={28} />,
-    },
-    {
-      title: "Data Export",
-      description: "Flexible data export options with scheduled reports and multiple format support.",
-      icon: <BarChart3 size={28} />,
-    },
-  ];
-
-  const benefits = [
-    "Increase sales by up to 300% with advanced e-commerce features",
-    "Reduce operational costs by 40% through automation",
-    "Improve customer satisfaction by 85% with better service",
-    "Scale your business 10x faster with our platform",
-    "Get real-time insights with advanced analytics",
-    "24/7 expert support and dedicated account management"
-  ];
-
-  const featureSections = [
-    { title: "Core Platform", features: coreFeatures },
-    { title: "E-commerce", features: ecommerceFeatures },
-    { title: "Marketing", features: marketingFeatures },
-    { title: "Delivery & Logistics", features: logisticsFeatures },
-    { title: "Customer Management", features: customerFeatures },
-    { title: "Business Intelligence", features: businessFeatures },
-    { title: "Integrations", features: integrationFeatures },
+      question: "What kind of support is included?",
+      answer: "We provide comprehensive support including technical assistance, training, marketing guidance, and business growth consulting."
+    }
   ];
 
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
       <SEO
-        title="Features - Brandae: Complete E-commerce Platform"
-        description="Explore comprehensive features that power your online business. From e-commerce to delivery management, analytics to customer engagement - everything you need in one platform."
-        keywords="e-commerce platform, online store, delivery management, business analytics, customer engagement, mobile commerce"
+        title="Powerful Features to Grow Your Business - Brandae"
+        description="Discover comprehensive e-commerce features including branded mobile apps, delivery management, analytics, and more. Everything you need to build and scale your online business."
+        keywords="e-commerce platform, mobile apps, delivery management, business analytics, online store features, customer management"
       />
       <Navbar />
 
@@ -261,104 +300,131 @@ const Features = () => {
         <div className="container mx-auto text-center relative z-10">
           <motion.div {...fadeInUp}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Everything You Need to <span className="gradient-text">Grow Your Business</span>
+              Powerful Features to <span className="gradient-text">Grow Your Business</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              From e-commerce to delivery management, customer engagement to business analytics - 
-              our comprehensive platform provides all the tools you need to build, manage, and scale your online business.
+              Discover everything that's built in-to help you grow your business while creating amazing experiences for your customers.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <AnimatedButton 
-                onClick={() => window.location.href = '/auth'} 
-                className="bg-brandae-green text-brandae-dark hover:bg-brandae-green/90"
-              >
-                Start Free Trial
-                <ArrowRight size={20} className="ml-2" />
-              </AnimatedButton>
-              <AnimatedButton 
-                onClick={() => window.location.href = '#demo'} 
-                variant="outline"
-              >
-                <Play size={20} className="mr-2" />
-                Watch Demo
-              </AnimatedButton>
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="flex items-center bg-brandae-gray px-4 py-2 rounded-full">
+                <Check className="text-brandae-green mr-2" size={16} />
+                <span className="text-sm">E-Commerce</span>
+              </div>
+              <div className="flex items-center bg-brandae-gray px-4 py-2 rounded-full">
+                <Check className="text-brandae-green mr-2" size={16} />
+                <span className="text-sm">Analytics</span>
+              </div>
+              <div className="flex items-center bg-brandae-gray px-4 py-2 rounded-full">
+                <Check className="text-brandae-green mr-2" size={16} />
+                <span className="text-sm">Marketing</span>
+              </div>
+              <div className="flex items-center bg-brandae-gray px-4 py-2 rounded-full">
+                <Check className="text-brandae-green mr-2" size={16} />
+                <span className="text-sm">Delivery</span>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Feature Navigation */}
-      <section className="py-8 px-6 md:px-12 lg:px-24 bg-brandae-darker/50">
+      {/* Main Features Tabs */}
+      <section className="py-16 px-6 md:px-12 lg:px-24 bg-brandae-darker">
         <div className="container mx-auto">
-          <div className="flex flex-wrap justify-center gap-4">
-            {featureSections.map((section, index) => (
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {featureCategories.map((category, index) => (
               <button
                 key={index}
-                onClick={() => setActiveSection(index)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                  activeSection === index
+                onClick={() => setActiveTab(index)}
+                className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                  activeTab === index
                     ? 'bg-brandae-green text-brandae-dark'
                     : 'bg-brandae-gray text-gray-300 hover:bg-brandae-green/20'
                 }`}
               >
-                {section.title}
+                {category.title}
               </button>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Dynamic Feature Sections */}
-      {featureSections.map((section, sectionIndex) => (
-        <section 
-          key={sectionIndex}
-          className={`py-16 px-6 md:px-12 lg:px-24 ${sectionIndex % 2 === 0 ? 'bg-brandae-dark' : 'bg-brandae-darker'}`}
-          style={{ display: activeSection === sectionIndex ? 'block' : 'none' }}
-        >
-          <div className="container mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-12"
-            >
+          {/* Tab Content */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                {section.title} Features
+                {featureCategories[activeTab].title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Powerful tools designed to streamline your operations and accelerate growth.
+                {featureCategories[activeTab].description}
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {section.features.map((feature, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featureCategories[activeTab].features.map((feature, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                   className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/20 hover:border-brandae-green/40 transition-all"
                 >
                   <div className="text-brandae-green mb-4">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                   <p className="text-gray-300 text-sm">{feature.description}</p>
                 </motion.div>
               ))}
-            </motion.div>
-          </div>
-        </section>
-      ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-      {/* All Features Overview */}
+      {/* Additional Features Grid */}
+      <section className="py-16 px-6 md:px-12 lg:px-24">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Everything You Need in One Platform
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {additionalFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/20 hover:border-brandae-green/40 transition-all"
+              >
+                <h3 className="text-lg font-semibold mb-4 text-brandae-green">{feature.category}</h3>
+                <ul className="space-y-2">
+                  {feature.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className="flex items-center text-sm text-gray-300">
+                      <Check className="text-brandae-green mr-2 flex-shrink-0" size={14} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories */}
       <section className="py-16 px-6 md:px-12 lg:px-24 bg-brandae-darker">
         <div className="container mx-auto">
           <motion.div
@@ -368,128 +434,148 @@ const Features = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Complete Feature Overview
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Real Success Stories
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Explore all our features across different categories to see how our platform can transform your business.
+              See how businesses like yours are thriving with our platform
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {featureSections.map((section, sectionIndex) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {successStories.map((story, index) => (
               <motion.div
-                key={sectionIndex}
-                initial={{ opacity: 0, x: sectionIndex % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: sectionIndex * 0.1 }}
-                className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/20"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                whileHover={{ y: -5 }}
+                className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/20 hover:border-brandae-green/40 transition-all"
               >
-                <h3 className="text-xl font-bold mb-4 text-brandae-green">{section.title}</h3>
-                <div className="space-y-3">
-                  {section.features.map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <Check className="text-brandae-green mr-3 mt-1 flex-shrink-0" size={16} />
-                      <div>
-                        <span className="font-medium text-white">{feature.title}</span>
-                        <p className="text-gray-400 text-sm mt-1">{feature.description}</p>
-                      </div>
-                    </div>
+                <div className="flex items-center mb-4">
+                  <img 
+                    src={story.image} 
+                    alt={story.name}
+                    className="w-12 h-12 rounded-full mr-4 object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-white">{story.name}</h4>
+                    <p className="text-sm text-gray-400">{story.role}</p>
+                  </div>
+                </div>
+                <div className="flex mb-3">
+                  {[...Array(story.rating)].map((_, i) => (
+                    <Star key={i} className="text-brandae-green" size={16} fill="currentColor" />
                   ))}
                 </div>
-                <button
-                  onClick={() => setActiveSection(sectionIndex)}
-                  className="mt-4 text-brandae-green hover:text-brandae-green/80 font-medium text-sm flex items-center"
-                >
-                  Learn More <ChevronRight size={16} className="ml-1" />
-                </button>
+                <blockquote className="text-sm text-gray-300 mb-4 italic">
+                  "{story.quote}"
+                </blockquote>
+                <div className="text-brandae-green font-semibold text-sm">
+                  {story.results}
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Success Metrics */}
+      {/* Why Choose Brandae */}
       <section className="py-16 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Why Choose Our Platform?
-              </h2>
-              <p className="text-lg text-gray-300 mb-8">
-                Join thousands of successful businesses who have transformed their operations 
-                with our comprehensive e-commerce platform.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-start"
-                  >
-                    <Check className="text-brandae-green mr-3 mt-1 flex-shrink-0" size={20} />
-                    <span className="text-gray-300">{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="bg-gradient-to-br from-brandae-green/10 to-brandae-purple/10 p-8 rounded-2xl border border-brandae-green/20">
-                <h3 className="text-2xl font-bold mb-6 text-center">Platform Statistics</h3>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brandae-green mb-2">10,000+</div>
-                    <div className="text-gray-300 text-sm">Active Stores</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brandae-green mb-2">$50M+</div>
-                    <div className="text-gray-300 text-sm">GMV Processed</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brandae-green mb-2">99.9%</div>
-                    <div className="text-gray-300 text-sm">Uptime</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-brandae-green mb-2">50+</div>
-                    <div className="text-gray-300 text-sm">Countries</div>
-                  </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Why Choose Brandae
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We're not just a platform provider, we're your growth partners
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {whyChooseBrandae.map((reason, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                whileHover={{ y: -5 }}
+                className="text-center bg-brandae-gray p-8 rounded-xl border border-brandae-green/20 hover:border-brandae-green/40 transition-all"
+              >
+                <div className="text-brandae-green mb-6 flex justify-center">
+                  {reason.icon}
                 </div>
-              </div>
-            </motion.div>
+                <h3 className="text-xl font-semibold mb-4">{reason.title}</h3>
+                <p className="text-gray-300">{reason.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Call to Action */}
+      {/* FAQ Section */}
       <section className="py-16 px-6 md:px-12 lg:px-24 bg-brandae-darker">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Get answers to common questions about our platform and services
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            {faqData.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-brandae-gray p-6 rounded-xl border border-brandae-green/20"
+              >
+                <h3 className="text-lg font-semibold mb-3 text-brandae-green">
+                  {faq.question}
+                </h3>
+                <p className="text-gray-300 text-sm">
+                  {faq.answer}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="bg-gradient-to-br from-brandae-green/10 to-brandae-purple/10 p-12 rounded-2xl border border-brandae-green/20"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your Business?
+              Ready to take control of your ordering system?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Experience all these powerful features firsthand. Start your free trial today 
-              and discover why industry leaders choose our platform for their e-commerce needs.
+              Start selling through your own branded app & website in <strong>3 days</strong> or less!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <AnimatedButton 
@@ -505,11 +591,11 @@ const Features = () => {
                 size="lg"
                 variant="outline"
               >
-                Schedule Demo
+                Book Free Demo
               </AnimatedButton>
             </div>
-            <p className="text-sm text-gray-400 mt-4">
-              No credit card required • 14-day free trial • Cancel anytime
+            <p className="text-sm text-gray-400 mt-6">
+              No setup fees • No commission • Cancel anytime
             </p>
           </motion.div>
         </div>
