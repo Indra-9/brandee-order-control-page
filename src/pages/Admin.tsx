@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -12,6 +12,7 @@ import CaseStudyManager from '@/components/CaseStudyManager';
 import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
 import SitemapManager from '@/components/SitemapManager';
+import DocumentationManager from '@/components/DocumentationManager';
 
 const AdminDashboard = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const AdminDashboard = () => {
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/admin' },
     { id: 'contacts', label: 'Contact Submissions', icon: MessageSquare, path: '/admin/contacts' },
     { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
+    { id: 'documentation', label: 'Documentation', icon: BookOpen, path: '/admin/documentation' },
     { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/admin/webhooks' },
     { id: 'sitemap', label: 'Sitemap', icon: Map, path: '/admin/sitemap' },
@@ -75,11 +77,17 @@ const AdminDashboard = () => {
             <CardTitle className="text-brandae-green">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Link to="/admin/case-studies">
                 <Button className="w-full bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
                   <FileText size={18} className="mr-2" />
                   Create Case Study
+                </Button>
+              </Link>
+              <Link to="/admin/documentation">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
+                  <BookOpen size={18} className="mr-2" />
+                  Create Documentation
                 </Button>
               </Link>
               <Link to="/admin/integrations">
@@ -148,6 +156,7 @@ const AdminDashboard = () => {
                 <Route index element={<DashboardOverview />} />
                 <Route path="contacts" element={<ContactSubmissions />} />
                 <Route path="case-studies" element={<CaseStudyManager />} />
+                <Route path="documentation" element={<DocumentationManager />} />
                 <Route path="integrations" element={<IntegrationManager />} />
                 <Route path="webhooks" element={<WebhookManager />} />
                 <Route path="sitemap" element={<SitemapManager />} />
