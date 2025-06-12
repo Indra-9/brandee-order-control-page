@@ -14,13 +14,22 @@ interface Documentation {
   id: string;
   title: string;
   slug: string;
-  excerpt: string;
+  meta_title?: string;
+  meta_description?: string;
+  excerpt?: string;
+  content?: string;
+  featured_image_url?: string;
   category: string;
   tags: string[];
-  reading_time: number;
-  views_count: number;
+  author: string;
   featured: boolean;
   published: boolean;
+  seo_keywords?: string;
+  canonical_url?: string;
+  reading_time?: number;
+  views_count: number;
+  sort_order?: number;
+  parent_id?: string;
   created_at: string;
   updated_at: string;
 }
@@ -357,7 +366,7 @@ const DocumentationManager = () => {
                 <CardContent className="pt-0">
                   <div className="flex justify-between items-center text-sm text-gray-400">
                     <div className="flex items-center gap-4">
-                      <span>📖 {doc.reading_time}m read</span>
+                      <span>📖 {doc.reading_time || 5}m read</span>
                       <span>👁️ {doc.views_count} views</span>
                       <span>Created: {formatDate(doc.created_at)}</span>
                     </div>
