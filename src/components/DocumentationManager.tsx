@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Eye, Search, Filter, BookOpen } from 'lucide-react';
@@ -9,30 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import DocumentationEditor from '@/components/DocumentationEditor';
-
-interface Documentation {
-  id: string;
-  title: string;
-  slug: string;
-  meta_title?: string;
-  meta_description?: string;
-  excerpt?: string;
-  content?: string;
-  featured_image_url?: string;
-  category: string;
-  tags: string[];
-  author: string;
-  featured: boolean;
-  published: boolean;
-  seo_keywords?: string;
-  canonical_url?: string;
-  reading_time?: number;
-  views_count: number;
-  sort_order?: number;
-  parent_id?: string;
-  created_at: string;
-  updated_at: string;
-}
+import { Documentation } from '@/types/documentation';
 
 const DocumentationManager = () => {
   const [docs, setDocs] = useState<Documentation[]>([]);
@@ -355,7 +331,7 @@ const DocumentationManager = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => handleDeleteDoc(doc.id)}
+                        onClick={() => handleDeleteDoc(doc.id!)}
                         className="border-red-500/50 text-red-400 hover:bg-red-500/10"
                       >
                         <Trash2 size={16} />

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, X, Eye, Upload, Youtube, Link2, Image as ImageIcon } from 'lucide-react';
@@ -20,31 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-
-interface Documentation {
-  id?: string;
-  title: string;
-  slug: string;
-  meta_title: string;
-  meta_description: string;
-  excerpt: string;
-  content: string;
-  featured_image_url: string;
-  category: string;
-  tags: string[];
-  author: string;
-  featured: boolean;
-  published: boolean;
-  seo_keywords: string;
-  canonical_url: string;
-  reading_time: number;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-}
+import { Documentation, Category } from '@/types/documentation';
 
 interface DocumentationEditorProps {
   doc?: Documentation | null;
@@ -153,7 +128,7 @@ const DocumentationEditor: React.FC<DocumentationEditorProps> = ({
   const onSubmit = async (data: Documentation) => {
     setIsLoading(true);
     try {
-      const readingTime = estimateReadingTime(data.content);
+      const readingTime = estimateReadingTime(data.content || '');
       await onSave({
         ...data,
         reading_time: readingTime,
