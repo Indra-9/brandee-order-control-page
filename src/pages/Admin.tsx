@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -14,11 +13,14 @@ import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
 import SitemapManager from '@/components/SitemapManager';
 import DocumentationManager from '@/components/DocumentationManager';
+import AdminStatsCard from '@/components/AdminStatsCard';
+import { useAdminStats } from '@/hooks/useAdminStats';
 
 const AdminDashboard = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const { toast } = useToast();
+  const { stats, isLoading } = useAdminStats();
 
   const handleLogout = async () => {
     try {
@@ -55,33 +57,72 @@ const AdminDashboard = () => {
         <p className="text-gray-400">Manage your content and monitor activity</p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {menuItems.slice(1).map((item, index) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-          >
-            <Card className="bg-brandae-gray border-brandae-green/20 hover:border-brandae-green/40 transition-colors cursor-pointer">
-              <Link to={item.path}>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-white">
-                    {item.label}
-                  </CardTitle>
-                  <item.icon className="h-4 w-4 text-brandae-green" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-brandae-green">-</div>
-                  <p className="text-xs text-gray-400">
-                    Manage {item.label.toLowerCase()}
-                  </p>
-                </CardContent>
-              </Link>
+      {isLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <Card key={i} className="bg-brandae-gray border-brandae-green/20 animate-pulse">
+              <CardHeader>
+                <div className="h-4 bg-gray-600 rounded w-3/4"></div>
+              </CardHeader>
+              <CardContent>
+                <div className="h-8 bg-gray-600 rounded w-1/2 mb-2"></div>
+                <div className="h-4 bg-gray-600 rounded w-2/3"></div>
+              </CardContent>
             </Card>
-          </motion.div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AdminStatsCard
+            title="Contact Submissions"
+            count={stats.contactSubmissions.current}
+            previousCount={stats.contactSubmissions.previous}
+            icon={<MessageSquare className="h-4 w-4" />}
+            path="/admin/contacts"
+            index={0}
+          />
+          <AdminStatsCard
+            title="Case Studies"
+            count={stats.caseStudies.current}
+            previousCount={stats.caseStudies.previous}
+            icon={<FileText className="h-4 w-4" />}
+            path="/admin/case-studies"
+            index={1}
+          />
+          <AdminStatsCard
+            title="Documentation"
+            count={stats.documentation.current}
+            previousCount={stats.documentation.previous}
+            icon={<BookOpen className="h-4 w-4" />}
+            path="/admin/documentation"
+            index={2}
+          />
+          <AdminStatsCard
+            title="Integrations"
+            count={stats.integrations.current}
+            previousCount={stats.integrations.previous}
+            icon={<Layers className="h-4 w-4" />}
+            path="/admin/integrations"
+            index={3}
+          />
+          <AdminStatsCard
+            title="Webhooks"
+            count={stats.webhooks.current}
+            previousCount={stats.webhooks.previous}
+            icon={<Webhook className="h-4 w-4" />}
+            path="/admin/webhooks"
+            index={4}
+          />
+          <AdminStatsCard
+            title="Sitemap"
+            count={stats.sitemapPages.current}
+            previousCount={stats.sitemapPages.previous}
+            icon={<Map className="h-4 w-4" />}
+            path="/admin/sitemap"
+            index={5}
+          />
+        </div>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
