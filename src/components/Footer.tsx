@@ -9,12 +9,12 @@ const Footer = () => {
     <footer className="bg-brandae-darker border-t border-brandae-green/20">
       <div className="container mx-auto px-6 md:px-12 lg:px-24 py-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-          {/* About Us - 20% width (1 column out of 5) */}
+          {/* About Us - 40% width (2 columns out of 5) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 md:col-span-1"
+            className="space-y-4 md:col-span-2"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#093d30] to-brandae-green flex items-center justify-center">
@@ -27,7 +27,7 @@ const Footer = () => {
               <p className="text-gray-300 text-sm leading-relaxed">
                 Brandae is revolutionizing the marketing landscape with cutting-edge AI-powered automation 
                 and innovative solutions. We empower businesses to achieve unprecedented growth through 
-                intelligent marketing strategies.
+                intelligent marketing strategies that deliver measurable results and drive sustainable success.
               </p>
             </div>
             <div className="flex gap-4 pt-2">
