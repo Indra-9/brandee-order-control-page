@@ -1,8 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Zap, Shield, TrendingUp, Users, Globe } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import FeatureCard from '@/components/FeatureCard';
 
@@ -75,6 +75,7 @@ const Features = () => {
         keywords="marketing automation, AI, analytics, security, collaboration"
       />
       <Navbar />
+      
       <section className="pt-32 pb-16 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto text-center">
           <motion.div
@@ -137,6 +138,8 @@ const Features = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

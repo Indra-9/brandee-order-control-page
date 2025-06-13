@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen, LogOut } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import Navbar from '@/components/Navbar';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 import ContactSubmissions from '@/components/ContactSubmissions';
 import CaseStudyManager from '@/components/CaseStudyManager';
 import WebhookManager from '@/components/WebhookManager';
@@ -17,6 +18,21 @@ import DocumentationManager from '@/components/DocumentationManager';
 const AdminDashboard = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error logging out:', error);
+      toast({
+        title: "Error",
+        description: "Failed to log out",
+        variant: "destructive"
+      });
+    }
+  };
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/admin' },
@@ -111,9 +127,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
-      <Navbar />
-      
-      <div className="pt-24 px-6 md:px-12 lg:px-24">
+      <div className="px-6 md:px-12 lg:px-24 py-8">
         <div className="container mx-auto">
           <div className="flex gap-8">
             {/* Sidebar */}
@@ -122,8 +136,23 @@ const AdminDashboard = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4 }}
-                className="sticky top-32"
+                className="sticky top-8"
               >
+                <Card className="bg-brandae-gray border-brandae-green/20 mb-4">
+                  <CardHeader className="flex flex-row items-center justify-between">
+                    <CardTitle className="text-brandae-green">Admin Panel</CardTitle>
+                    <Button
+                      onClick={handleLogout}
+                      size="sm"
+                      variant="outline"
+                      className="border-red-500/50 text-red-400 hover:bg-red-500/10"
+                    >
+                      <LogOut size={16} className="mr-1" />
+                      Logout
+                    </Button>
+                  </CardHeader>
+                </Card>
+
                 <Card className="bg-brandae-gray border-brandae-green/20">
                   <CardHeader>
                     <CardTitle className="text-brandae-green">Navigation</CardTitle>
