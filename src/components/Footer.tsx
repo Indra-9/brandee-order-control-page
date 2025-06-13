@@ -156,7 +156,7 @@ const Footer = () => {
               Get Started
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
