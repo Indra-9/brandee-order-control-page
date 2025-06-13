@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Search, Clock, Eye, ArrowRight, BookOpen } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -134,9 +134,9 @@ const DocCategory = () => {
   return (
     <div className="min-h-screen bg-brandae-dark text-white">
       <SEO 
-        title={`${category.name} - Brandae Documentation`} 
-        description={`${category.description} - Comprehensive guides and tutorials for ${category.name.toLowerCase()}.`} 
-        keywords={`${category.name.toLowerCase()}, brandae documentation, guides, tutorials`} 
+        title={`${category?.name || 'Category'} - Brandae Documentation`} 
+        description={`${category?.description || 'Documentation category'} - Comprehensive guides and tutorials for ${category?.name?.toLowerCase() || 'this category'}.`} 
+        keywords={`${category?.name?.toLowerCase() || 'category'}, brandae documentation, guides, tutorials`} 
       />
 
       <Navbar />
@@ -266,6 +266,8 @@ const DocCategory = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

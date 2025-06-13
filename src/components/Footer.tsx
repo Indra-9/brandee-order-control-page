@@ -8,13 +8,13 @@ const Footer = () => {
   return (
     <footer className="bg-brandae-darker border-t border-brandae-green/20">
       <div className="container mx-auto px-6 md:px-12 lg:px-24 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info & About */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          {/* About Us - 20% width (1 column out of 5) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 lg:col-span-2"
+            className="space-y-4 md:col-span-1"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#093d30] to-brandae-green flex items-center justify-center">
@@ -27,11 +27,7 @@ const Footer = () => {
               <p className="text-gray-300 text-sm leading-relaxed">
                 Brandae is revolutionizing the marketing landscape with cutting-edge AI-powered automation 
                 and innovative solutions. We empower businesses to achieve unprecedented growth through 
-                intelligent marketing strategies, real-time analytics, and seamless integrations.
-              </p>
-              <p className="text-gray-400 text-sm">
-                Founded with a vision to democratize advanced marketing technology, we're committed to 
-                helping businesses of all sizes unlock their full potential in the digital age.
+                intelligent marketing strategies.
               </p>
             </div>
             <div className="flex gap-4 pt-2">
@@ -74,35 +70,48 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
+          {/* Product Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-4"
           >
-            <h3 className="text-white font-semibold">Quick Links</h3>
+            <h3 className="text-white font-semibold">Product</h3>
             <ul className="space-y-2">
               <li><Link to="/features" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Features</Link></li>
               <li><Link to="/how-it-works" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">How It Works</Link></li>
               <li><Link to="/solutions" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Solutions</Link></li>
               <li><Link to="/pricing" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Pricing</Link></li>
-              <li><Link to="/case-studies" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Case Studies</Link></li>
               <li><Link to="/integrations" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Integrations</Link></li>
             </ul>
           </motion.div>
 
-          {/* Resources & Contact */}
+          {/* Resources Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-4"
           >
-            <h3 className="text-white font-semibold">Resources & Support</h3>
-            <ul className="space-y-2 mb-4">
+            <h3 className="text-white font-semibold">Resources</h3>
+            <ul className="space-y-2">
               <li><Link to="/blog" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Blog</Link></li>
               <li><Link to="/docs" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Documentation</Link></li>
+              <li><Link to="/case-studies" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Case Studies</Link></li>
+              <li><Link to="/sitemap" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Sitemap</Link></li>
+            </ul>
+          </motion.div>
+
+          {/* Legal & Support Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <h3 className="text-white font-semibold">Legal & Support</h3>
+            <ul className="space-y-2 mb-4">
               <li><Link to="/privacy" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-gray-400 hover:text-brandae-green transition-colors text-sm">Terms of Service</Link></li>
             </ul>
@@ -147,7 +156,7 @@ const Footer = () => {
               Get Started
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
