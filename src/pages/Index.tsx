@@ -63,98 +63,137 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker to-brandae-dark z-0"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(9,61,48,0.15),transparent_70%)]"></div>
+      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brandae-darker via-brandae-dark to-brandae-darker/80 z-0"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(9,61,48,0.25),transparent_60%)]"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brandae-green/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brandae-green/10 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto z-10 px-0">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <motion.div className="flex-1" initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.8
-          }}>
-              <motion.h1 className="text-4xl md:text-6xl font-bold mb-6" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.2
-            }}>
-                Own Your Orders. <br />
-                <span className="gradient-text">Own Your Customers.</span>
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <motion.div 
+              className="flex-1 space-y-8" 
+              initial={{ opacity: 0, x: -50 }} 
+              animate={{ opacity: 1, x: 0 }} 
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="inline-flex items-center px-4 py-2 rounded-full bg-brandae-green/10 border border-brandae-green/20 text-brandae-green text-sm font-medium"
+              >
+                🚀 Zero Commission Platform
+              </motion.div>
+              
+              <motion.h1 
+                className="text-5xl md:text-7xl font-bold leading-tight" 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                Own Your Orders.<br />
+                <span className="gradient-text">Own Your Future.</span>
               </motion.h1>
               
-              <motion.p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.4
-            }}>
-                Say goodbye to aggregator commissions and customer data loss. Brandae helps you grow with your own branded app, powerful marketing tools, and delivery control.
+              <motion.p 
+                className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl" 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Break free from aggregator fees. Build your branded food delivery empire with our commission-free platform, advanced marketing tools, and complete customer ownership.
               </motion.p>
               
-              <motion.div className="flex flex-col sm:flex-row gap-4" initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.6
-            }}>
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-6 pt-4" 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="rounded mx-0 px-0">
-                      <AnimatedButton variant="primary" size="lg" className="rounded mx-[40px] py-[10px] px-[55px] font-normal text-justify text-base">Book a Demo</AnimatedButton>
+                    <div>
+                      <AnimatedButton 
+                        variant="primary" 
+                        size="lg" 
+                        className="rounded-2xl px-8 py-4 text-lg font-semibold shadow-2xl shadow-brandae-green/25 hover:shadow-brandae-green/40 transition-all duration-300"
+                      >
+                        Start Free Trial
+                      </AnimatedButton>
                     </div>
                   </PopoverTrigger>
-                  <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
+                  <PopoverContent className="w-[400px] bg-brandae-gray border-white/10 text-white rounded-2xl">
                     <ContactForm 
                       isOpen={isContactFormOpen} 
                       onClose={() => setIsContactFormOpen(false)} 
                     />
                   </PopoverContent>
                 </Popover>
-                <AnimatedButton variant="outline" size="lg" className="rounded font-normal px-[35px] py-0">Watch How it Works</AnimatedButton>
+                <AnimatedButton 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-2xl px-8 py-4 text-lg font-semibold border-2 hover:bg-white/5 transition-all duration-300"
+                >
+                  Watch Demo
+                </AnimatedButton>
+              </motion.div>
+
+              <motion.div 
+                className="flex items-center gap-8 pt-8" 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="flex -space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-brandae-green border-2 border-brandae-dark"></div>
+                    <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-brandae-dark"></div>
+                    <div className="w-8 h-8 rounded-full bg-purple-500 border-2 border-brandae-dark"></div>
+                  </div>
+                  <span className="text-sm text-gray-400">Trusted by 1,000+ restaurants</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">⭐</span>
+                  <span className="text-sm text-gray-400">4.9/5 rating</span>
+                </div>
               </motion.div>
             </motion.div>
             
-            <motion.div className="flex-1 relative" initial={{
-            opacity: 0,
-            scale: 0.9
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            duration: 0.8,
-            delay: 0.4
-          }}>
-              <div className="relative w-full max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#093d30]/20 to-transparent rounded-3xl filter blur-xl"></div>
-                <img alt="Brandae App Demo" src="/lovable-uploads/a14793e5-192f-4f20-b156-b312a832363a.png" className="relative z-10 w-full h-auto rounded-3xl shadow-xl border border-brandae-green/20 object-cover" />
+            <motion.div 
+              className="flex-1 relative" 
+              initial={{ opacity: 0, x: 50, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+            >
+              <div className="relative w-full max-w-lg mx-auto">
+                <div className="absolute -inset-4 bg-gradient-to-r from-brandae-green/30 to-blue-500/30 rounded-3xl blur-2xl opacity-75"></div>
+                <div className="relative">
+                  <img 
+                    alt="Brandae App Demo" 
+                    src="/lovable-uploads/a14793e5-192f-4f20-b156-b312a832363a.png" 
+                    className="w-full h-auto rounded-3xl shadow-2xl border border-white/10 object-cover transform hover:scale-105 transition-transform duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brandae-dark/20 to-transparent rounded-3xl"></div>
+                </div>
               </div>
               
-              <motion.div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brandae-green/30 rounded-full filter blur-3xl" animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.3, 0.5, 0.3]
-            }} transition={{
-              duration: 4,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }} />
+              {/* Floating elements */}
+              <motion.div 
+                className="absolute -top-8 -right-8 w-24 h-24 bg-brandae-green/20 rounded-2xl backdrop-blur-sm border border-brandae-green/30 flex items-center justify-center"
+                animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span className="text-3xl">📱</span>
+              </motion.div>
+              
+              <motion.div 
+                className="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center"
+                animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
+                <span className="text-2xl">💰</span>
+              </motion.div>
             </motion.div>
           </div>
         </div>
