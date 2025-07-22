@@ -5,6 +5,7 @@ import { Store, Users, Calendar, ShoppingBag, Truck, Star, ArrowRight, CheckCirc
 import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
 import StepCard from '@/components/StepCard';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 export default function HowItWorks() {
@@ -446,6 +447,8 @@ export default function HowItWorks() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }

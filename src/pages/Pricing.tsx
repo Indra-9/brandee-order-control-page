@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import ContactForm from '@/components/ContactForm';
@@ -365,6 +366,8 @@ export default function Pricing() {
           </div>
         </div>
       </motion.div>
+      
+      <Footer />
     </div>;
 }
 

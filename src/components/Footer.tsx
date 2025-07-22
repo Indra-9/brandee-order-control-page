@@ -1,11 +1,51 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, ExternalLink, Send } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const { toast } = useToast();
   const currentYear = new Date().getFullYear();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubscribing(true);
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{ email }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Successfully Subscribed!",
+        description: "Thank you for subscribing to our newsletter",
+      });
+      setEmail('');
+    } catch (error: any) {
+      toast({
+        title: "Subscription Failed",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -359,20 +399,40 @@ const Footer = () => {
             <p className="text-gray-300 text-sm mb-6">
               Get the latest updates on new features, success stories, and industry insights.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 rounded-xl bg-brandae-gray border border-brandae-green/20 text-white placeholder-gray-400 focus:outline-none focus:border-brandae-green transition-colors"
+                disabled={isSubscribing}
+                required
               />
               <motion.button
-                className="px-6 py-3 bg-brandae-green text-brandae-dark rounded-xl font-semibold hover:bg-brandae-green/90 transition-colors whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                type="submit"
+                disabled={isSubscribing}
+                className="px-6 py-3 bg-brandae-green text-brandae-dark rounded-xl font-semibold hover:bg-brandae-green/90 transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                whileHover={{ scale: isSubscribing ? 1 : 1.05 }}
+                whileTap={{ scale: isSubscribing ? 1 : 0.95 }}
               >
-                Subscribe
+                {isSubscribing ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-4 h-4 border-2 border-brandae-dark border-t-transparent rounded-full"
+                    />
+                    Subscribing...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Subscribe
+                  </>
+                )}
               </motion.button>
-            </div>
+            </form>
           </div>
         </motion.div>
 

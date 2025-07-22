@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, FileText, Shield, Users, AlertCircle } from 'lucide-react';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 export default function Terms() {
@@ -189,6 +190,8 @@ export default function Terms() {
           </section>
         </motion.div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

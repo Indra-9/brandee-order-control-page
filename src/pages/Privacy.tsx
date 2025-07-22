@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield, Eye, Lock, Database, UserCheck } from 'lucide-react';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 export default function Privacy() {
@@ -240,6 +241,8 @@ export default function Privacy() {
           </section>
         </motion.div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

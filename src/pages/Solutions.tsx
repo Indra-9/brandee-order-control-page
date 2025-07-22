@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Store, ShoppingBag, Calendar, Users, Truck, CreditCard, Star, BarChart3, CheckCircle, ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import FeatureCard from '@/components/FeatureCard';
+import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 export default function Solutions() {
   const solutions = [{
@@ -231,5 +232,7 @@ export default function Solutions() {
           </motion.div>
         </div>
       </section>
+      
+      <Footer />
     </div>;
 }
