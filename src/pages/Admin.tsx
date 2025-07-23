@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import ContactSubmissions from '@/components/ContactSubmissions';
+import PartnerSubmissions from '@/components/PartnerSubmissions';
 import CaseStudyManager from '@/components/CaseStudyManager';
 import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
@@ -39,6 +40,7 @@ const AdminDashboard = () => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/admin' },
     { id: 'contacts', label: 'Contact Submissions', icon: MessageSquare, path: '/admin/contacts' },
+    { id: 'partners', label: 'Partner Submissions', icon: Users, path: '/admin/partners' },
     { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
     { id: 'documentation', label: 'Documentation', icon: BookOpen, path: '/admin/documentation' },
     { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
@@ -225,6 +227,7 @@ const AdminDashboard = () => {
               <Routes>
                 <Route index element={<DashboardOverview />} />
                 <Route path="contacts" element={<ContactSubmissions />} />
+                <Route path="partners" element={<PartnerSubmissions />} />
                 <Route path="case-studies" element={<CaseStudyManager />} />
                 <Route path="documentation" element={<DocumentationManager />} />
                 <Route path="integrations" element={<IntegrationManager />} />

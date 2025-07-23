@@ -22,6 +22,7 @@ import Sitemap from "./pages/Sitemap";
 import SitemapXML from "./pages/SitemapXML";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Partners from "./pages/Partners";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
@@ -54,6 +55,7 @@ const App = () => (
             <Route path="/sitemap.xml" element={<SitemapXML />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/partners" element={<Partners />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/*" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

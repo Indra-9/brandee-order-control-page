@@ -653,6 +653,51 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_submissions: {
+        Row: {
+          address: string
+          company_website: string | null
+          country: string
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          pin_code: string
+          proposal: string | null
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          address: string
+          company_website?: string | null
+          country: string
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          pin_code: string
+          proposal?: string | null
+          state: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          company_website?: string | null
+          country?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          pin_code?: string
+          proposal?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sitemap_pages: {
         Row: {
           canonical_url: string | null

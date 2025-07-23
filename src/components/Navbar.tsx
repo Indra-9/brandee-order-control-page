@@ -22,6 +22,9 @@ const navItems = [{
   name: 'Case Studies',
   href: '/case-studies'
 }, {
+  name: 'Partners',
+  href: '/partners'
+}, {
   name: 'Blog',
   href: '/blog'
 }, {
