@@ -42,7 +42,7 @@ export default function AnimatedButton({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.97 }}
       className={cn(
-        'rounded-md font-medium transition-all',
+        'rounded-xl font-medium transition-all',
         variants[variant],
         sizes[size],
         className
