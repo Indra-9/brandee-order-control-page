@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import EnhancedContactForm from './EnhancedContactForm';
+import DemoFormModal from './DemoFormModal';
 import AnimatedButton from './AnimatedButton';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
@@ -33,6 +33,7 @@ const navItems = [{
 }];
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   useEffect(() => {
     // Get initial session
@@ -101,27 +102,32 @@ export default function Navbar() {
                 
               </Link>}
             
-            <Popover>
-              <PopoverTrigger asChild>
-                <motion.div initial={{
+            <motion.div 
+              initial={{
                 opacity: 0,
                 scale: 0.9
-              }} animate={{
+              }} 
+              animate={{
                 opacity: 1,
                 scale: 1
-              }} transition={{
+              }} 
+              transition={{
                 delay: 0.6,
                 duration: 0.5
-              }} whileHover={{
+              }} 
+              whileHover={{
                 scale: 1.05
-              }}>
-                  <AnimatedButton variant="primary" size="md" className="py-2 font-semibold flex items-center justify-center gap-2 rounded">Book a Demo</AnimatedButton>
-                </motion.div>
-              </PopoverTrigger>
-              <PopoverContent className="w-[450px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
-                <EnhancedContactForm />
-              </PopoverContent>
-            </Popover>
+              }}
+            >
+              <AnimatedButton 
+                variant="primary" 
+                size="md" 
+                className="py-2 font-semibold flex items-center justify-center gap-2 rounded"
+                onClick={() => setIsDemoModalOpen(true)}
+              >
+                Book a Demo
+              </AnimatedButton>
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}
@@ -150,19 +156,23 @@ export default function Navbar() {
               </Link>
             </div>}
           
-          <Popover>
-            <PopoverTrigger asChild>
-              <div className="py-2">
-                <AnimatedButton variant="primary" size="md" className="w-full justify-center">
-                  Book a Demo
-                </AnimatedButton>
-              </div>
-            </PopoverTrigger>
-            <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white p-0 rounded-lg">
-              <EnhancedContactForm />
-            </PopoverContent>
-          </Popover>
+          <div 
+            className="py-2"
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsDemoModalOpen(true);
+            }}
+          >
+            <AnimatedButton variant="primary" size="md" className="w-full justify-center">
+              Book a Demo
+            </AnimatedButton>
+          </div>
         </div>
       </div>
+
+      <DemoFormModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+      />
     </nav>;
 }

@@ -4,12 +4,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedButton from '@/components/AnimatedButton';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import ContactForm from '@/components/ContactForm';
+import DemoFormModal from '@/components/DemoFormModal';
 import { Check, CreditCard } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const fadeIn = {
     hidden: {
       opacity: 0,
@@ -117,21 +117,11 @@ export default function Pricing() {
                 </li>
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div>
-                    <AnimatedButton variant="outline" className="w-full rounded">
-                      Get Started
-                    </AnimatedButton>
-                  </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm 
-                    isOpen={isContactFormOpen} 
-                    onClose={() => setIsContactFormOpen(false)} 
-                  />
-                </PopoverContent>
-              </Popover>
+              <div onClick={() => setIsDemoModalOpen(true)}>
+                <AnimatedButton variant="outline" className="w-full rounded">
+                  Get Started
+                </AnimatedButton>
+              </div>
             </div>
           </motion.div>
 
@@ -185,21 +175,11 @@ export default function Pricing() {
                 </li>
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div>
-                    <AnimatedButton variant="primary" className="w-full rounded">
-                      Get Started
-                    </AnimatedButton>
-                  </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm 
-                    isOpen={isContactFormOpen} 
-                    onClose={() => setIsContactFormOpen(false)} 
-                  />
-                </PopoverContent>
-              </Popover>
+              <div onClick={() => setIsDemoModalOpen(true)}>
+                <AnimatedButton variant="primary" className="w-full rounded">
+                  Get Started
+                </AnimatedButton>
+              </div>
             </div>
           </motion.div>
 
@@ -249,21 +229,11 @@ export default function Pricing() {
                 </li>
               </ul>
               
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div>
-                    <AnimatedButton variant="outline" className="w-full rounded">
-                      Get Started
-                    </AnimatedButton>
-                  </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm 
-                    isOpen={isContactFormOpen} 
-                    onClose={() => setIsContactFormOpen(false)} 
-                  />
-                </PopoverContent>
-              </Popover>
+              <div onClick={() => setIsDemoModalOpen(true)}>
+                <AnimatedButton variant="outline" className="w-full rounded">
+                  Get Started
+                </AnimatedButton>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -346,26 +316,21 @@ export default function Pricing() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to grow your business?</h2>
           <p className="text-gray-300 mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
           <div className="flex flex-col md:flex-row justify-center gap-4">
-            <Popover>
-              <PopoverTrigger asChild>
-                <div>
-                  <AnimatedButton variant="primary" size="lg" className="rounded">
-                    Book a Free Demo
-                  </AnimatedButton>
-                </div>
-              </PopoverTrigger>
-              <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                <ContactForm 
-                  isOpen={isContactFormOpen} 
-                  onClose={() => setIsContactFormOpen(false)} 
-                />
-              </PopoverContent>
-            </Popover>
+            <div onClick={() => setIsDemoModalOpen(true)}>
+              <AnimatedButton variant="primary" size="lg" className="rounded">
+                Book a Free Demo
+              </AnimatedButton>
+            </div>
             
             
           </div>
         </div>
       </motion.div>
+      
+      <DemoFormModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+      />
       
       <Footer />
     </div>;

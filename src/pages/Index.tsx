@@ -9,14 +9,14 @@ import TestimonialCard from '@/components/TestimonialCard';
 import IntegrationLogo from '@/components/IntegrationLogo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ContactForm from '@/components/ContactForm';
+import DemoFormModal from '@/components/DemoFormModal';
 import SEO from '@/components/SEO';
 
 const Index = () => {
   const {
     scrollYProgress
   } = useScroll();
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return <div className="min-h-screen bg-brandae-dark text-white relative overflow-hidden">
       <SEO title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
@@ -112,25 +112,16 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <div>
-                      <AnimatedButton 
-                        variant="primary" 
-                        size="lg" 
-                        className="rounded-2xl px-8 py-4 text-lg font-semibold shadow-2xl shadow-brandae-green/25 hover:shadow-brandae-green/40 transition-all duration-300"
-                      >
-                        Start Free Trial
-                      </AnimatedButton>
-                    </div>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[400px] bg-brandae-gray border-white/10 text-white rounded-2xl">
-                    <ContactForm 
-                      isOpen={isContactFormOpen} 
-                      onClose={() => setIsContactFormOpen(false)} 
-                    />
-                  </PopoverContent>
-                </Popover>
+                <div>
+                  <AnimatedButton 
+                    variant="primary" 
+                    size="lg" 
+                    className="rounded-2xl px-8 py-4 text-lg font-semibold shadow-2xl shadow-brandae-green/25 hover:shadow-brandae-green/40 transition-all duration-300"
+                    onClick={() => setIsDemoModalOpen(true)}
+                  >
+                    Start Free Trial
+                  </AnimatedButton>
+                </div>
                 <AnimatedButton 
                   variant="outline" 
                   size="lg" 
@@ -745,21 +736,16 @@ const Index = () => {
             duration: 0.6,
             delay: 0.2
           }}>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div className="inline-block">
-                    <AnimatedButton variant="primary" size="lg" className="rounded">
-                      Schedule Your Free Demo
-                    </AnimatedButton>
-                  </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-[350px] bg-brandae-gray border-white/10 text-white">
-                  <ContactForm 
-                    isOpen={isContactFormOpen} 
-                    onClose={() => setIsContactFormOpen(false)} 
-                  />
-                </PopoverContent>
-              </Popover>
+              <div className="inline-block">
+                <AnimatedButton 
+                  variant="primary" 
+                  size="lg" 
+                  className="rounded"
+                  onClick={() => setIsDemoModalOpen(true)}
+                >
+                  Schedule Your Free Demo
+                </AnimatedButton>
+              </div>
             </motion.div>
             
             <motion.div className="mt-8 flex flex-wrap justify-center gap-6" initial={{
@@ -823,8 +809,8 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <AnimatedButton variant="primary" size="lg" className="rounded">Start Free Trial</AnimatedButton>
-              <AnimatedButton variant="outline" size="lg" className="rounded">Talk to Sales</AnimatedButton>
+              <AnimatedButton variant="primary" size="lg" className="rounded" onClick={() => setIsDemoModalOpen(true)}>Start Free Trial</AnimatedButton>
+              <AnimatedButton variant="outline" size="lg" className="rounded" onClick={() => setIsDemoModalOpen(true)}>Talk to Sales</AnimatedButton>
             </div>
             
             <div className="flex flex-wrap justify-center gap-6">
@@ -858,6 +844,11 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+      
+      <DemoFormModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+      />
       
       <Footer />
     </div>;
