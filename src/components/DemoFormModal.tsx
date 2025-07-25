@@ -247,14 +247,14 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 lg:p-8 overflow-y-auto"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6 lg:p-8 overflow-y-auto"
         >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            className="absolute inset-0 bg-black/95 backdrop-blur-lg"
             onClick={handleClose}
           />
           
@@ -264,7 +264,7 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="relative z-10 w-full max-w-6xl bg-gradient-to-br from-brandae-gray to-brandae-dark border border-brandae-green/20 rounded-3xl shadow-2xl overflow-hidden my-auto"
+            className="relative z-[9999] w-full max-w-6xl bg-gradient-to-br from-brandae-gray to-brandae-dark border border-brandae-green/20 rounded-3xl shadow-2xl overflow-hidden my-auto"
           >
             {/* Close button */}
             <motion.button
