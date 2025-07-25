@@ -247,7 +247,7 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center"
+          className="fixed inset-0 z-[100] flex items-start justify-center p-4 md:p-6 lg:p-8 overflow-y-auto"
         >
           {/* Backdrop */}
           <motion.div
@@ -264,7 +264,7 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="relative z-10 w-full max-w-6xl mx-4 h-[90vh] bg-gradient-to-br from-brandae-gray to-brandae-dark border border-brandae-green/20 rounded-3xl shadow-2xl overflow-hidden"
+            className="relative z-10 w-full max-w-6xl min-h-[80vh] max-h-[95vh] my-auto bg-gradient-to-br from-brandae-gray to-brandae-dark border border-brandae-green/20 rounded-3xl shadow-2xl overflow-hidden"
           >
             {/* Close button */}
             <motion.button
@@ -276,13 +276,13 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
               <X size={20} />
             </motion.button>
 
-            <div className="flex h-full">
+            <div className="flex flex-col lg:flex-row min-h-full">
               {/* Left Side - Benefits & Information */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brandae-purple/20 to-brandae-green/20 p-12 flex-col justify-center relative overflow-hidden"
+                className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brandae-purple/20 to-brandae-green/20 p-8 xl:p-12 flex-col justify-center relative overflow-hidden"
               >
                 {/* Background decoration */}
                 <div className="absolute inset-0 bg-gradient-to-br from-brandae-green/10 via-transparent to-brandae-purple/10" />
@@ -371,15 +371,16 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center relative overflow-y-auto"
+                className="flex-1 w-full lg:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-start relative overflow-y-auto"
               >
                 {/* Mobile header */}
-                <div className="lg:hidden mb-8 text-center">
-                  <h2 className="text-3xl font-bold gradient-text mb-4">Book Your Free Demo</h2>
-                  <p className="text-gray-300">Get a personalized walkthrough in just 30 minutes</p>
+                <div className="lg:hidden mb-6 text-center">
+                  <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-3">Book Your Free Demo</h2>
+                  <p className="text-gray-300 text-sm md:text-base">Get a personalized walkthrough in just 30 minutes</p>
                 </div>
                 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="flex-1 flex flex-col justify-center">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -614,6 +615,7 @@ export default function DemoFormModal({ isOpen, onClose }: DemoFormModalProps) {
                     </p>
                   </motion.div>
                 </form>
+                </div>
               </motion.div>
             </div>
           </motion.div>
