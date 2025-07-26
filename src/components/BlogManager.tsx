@@ -327,27 +327,27 @@ const BlogManager = () => {
               </div>
             </div>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-48 bg-brandae-dark border-brandae-green/30 text-white">
+              <SelectTrigger className="w-48 bg-brandae-dark/90 backdrop-blur-md border-brandae-green/30 text-white">
                 <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+              <SelectContent className="z-[9999] bg-brandae-dark/95 backdrop-blur-md border-brandae-green/30 shadow-2xl">
+                <SelectItem value="all" className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">All Categories</SelectItem>
                 {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
+                  <SelectItem key={category} value={category} className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">
                     {category}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-48 bg-brandae-dark border-brandae-green/30 text-white">
+              <SelectTrigger className="w-48 bg-brandae-dark/90 backdrop-blur-md border-brandae-green/30 text-white">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Posts</SelectItem>
-                <SelectItem value="published">Published</SelectItem>
-                <SelectItem value="draft">Drafts</SelectItem>
-                <SelectItem value="featured">Featured</SelectItem>
+              <SelectContent className="z-[9999] bg-brandae-dark/95 backdrop-blur-md border-brandae-green/30 shadow-2xl">
+                <SelectItem value="all" className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">All Posts</SelectItem>
+                <SelectItem value="published" className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">Published</SelectItem>
+                <SelectItem value="draft" className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">Drafts</SelectItem>
+                <SelectItem value="featured" className="text-white hover:bg-brandae-green/20 focus:bg-brandae-green/20">Featured</SelectItem>
               </SelectContent>
             </Select>
           </div>
