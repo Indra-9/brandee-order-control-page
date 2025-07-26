@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen, LogOut } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen, LogOut, PenTool } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -14,6 +14,7 @@ import WebhookManager from '@/components/WebhookManager';
 import IntegrationManager from '@/components/IntegrationManager';
 import SitemapManager from '@/components/SitemapManager';
 import DocumentationManager from '@/components/DocumentationManager';
+import BlogManager from '@/components/BlogManager';
 import AdminStatsCard from '@/components/AdminStatsCard';
 import { useAdminStats } from '@/hooks/useAdminStats';
 
@@ -42,6 +43,7 @@ const AdminDashboard = () => {
     { id: 'contacts', label: 'Contact Submissions', icon: MessageSquare, path: '/admin/contacts' },
     { id: 'partners', label: 'Partner Submissions', icon: Users, path: '/admin/partners' },
     { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
+    { id: 'blog', label: 'Blog Posts', icon: PenTool, path: '/admin/blog' },
     { id: 'documentation', label: 'Documentation', icon: BookOpen, path: '/admin/documentation' },
     { id: 'integrations', label: 'Integrations', icon: Layers, path: '/admin/integrations' },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/admin/webhooks' },
@@ -143,6 +145,12 @@ const AdminDashboard = () => {
                   Create Case Study
                 </Button>
               </Link>
+              <Link to="/admin/blog">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
+                  <PenTool size={18} className="mr-2" />
+                  Create Blog Post
+                </Button>
+              </Link>
               <Link to="/admin/documentation">
                 <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
                   <BookOpen size={18} className="mr-2" />
@@ -229,6 +237,7 @@ const AdminDashboard = () => {
                 <Route path="contacts" element={<ContactSubmissions />} />
                 <Route path="partners" element={<PartnerSubmissions />} />
                 <Route path="case-studies" element={<CaseStudyManager />} />
+                <Route path="blog" element={<BlogManager />} />
                 <Route path="documentation" element={<DocumentationManager />} />
                 <Route path="integrations" element={<IntegrationManager />} />
                 <Route path="webhooks" element={<WebhookManager />} />
