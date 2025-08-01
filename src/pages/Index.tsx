@@ -11,13 +11,11 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DemoFormModal from '@/components/DemoFormModal';
 import SEO from '@/components/SEO';
-
 const Index = () => {
   const {
     scrollYProgress
   } = useScroll();
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-
   return <div className="min-h-screen bg-brandae-dark text-white relative overflow-hidden">
       <SEO title="Brandae - Own Your Orders, Own Your Customers | Food Ordering Apps" description="Say goodbye to aggregator commissions and customer data loss. Brandae helps restaurants and grocery stores grow with your own branded ordering app, powerful marketing tools, and delivery control." />
 
@@ -72,81 +70,93 @@ const Index = () => {
         
         <div className="container mx-auto z-10 px-0">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <motion.div 
-              className="flex-1 space-y-8" 
-              initial={{ opacity: 0, x: -50 }} 
-              animate={{ opacity: 1, x: 0 }} 
-              transition={{ duration: 1, ease: "easeOut" }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="inline-flex items-center px-4 py-2 rounded-full bg-brandae-green/10 border border-brandae-green/20 text-brandae-green text-sm font-medium"
-              >
+            <motion.div className="flex-1 space-y-8" initial={{
+            opacity: 0,
+            x: -50
+          }} animate={{
+            opacity: 1,
+            x: 0
+          }} transition={{
+            duration: 1,
+            ease: "easeOut"
+          }}>
+              <motion.div initial={{
+              opacity: 0,
+              y: 30
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.2
+            }} className="inline-flex items-center px-4 py-2 rounded-full bg-brandae-green/10 border border-brandae-green/20 text-brandae-green text-sm font-medium">
                 🚀 Zero Commission Platform
               </motion.div>
               
-              <motion.h1 
-                className="text-5xl md:text-7xl font-bold leading-tight" 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
+              <motion.h1 className="text-5xl md:text-7xl font-bold leading-tight" initial={{
+              opacity: 0,
+              y: 30
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.3
+            }}>
                 Own Your Orders.<br />
                 <span className="gradient-text">Own Your Future.</span>
               </motion.h1>
               
-              <motion.p 
-                className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl" 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
+              <motion.p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl" initial={{
+              opacity: 0,
+              y: 30
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.4
+            }}>
                 Break free from aggregator fees. Build your branded food delivery empire with our commission-free platform, advanced marketing tools, and complete customer ownership.
               </motion.p>
               
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-6 pt-4" 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
+              <motion.div className="flex flex-col sm:flex-row gap-6 pt-4" initial={{
+              opacity: 0,
+              y: 30
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.8,
+              delay: 0.5
+            }}>
                 <div>
-                  <AnimatedButton 
-                    variant="primary" 
-                    size="lg" 
-                    className="rounded-2xl px-8 py-4 text-lg font-semibold shadow-2xl shadow-brandae-green/25 hover:shadow-brandae-green/40 transition-all duration-300"
-                    onClick={() => setIsDemoModalOpen(true)}
-                  >
+                  <AnimatedButton variant="primary" size="lg" className="rounded-2xl px-8 py-4 text-lg font-semibold shadow-2xl shadow-brandae-green/25 hover:shadow-brandae-green/40 transition-all duration-300" onClick={() => setIsDemoModalOpen(true)}>
                     Start Free Trial
                   </AnimatedButton>
                 </div>
-                <AnimatedButton 
-                  variant="outline" 
-                  size="lg" 
-                  className="rounded-2xl px-8 py-4 text-lg font-semibold border-2 hover:bg-white/5 transition-all duration-300"
-                >
+                <AnimatedButton variant="outline" size="lg" className="rounded-2xl px-8 py-4 text-lg font-semibold border-2 hover:bg-white/5 transition-all duration-300">
                   Watch Demo
                 </AnimatedButton>
                 <div className="ml-4">
-                  <motion.a
-                    href="/auth"
-                    className="text-brandae-green hover:text-brandae-green/80 text-sm font-medium underline transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
+                  <motion.a href="/auth" className="text-brandae-green hover:text-brandae-green/80 text-sm font-medium underline transition-colors" whileHover={{
+                  scale: 1.05
+                }} whileTap={{
+                  scale: 0.95
+                }}>
                     Admin Access →
                   </motion.a>
                 </div>
               </motion.div>
 
-              <motion.div 
-                className="flex items-center gap-8 pt-8" 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
+              <motion.div className="flex items-center gap-8 pt-8" initial={{
+              opacity: 0
+            }} animate={{
+              opacity: 1
+            }} transition={{
+              delay: 0.8,
+              duration: 0.6
+            }}>
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     <div className="w-8 h-8 rounded-full bg-brandae-green border-2 border-brandae-dark"></div>
@@ -162,38 +172,48 @@ const Index = () => {
               </motion.div>
             </motion.div>
             
-            <motion.div 
-              className="flex-1 relative" 
-              initial={{ opacity: 0, x: 50, scale: 0.8 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            >
+            <motion.div className="flex-1 relative" initial={{
+            opacity: 0,
+            x: 50,
+            scale: 0.8
+          }} animate={{
+            opacity: 1,
+            x: 0,
+            scale: 1
+          }} transition={{
+            duration: 1,
+            delay: 0.4,
+            ease: "easeOut"
+          }}>
               <div className="relative w-full max-w-lg mx-auto">
                 <div className="absolute -inset-4 bg-gradient-to-r from-brandae-green/30 to-blue-500/30 rounded-3xl blur-2xl opacity-75"></div>
                 <div className="relative">
-                  <img 
-                    alt="Brandae App Demo" 
-                    src="/lovable-uploads/a14793e5-192f-4f20-b156-b312a832363a.png" 
-                    className="w-full h-auto rounded-3xl shadow-2xl border border-white/10 object-cover transform hover:scale-105 transition-transform duration-700" 
-                  />
+                  <img alt="Brandae App Demo" src="/lovable-uploads/a14793e5-192f-4f20-b156-b312a832363a.png" className="w-full h-auto rounded-3xl shadow-2xl border border-white/10 object-cover transform hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brandae-dark/20 to-transparent rounded-3xl"></div>
                 </div>
               </div>
               
               {/* Floating elements */}
-              <motion.div 
-                className="absolute -top-8 -right-8 w-24 h-24 bg-brandae-green/20 rounded-2xl backdrop-blur-sm border border-brandae-green/30 flex items-center justify-center"
-                animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
+              <motion.div className="absolute -top-8 -right-8 w-24 h-24 bg-brandae-green/20 rounded-2xl backdrop-blur-sm border border-brandae-green/30 flex items-center justify-center" animate={{
+              y: [-10, 10, -10],
+              rotate: [0, 5, 0]
+            }} transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}>
                 <span className="text-3xl">📱</span>
               </motion.div>
               
-              <motion.div 
-                className="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center"
-                animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              >
+              <motion.div className="absolute -bottom-8 -left-8 w-20 h-20 bg-blue-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center" animate={{
+              y: [10, -10, 10],
+              rotate: [0, -5, 0]
+            }} transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}>
                 <span className="text-2xl">💰</span>
               </motion.div>
             </motion.div>
@@ -701,97 +721,7 @@ const Index = () => {
       </section>
       
       {/* Call to Action Section with Form Popup */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 bg-brandae-darker relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#093d30]/20 to-transparent opacity-50"></div>
-        <div className="container mx-auto relative z-10 px-0">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h2 className="text-3xl md:text-4xl font-bold mb-6" initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6
-          }}>
-              Ready to <span className="gradient-text">Boost Your Revenue?</span>
-            </motion.h2>
-            
-            <motion.p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto" initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: 0.1
-          }}>
-              Join thousands of local businesses who have taken control of their online ordering experience and increased their revenue by up to 30%.
-            </motion.p>
-            
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: 0.2
-          }}>
-              <div className="inline-block">
-                <AnimatedButton 
-                  variant="primary" 
-                  size="lg" 
-                  className="rounded"
-                  onClick={() => setIsDemoModalOpen(true)}
-                >
-                  Schedule Your Free Demo
-                </AnimatedButton>
-              </div>
-            </motion.div>
-            
-            <motion.div className="mt-8 flex flex-wrap justify-center gap-6" initial={{
-            opacity: 0
-          }} whileInView={{
-            opacity: 1
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: 0.3
-          }}>
-              <div className="flex items-center gap-2 text-sm text-gray-300">
-                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
-                </div>
-                <span>No credit card required</span>
-              </div>
-              
-              <div className="flex items-center gap-2 text-sm text-gray-300">
-                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
-                </div>
-                <span>30-day free trial</span>
-              </div>
-              
-              <div className="flex items-center gap-2 text-sm text-gray-300">
-                <div className="w-4 h-4 rounded-full bg-brandae-green/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-brandae-green"></div>
-                </div>
-                <span>Cancel anytime</span>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      
       
       {/* Final CTA */}
       <section className="px-6 md:px-12 lg:px-24 py-32 relative overflow-hidden">
@@ -855,13 +785,9 @@ const Index = () => {
         </div>
       </section>
       
-      <DemoFormModal 
-        isOpen={isDemoModalOpen} 
-        onClose={() => setIsDemoModalOpen(false)} 
-      />
+      <DemoFormModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} />
       
       <Footer />
     </div>;
 };
-
 export default Index;
