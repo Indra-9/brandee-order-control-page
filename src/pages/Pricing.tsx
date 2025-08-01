@@ -3,326 +3,551 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedButton from '@/components/AnimatedButton';
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import DemoFormModal from '@/components/DemoFormModal';
-import { Check, CreditCard } from 'lucide-react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Check, Zap, Shield, Globe, Users, Smartphone, BarChart3, Star, Crown, Sparkles } from 'lucide-react';
+
 export default function Pricing() {
-  const [isYearly, setIsYearly] = useState(false);
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'halfyearly' | 'yearly'>('monthly');
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-  const fadeIn = {
-    hidden: {
-      opacity: 0,
-      y: 20
+  
+  const basePrice = 399;
+  const prices = {
+    monthly: basePrice,
+    halfyearly: Math.round(basePrice * 0.8), // 20% off
+    yearly: Math.round(basePrice * 0.75) // 25% off
+  };
+
+  const animations = {
+    fadeIn: {
+      hidden: { opacity: 0, y: 30 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
+    slideInLeft: {
+      hidden: { opacity: 0, x: -50 },
+      visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }
+    },
+    slideInRight: {
+      hidden: { opacity: 0, x: 50 },
+      visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }
+    },
+    staggerContainer: {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2, delayChildren: 0.1 }
       }
+    },
+    scaleIn: {
+      hidden: { opacity: 0, scale: 0.8 },
+      visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } }
     }
   };
-  const staggerContainer = {
-    hidden: {
-      opacity: 0
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+
+  const getSavings = (cycle: string) => {
+    if (cycle === 'halfyearly') return '20% OFF';
+    if (cycle === 'yearly') return '25% OFF';
+    return '';
   };
-  const getYearlyPrice = (monthlyPrice: number) => {
-    const yearly = monthlyPrice * 10; // 2 months free
-    return yearly;
+
+  const getTotalPrice = (cycle: string) => {
+    if (cycle === 'halfyearly') return prices.halfyearly * 6;
+    if (cycle === 'yearly') return prices.yearly * 12;
+    return prices.monthly;
   };
-  return <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white">
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-brandae-darker to-brandae-dark text-white overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
-      <motion.div initial="hidden" animate="visible" variants={fadeIn} className="container mx-auto pt-32 pb-16 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
-          Simple, Transparent <span className="gradient-text">Pricing</span>
+      <motion.div 
+        initial="hidden" 
+        animate="visible" 
+        variants={animations.fadeIn} 
+        className="container mx-auto pt-32 pb-20 px-4 text-center"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="inline-flex items-center gap-2 bg-brandae-green/10 border border-brandae-green/30 rounded-full px-6 py-2 mb-8"
+        >
+          <Sparkles className="h-4 w-4 text-brandae-green" />
+          <span className="text-brandae-green font-medium">Marketplace Solution</span>
+        </motion.div>
+        
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          One Plan, <span className="gradient-text">Unlimited Growth</span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto text-center mb-8">
-          No hidden fees, no commissions. Just one predictable monthly fee for all the tools you need.
+        <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+          Everything you need to build and scale your marketplace empire. No hidden fees, no limits, just pure growth.
         </p>
 
         {/* Billing Toggle */}
-        <div className="flex justify-center items-center mb-12">
-          <span className={`mr-3 ${!isYearly ? "text-white" : "text-gray-400"}`}>Monthly</span>
-          <div className="w-14 h-7 bg-brandae-gray rounded-full p-1 cursor-pointer relative" onClick={() => setIsYearly(!isYearly)}>
-            <motion.div className="w-5 h-5 bg-brandae-green rounded-full absolute" animate={{
-            x: isYearly ? 26 : 2
-          }} transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20
-          }} />
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col md:flex-row justify-center items-center gap-4 mb-16"
+        >
+          <div className="flex items-center bg-brandae-gray/50 backdrop-blur-md rounded-2xl p-2 border border-white/10">
+            {['monthly', 'halfyearly', 'yearly'].map((cycle) => (
+              <button
+                key={cycle}
+                onClick={() => setBillingCycle(cycle as any)}
+                className={`px-6 py-3 rounded-xl transition-all duration-300 relative ${
+                  billingCycle === cycle 
+                    ? 'bg-brandae-green text-brandae-dark font-bold' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                {cycle === 'monthly' && 'Monthly'}
+                {cycle === 'halfyearly' && 'Half Yearly'}
+                {cycle === 'yearly' && 'Yearly'}
+                {getSavings(cycle) && (
+                  <span className="absolute -top-2 -right-2 bg-brandae-purple text-white text-xs px-2 py-1 rounded-full">
+                    {getSavings(cycle)}
+                  </span>
+                )}
+              </button>
+            ))}
           </div>
-          <span className={`ml-3 ${isYearly ? "text-white" : "text-gray-400"}`}>
-            Yearly <span className="text-brandae-green text-xs">Save 20%</span>
-          </span>
-        </div>
-      </motion.div>
-
-      {/* Pricing Cards */}
-      <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="container mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Single Store Plan */}
-          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all">
-            <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Single Store</div>
-              <div className="flex items-end mb-6">
-                <span className="text-4xl font-bold">${isYearly ? 99 * 10 : 99}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
-              </div>
-              <p className="text-gray-300 mb-6">For Custom Store App</p>
-              
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Single Store</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Web | iOS | Android</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Marketing Automation</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Inbuilt Chat System</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Inbuilt POS System + App</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Realtime Order Tracking</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Table Reservation system</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Detailed Analytics and more</span>
-                </li>
-              </ul>
-              
-              <div onClick={() => setIsDemoModalOpen(true)}>
-                <AnimatedButton variant="outline" className="w-full rounded">
-                  Get Started
-                </AnimatedButton>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Brand Stores Plan */}
-          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-brandae-purple/50 overflow-hidden relative hover:border-brandae-purple transition-all transform scale-[1.02] shadow-xl shadow-brandae-purple/20">
-            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-brandae-purple to-brandae-green h-1"></div>
-            <div className="bg-gradient-to-r from-brandae-purple/10 to-brandae-green/10 text-white text-center py-2">
-              Most Popular
-            </div>
-            <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Brand Stores</div>
-              <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? 399 * 10 : 399}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
-              </div>
-              <p className="text-sm text-brandae-purple mb-4">12 Outlets</p>
-              <p className="text-gray-300 mb-6">For Multi-outlet Brand App</p>
-              
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>All in Single Store +</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Up-to 12 Outlets</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Auto Nearest Outlet Assign</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Central Dashboard</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Integrated POS System</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>QR Scan & Ordering</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Zero commission Fee*</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Custom Franchise App</span>
-                </li>
-              </ul>
-              
-              <div onClick={() => setIsDemoModalOpen(true)}>
-                <AnimatedButton variant="primary" className="w-full rounded">
-                  Get Started
-                </AnimatedButton>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Marketplace Plan */}
-          <motion.div variants={fadeIn} className="bg-gradient-to-b from-brandae-gray to-brandae-dark rounded-xl border border-white/10 overflow-hidden hover:border-brandae-green/40 transition-all">
-            <div className="p-8">
-              <div className="text-sm text-brandae-green mb-3">Marketplace</div>
-              <div className="flex items-end mb-2">
-                <span className="text-4xl font-bold">${isYearly ? 449 * 10 : 449}</span>
-                <span className="text-gray-400 ml-2">/{isYearly ? 'year' : 'month'}</span>
-              </div>
-              <p className="text-sm text-brandae-purple mb-4">Aggregator</p>
-              <p className="text-gray-300 mb-6">For Multivendor Marketplaces</p>
-              
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Unlimited Stores</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Web | iOS | Android</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Custom Report</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Marketing Automation</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Fully Customisable Design</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Zero commission Fee*</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>Create Dynamic Offers</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 mr-2 text-brandae-green" />
-                  <span>And 100+ more features</span>
-                </li>
-              </ul>
-              
-              <div onClick={() => setIsDemoModalOpen(true)}>
-                <AnimatedButton variant="outline" className="w-full rounded">
-                  Get Started
-                </AnimatedButton>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Comparison Table */}
-      <div className="container mx-auto px-4 pb-16">
-        <motion.div initial={{
-        opacity: 0,
-        y: 30
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.7
-      }} viewport={{
-        once: true
-      }} className="bg-brandae-gray rounded-xl border border-white/10 p-6 overflow-x-auto">
-          <h2 className="text-2xl font-bold mb-6">Compare Plans</h2>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[250px]">Feature</TableHead>
-                <TableHead>Single Store</TableHead>
-                <TableHead>Brand Stores</TableHead>
-                <TableHead>Marketplace</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {comparisonFeatures.map((feature, idx) => <TableRow key={idx}>
-                  <TableCell className="font-medium">{feature.name}</TableCell>
-                  <TableCell>
-                    {feature.singleStore ? typeof feature.singleStore === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.singleStore : <span className="text-gray-500">—</span>}
-                  </TableCell>
-                  <TableCell>
-                    {feature.brandStores ? typeof feature.brandStores === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.brandStores : <span className="text-gray-500">—</span>}
-                  </TableCell>
-                  <TableCell>
-                    {feature.marketplace ? typeof feature.marketplace === 'boolean' ? <Check className="h-5 w-5 text-brandae-green" /> : feature.marketplace : <span className="text-gray-500">—</span>}
-                  </TableCell>
-                </TableRow>)}
-            </TableBody>
-          </Table>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* FAQ Section */}
-      <motion.div initial={{
-      opacity: 0
-    }} whileInView={{
-      opacity: 1
-    }} transition={{
-      duration: 0.8
-    }} viewport={{
-      once: true
-    }} className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-          
-          <div className="space-y-6">
-            {faqs.map((faq, idx) => <div key={idx} className="bg-brandae-gray p-6 border border-white/10 rounded">
-                <h3 className="text-xl font-bold mb-2">{faq.question}</h3>
-                <p className="text-gray-300">{faq.answer}</p>
-              </div>)}
-          </div>
+      {/* Main Pricing Card */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.scaleIn}
+        className="container mx-auto px-4 pb-20"
+      >
+        <div className="max-w-2xl mx-auto">
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="relative bg-gradient-to-br from-brandae-gray/80 to-brandae-dark/80 backdrop-blur-md rounded-3xl border-2 border-brandae-green/30 overflow-hidden shadow-2xl shadow-brandae-green/10"
+          >
+            {/* Premium Badge */}
+            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-brandae-purple to-brandae-green h-1"></div>
+            <div className="bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 text-center py-4 border-b border-white/10">
+              <div className="inline-flex items-center gap-2">
+                <Crown className="h-5 w-5 text-brandae-green" />
+                <span className="text-brandae-green font-bold">MARKETPLACE PLAN</span>
+              </div>
+            </div>
+
+            <div className="p-12">
+              {/* Pricing */}
+              <div className="text-center mb-12">
+                <div className="flex items-baseline justify-center mb-4">
+                  <span className="text-6xl md:text-7xl font-bold text-brandae-green">
+                    ${prices[billingCycle]}
+                  </span>
+                  <span className="text-2xl text-gray-400 ml-3">
+                    /{billingCycle === 'yearly' ? 'month' : billingCycle === 'halfyearly' ? 'month' : 'month'}
+                  </span>
+                </div>
+                {billingCycle !== 'monthly' && (
+                  <div className="text-lg text-brandae-green mb-4">
+                    Billed {billingCycle === 'yearly' ? 'annually' : 'every 6 months'} (${getTotalPrice(billingCycle)} total)
+                  </div>
+                )}
+                <p className="text-xl text-gray-300">
+                  Complete marketplace platform with unlimited potential
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center mb-12">
+                <div onClick={() => setIsDemoModalOpen(true)}>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <AnimatedButton variant="primary" size="lg" className="rounded-2xl px-12 py-4 text-xl font-bold">
+                      Start Building Your Marketplace
+                    </AnimatedButton>
+                  </motion.div>
+                </div>
+                <p className="text-sm text-gray-400 mt-3">30-day money-back guarantee</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
 
-      {/* CTA Section */}
-      <motion.div initial={{
-      opacity: 0
-    }} whileInView={{
-      opacity: 1
-    }} transition={{
-      duration: 0.8
-    }} viewport={{
-      once: true
-    }} className="container mx-auto px-4 py-16 text-center">
-        <div className="max-w-3xl mx-auto bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 p-8 md:p-12 rounded-2xl border border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to grow your business?</h2>
-          <p className="text-gray-300 mb-8">Join thousands of businesses who have increased their revenue with Brandae.</p>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <div onClick={() => setIsDemoModalOpen(true)}>
-              <AnimatedButton variant="primary" size="lg" className="rounded">
-                Book a Free Demo
-              </AnimatedButton>
+      {/* Features Sections */}
+      
+      {/* Section 1: Core Platform */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20"
+      >
+        <motion.div variants={animations.fadeIn} className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-brandae-purple/10 border border-brandae-purple/30 rounded-full px-6 py-2 mb-6">
+            <Zap className="h-4 w-4 text-brandae-purple" />
+            <span className="text-brandae-purple font-medium">Core Platform</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Everything You Need to Launch
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Get your marketplace up and running with our comprehensive platform that handles everything from vendors to customers.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: <Globe className="h-8 w-8" />,
+              title: "Multi-Platform Presence",
+              description: "Web, iOS, and Android apps for maximum reach and accessibility"
+            },
+            {
+              icon: <Users className="h-8 w-8" />,
+              title: "Unlimited Vendors",
+              description: "Onboard as many vendors as you want with our scalable infrastructure"
+            },
+            {
+              icon: <Shield className="h-8 w-8" />,
+              title: "Zero Commission Fees",
+              description: "Keep 100% of your earnings with our transparent pricing model"
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={animations.fadeIn}
+              whileHover={{ y: -5 }}
+              className="bg-brandae-gray/50 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-brandae-green/30 transition-all duration-300"
+            >
+              <div className="text-brandae-green mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <p className="text-gray-300">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Section 2: Advanced Features */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20 bg-gradient-to-r from-brandae-purple/5 to-brandae-green/5"
+      >
+        <motion.div variants={animations.fadeIn} className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-brandae-green/10 border border-brandae-green/30 rounded-full px-6 py-2 mb-6">
+            <Smartphone className="h-4 w-4 text-brandae-green" />
+            <span className="text-brandae-green font-medium">Advanced Features</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Powerful Tools for Growth
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Advanced marketplace features that help you optimize operations and maximize revenue.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            "Custom Branding & Design",
+            "Real-time Order Tracking",
+            "Integrated Payment Gateway",
+            "Vendor Dashboard & Analytics",
+            "Customer Loyalty Programs",
+            "Dynamic Pricing & Offers",
+            "Inventory Management",
+            "Marketing Automation"
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={animations.fadeIn}
+              whileHover={{ scale: 1.05 }}
+              className="bg-brandae-gray/30 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:border-brandae-green/30 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3">
+                <Check className="h-5 w-5 text-brandae-green flex-shrink-0" />
+                <span className="font-medium">{feature}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Section 3: Business Intelligence */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div variants={animations.slideInLeft}>
+            <div className="inline-flex items-center gap-2 bg-brandae-purple/10 border border-brandae-purple/30 rounded-full px-6 py-2 mb-6">
+              <BarChart3 className="h-4 w-4 text-brandae-purple" />
+              <span className="text-brandae-purple font-medium">Business Intelligence</span>
             </div>
-            
-            
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Data-Driven Decisions
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Comprehensive analytics and reporting tools to help you understand your marketplace performance and make informed decisions.
+            </p>
+            <ul className="space-y-4">
+              {[
+                "Real-time Revenue Tracking",
+                "Vendor Performance Analytics",
+                "Customer Behavior Insights",
+                "Commission Management",
+                "Custom Report Generation"
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <Check className="h-5 w-5 text-brandae-green" />
+                  <span className="text-lg">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          
+          <motion.div 
+            variants={animations.slideInRight}
+            className="bg-gradient-to-br from-brandae-gray/50 to-brandae-dark/50 backdrop-blur-md rounded-3xl p-8 border border-white/10"
+          >
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                { label: "Revenue Growth", value: "+285%" },
+                { label: "Active Vendors", value: "1,250+" },
+                { label: "Monthly Orders", value: "45K+" },
+                { label: "Customer Satisfaction", value: "98.5%" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl font-bold text-brandae-green mb-2">{stat.value}</div>
+                  <div className="text-gray-300">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Section 4: Scalability */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20 bg-gradient-to-r from-brandae-green/5 to-brandae-purple/5"
+      >
+        <motion.div variants={animations.fadeIn} className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-brandae-green/10 border border-brandae-green/30 rounded-full px-6 py-2 mb-6">
+            <Zap className="h-4 w-4 text-brandae-green" />
+            <span className="text-brandae-green font-medium">Enterprise Ready</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Built to Scale with You
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Our infrastructure grows with your business, handling everything from startup to enterprise-level traffic.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "99.9% Uptime",
+              description: "Reliable infrastructure ensures your marketplace is always available",
+              icon: <Shield className="h-12 w-12 text-brandae-green" />
+            },
+            {
+              title: "Global CDN",
+              description: "Lightning-fast loading times worldwide with our content delivery network",
+              icon: <Globe className="h-12 w-12 text-brandae-purple" />
+            },
+            {
+              title: "Auto-Scaling",
+              description: "Seamlessly handle traffic spikes during peak seasons and promotions",
+              icon: <Zap className="h-12 w-12 text-brandae-green" />
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={animations.fadeIn}
+              whileHover={{ y: -10 }}
+              className="text-center bg-brandae-gray/30 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-brandae-green/30 transition-all duration-300"
+            >
+              <div className="mb-6 flex justify-center">{feature.icon}</div>
+              <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+              <p className="text-gray-300">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Section 5: Support & Integration */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div 
+            variants={animations.slideInLeft}
+            className="bg-gradient-to-br from-brandae-purple/20 to-brandae-green/20 backdrop-blur-md rounded-3xl p-12 border border-white/10"
+          >
+            <h3 className="text-3xl font-bold mb-6">24/7 Expert Support</h3>
+            <p className="text-xl text-gray-300 mb-8">
+              Our dedicated team is here to help you succeed at every step of your marketplace journey.
+            </p>
+            <ul className="space-y-4">
+              {[
+                "Dedicated account manager",
+                "Technical integration support",
+                "Business growth consultation",
+                "Priority email & chat support"
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <Star className="h-5 w-5 text-brandae-green" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          
+          <motion.div variants={animations.slideInRight}>
+            <div className="inline-flex items-center gap-2 bg-brandae-green/10 border border-brandae-green/30 rounded-full px-6 py-2 mb-6">
+              <Users className="h-4 w-4 text-brandae-green" />
+              <span className="text-brandae-green font-medium">Integration Ready</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Seamless Integrations
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Connect with all your favorite tools and services to create the perfect marketplace ecosystem.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                "Payment Gateways",
+                "CRM Systems",
+                "Email Marketing",
+                "SMS Providers",
+                "Social Media",
+                "Analytics Tools"
+              ].map((integration, index) => (
+                <div key={index} className="bg-brandae-gray/30 rounded-xl p-4 text-center border border-white/10">
+                  <span className="font-medium">{integration}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Section 6: FAQ */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.staggerContainer}
+        className="container mx-auto px-4 py-20 bg-gradient-to-r from-brandae-dark/50 to-brandae-gray/50"
+      >
+        <motion.div variants={animations.fadeIn} className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Everything you need to know about our marketplace platform
+          </p>
+        </motion.div>
+
+        <div className="max-w-4xl mx-auto space-y-6">
+          {[
+            {
+              question: "How quickly can I launch my marketplace?",
+              answer: "Most marketplaces are live within 2-3 weeks, including custom branding, vendor onboarding, and app store approvals."
+            },
+            {
+              question: "Is there a limit on the number of vendors?",
+              answer: "No limits! Our platform scales seamlessly to support unlimited vendors and can handle enterprise-level traffic."
+            },
+            {
+              question: "What payment methods are supported?",
+              answer: "We support all major payment gateways including Stripe, PayPal, and regional providers for global reach."
+            },
+            {
+              question: "Do you provide technical support?",
+              answer: "Yes! 24/7 technical support, dedicated account management, and business growth consultation are included."
+            },
+            {
+              question: "Can I customize the design and branding?",
+              answer: "Absolutely! Full white-label customization with your branding, colors, and design preferences."
+            }
+          ].map((faq, index) => (
+            <motion.div
+              key={index}
+              variants={animations.fadeIn}
+              className="bg-brandae-gray/50 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-brandae-green/30 transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-brandae-green">{faq.question}</h3>
+              <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Final CTA Section */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={animations.fadeIn}
+        className="container mx-auto px-4 py-20 text-center"
+      >
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-brandae-purple/20 to-brandae-green/20 backdrop-blur-md p-16 rounded-3xl border border-white/10">
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 bg-brandae-green/20 border border-brandae-green/30 rounded-full px-6 py-2 mb-8"
+          >
+            <Crown className="h-4 w-4 text-brandae-green" />
+            <span className="text-brandae-green font-medium">Ready to Launch?</span>
+          </motion.div>
+          
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            Start Your Marketplace Journey Today
+          </h2>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            Join successful marketplace owners who chose our platform to build their business empire. No setup fees, no hidden costs.
+          </p>
+          
+          <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
+            <div onClick={() => setIsDemoModalOpen(true)}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <AnimatedButton variant="primary" size="lg" className="rounded-2xl px-12 py-4 text-xl font-bold">
+                  Book Free Demo
+                </AnimatedButton>
+              </motion.div>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-gray-400">
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-brandae-green" />
+              <span>30-day money-back guarantee</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-brandae-green" />
+              <span>No setup fees</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-brandae-green" />
+              <span>Cancel anytime</span>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -333,86 +558,6 @@ export default function Pricing() {
       />
       
       <Footer />
-    </div>;
+    </div>
+  );
 }
-
-// Comparison table features
-const comparisonFeatures = [{
-  name: "Number of Locations",
-  singleStore: "1",
-  brandStores: "Up to 12",
-  marketplace: "Unlimited"
-}, {
-  name: "Branded Mobile App",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Web Ordering",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "POS Integration",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Marketing Tools",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Customer Database",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Multi-outlet Management",
-  singleStore: false,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Centralized Dashboard",
-  singleStore: false,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "QR Code Ordering",
-  singleStore: true,
-  brandStores: true,
-  marketplace: true
-}, {
-  name: "Vendor Management",
-  singleStore: false,
-  brandStores: false,
-  marketplace: true
-}, {
-  name: "Commission Control",
-  singleStore: false,
-  brandStores: false,
-  marketplace: true
-}, {
-  name: "White Label Option",
-  singleStore: "Add-on",
-  brandStores: "Add-on",
-  marketplace: true
-}];
-
-// FAQs
-const faqs = [{
-  question: "Is there a setup fee?",
-  answer: "No, there are no hidden setup fees. The monthly subscription price covers everything you need to get started."
-}, {
-  question: "What does 'zero commission fee' mean?",
-  answer: "Unlike aggregator apps that charge 20-30% commission on each order, Brandae lets you keep 100% of your order value. You pay only the fixed monthly subscription."
-}, {
-  question: "How long does it take to get my app live?",
-  answer: "Typically, we can have your branded app ready within 2-3 weeks from signing up, including app store approval time."
-}, {
-  question: "Do I need technical knowledge to use Brandae?",
-  answer: "Not at all. Our platform is designed to be user-friendly, and we provide full onboarding support to help you get comfortable with all features."
-}, {
-  question: "Can I migrate my existing customer data?",
-  answer: "Yes, we provide tools and support to help you migrate customer data from your existing platforms into Brandae."
-}];
