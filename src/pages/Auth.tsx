@@ -28,10 +28,23 @@ export default function AuthPage() {
     
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
+        // Clean up any existing auth state before signing up
+        const { cleanupAuthState } = await import('@/components/AuthWrapper');
+        cleanupAuthState();
+        
+        try {
+          await supabase.auth.signOut({ scope: 'global' });
+        } catch (err) {
+          // Continue even if this fails
+        }
+
+        const redirectUrl = `${window.location.origin}/`;
+        
+        const { error, data: signUpData } = await supabase.auth.signUp({
           email: data.email,
           password: data.password,
           options: {
+            emailRedirectTo: redirectUrl,
             data: {
               name: data.name
             }
@@ -40,20 +53,52 @@ export default function AuthPage() {
         
         if (error) throw error;
         
-        toast.success('Account created successfully! Please check your email to verify your account.');
+        if (signUpData.user) {
+          toast.success('Account created successfully! Please check your email to verify your account.');
+          // Force page reload for clean state
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+        }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({
+        // Clean up existing state before signing in
+        const { cleanupAuthState } = await import('@/components/AuthWrapper');
+        cleanupAuthState();
+        
+        try {
+          await supabase.auth.signOut({ scope: 'global' });
+        } catch (err) {
+          // Continue even if this fails
+        }
+
+        const { error, data: signInData } = await supabase.auth.signInWithPassword({
           email: data.email,
           password: data.password,
         });
         
         if (error) throw error;
         
-        toast.success('Welcome back!');
+        if (signInData.user) {
+          toast.success('Welcome back!');
+          // Force page reload for clean state
+          window.location.href = '/';
+        }
       }
     } catch (error: any) {
       console.error('Auth error:', error);
-      toast.error(error.message || 'An error occurred during authentication');
+      let errorMessage = "An error occurred during authentication";
+      
+      if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = "Invalid email or password";
+      } else if (error.message?.includes('User already registered')) {
+        errorMessage = "An account with this email already exists";
+      } else if (error.message?.includes('Password should be at least')) {
+        errorMessage = "Password should be at least 6 characters";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }

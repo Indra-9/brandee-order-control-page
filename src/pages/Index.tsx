@@ -129,6 +129,16 @@ const Index = () => {
                 >
                   Watch Demo
                 </AnimatedButton>
+                <div className="ml-4">
+                  <motion.a
+                    href="/auth"
+                    className="text-brandae-green hover:text-brandae-green/80 text-sm font-medium underline transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Admin Access →
+                  </motion.a>
+                </div>
               </motion.div>
 
               <motion.div 
