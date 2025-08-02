@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen, LogOut, PenTool } from 'lucide-react';
+import { BarChart3, FileText, Users, MessageSquare, Settings, Webhook, Layers, ShoppingBag, Map, BookOpen, LogOut, PenTool, Wand2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -16,6 +16,7 @@ import SitemapManager from '@/components/SitemapManager';
 import DocumentationManager from '@/components/DocumentationManager';
 import BlogManager from '@/components/BlogManager';
 import AdminStatsCard from '@/components/AdminStatsCard';
+import AIContentGenerator from '@/components/AIContentGenerator';
 import { useAdminStats } from '@/hooks/useAdminStats';
 
 const AdminDashboard = () => {
@@ -40,6 +41,7 @@ const AdminDashboard = () => {
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/admin' },
+    { id: 'ai-content', label: 'AI Content Generator', icon: Wand2, path: '/admin/ai-content' },
     { id: 'contacts', label: 'Contact Submissions', icon: MessageSquare, path: '/admin/contacts' },
     { id: 'partners', label: 'Partner Submissions', icon: Users, path: '/admin/partners' },
     { id: 'case-studies', label: 'Case Studies', icon: FileText, path: '/admin/case-studies' },
@@ -139,8 +141,14 @@ const AdminDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Link to="/admin/case-studies">
+              <Link to="/admin/ai-content">
                 <Button className="w-full bg-brandae-green text-brandae-dark hover:bg-brandae-green/90">
+                  <Wand2 size={18} className="mr-2" />
+                  Generate AI Content
+                </Button>
+              </Link>
+              <Link to="/admin/case-studies">
+                <Button variant="outline" className="w-full border-brandae-green/50 text-brandae-green hover:bg-brandae-green/10">
                   <FileText size={18} className="mr-2" />
                   Create Case Study
                 </Button>
@@ -234,6 +242,7 @@ const AdminDashboard = () => {
             <div className="flex-1 min-w-0">
               <Routes>
                 <Route index element={<DashboardOverview />} />
+                <Route path="ai-content" element={<AIContentGenerator />} />
                 <Route path="contacts" element={<ContactSubmissions />} />
                 <Route path="partners" element={<PartnerSubmissions />} />
                 <Route path="case-studies" element={<CaseStudyManager />} />
