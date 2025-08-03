@@ -30,6 +30,18 @@ export default function AdminWrapper({ children, session }: AdminWrapperProps) {
           <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
           <p className="text-gray-300">You do not have permission to access this area.</p>
           <p className="text-gray-400 mt-2">Administrator privileges required.</p>
+          <button 
+            onClick={async () => {
+              const { createFirstAdmin } = await import('@/utils/createFirstAdmin');
+              const success = await createFirstAdmin();
+              if (success) {
+                setTimeout(() => window.location.reload(), 2000);
+              }
+            }}
+            className="mt-4 px-4 py-2 bg-brandae-green text-brandae-dark rounded hover:opacity-80"
+          >
+            Create First Admin
+          </button>
         </div>
       </div>
     );

@@ -80,8 +80,14 @@ export default function AuthPage() {
         
         if (signInData.user) {
           toast.success('Welcome back!');
-          // Force page reload for clean state
-          window.location.href = '/';
+          // Check if we're coming from admin route
+          const currentPath = window.location.pathname;
+          const isAdminPath = currentPath.includes('/admin') || document.referrer.includes('/admin');
+          
+          // Redirect appropriately
+          setTimeout(() => {
+            window.location.href = isAdminPath ? '/admin' : '/';
+          }, 1000);
         }
       }
     } catch (error: any) {
