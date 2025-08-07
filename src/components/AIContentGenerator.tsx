@@ -141,6 +141,184 @@ export default function AIContentGenerator() {
     URL.revokeObjectURL(url);
   };
 
+  // Utils for publishing
+  const slugify = (str: string) =>
+    str
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+
+  const makeExcerpt = (text: string, length = 160) =>
+    (text || '').replace(/\s+/g, ' ').trim().slice(0, length);
+
+  const estimateReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const words = (content || '').split(/\s+/).length;
+    return Math.ceil(words / wordsPerMinute);
+  };
+
+  const pushToBlog = async () => {
+    if (!generatedContent) return;
+    try {
+      const title = generatedContent.title || topic;
+      const content = generatedContent.content || '';
+      const postData = {
+        title,
+        slug: slugify(title),
+        excerpt: generatedContent.metaDescription || makeExcerpt(content, 180),
+        content,
+        image_url: '',
+        author: 'AI Assistant',
+        category: 'AI Generated',
+        tags: Array.isArray(generatedContent.keywords) ? generatedContent.keywords : [],
+        read_time: `${estimateReadingTime(content)} min`,
+        featured: false,
+        published: false,
+      };
+
+      const { error } = await supabase.from('blog_posts').insert([postData]);
+      if (error) throw error;
+      toast({ title: 'Blog created', description: 'AI content pushed to Blog as draft.' });
+    } catch (e:any) {
+      console.error('Push blog failed:', e);
+      toast({ title: 'Failed to create blog', description: e.message || 'An error occurred', variant: 'destructive' });
+    }
+  };
+
+  const pushToCaseStudy = async () => {
+    if (!generatedContent) return;
+    try {
+      const title = generatedContent.title || topic;
+      const challenge = generatedContent.challenge || '';
+      const solution = generatedContent.solution || '';
+      const implementation = generatedContent.implementation || '';
+      const results = generatedContent.results || '';
+      const combinedContent = `${challenge}\n\n${solution}\n\n${implementation}\n\n${results}`.trim();
+
+      const studyData = {
+        title,
+        slug: slugify(title),
+        meta_title: `${title} – Case Study`,
+        meta_description: makeExcerpt(results || solution || challenge, 160),
+        excerpt: makeExcerpt(challenge || solution, 200),
+        content: combinedContent,
+        featured_image_url: '',
+        client_name: generatedContent.client || 'Confidential Client',
+        client_logo_url: '',
+        industry: 'AI Generated',
+        project_duration: null,
+        project_cost_range: null,
+        results_summary: results || null,
+        tags: Array.isArray(generatedContent.takeaways) ? generatedContent.takeaways : [],
+        technologies_used: Array.isArray(generatedContent.technologies) ? generatedContent.technologies : [],
+        challenge: challenge || null,
+        solution: solution || null,
+        results: results || null,
+        testimonial: null,
+        testimonial_author: null,
+        testimonial_position: null,
+        featured: false,
+        published: false,
+        seo_keywords: '',
+        canonical_url: '',
+        reading_time: estimateReadingTime(combinedContent),
+      };
+
+      const { error } = await supabase.from('case_studies').insert([studyData]);
+      if (error) throw error;
+      toast({ title: 'Case study created', description: 'AI content pushed to Case Studies as draft.' });
+    } catch (e:any) {
+      console.error('Push case study failed:', e);
+      toast({ title: 'Failed to create case study', description: e.message || 'An error occurred', variant: 'destructive' });
+    }
+  };
+
+  const pushToIntegration = async () => {
+    if (!generatedContent) return;
+    try {
+      const name = generatedContent.name || topic;
+      const desc = generatedContent.description || '';
+      const details = [
+        desc,
+        Array.isArray(generatedContent.setupSteps) ? `\n\nSetup Steps:\n- ${generatedContent.setupSteps.join('\n- ')}` : '',
+        generatedContent.codeExample ? `\n\nCode Example:\n${generatedContent.codeExample}` : '',
+        Array.isArray(generatedContent.benefits) ? `\n\nBenefits:\n- ${generatedContent.benefits.join('\n- ')}` : ''
+      ].join('');
+
+      const integrationData = {
+        name,
+        slug: slugify(name),
+        description: desc,
+        detailed_description: details,
+        logo_url: '',
+        category: generatedContent.category || 'General',
+        website_url: '',
+        documentation_url: '',
+        pricing_info: '',
+        features: Array.isArray(generatedContent.features) ? generatedContent.features : [],
+        supported_platforms: [],
+        integration_type: generatedContent.category || 'API',
+        difficulty_level: generatedContent.difficulty || 'Medium',
+        setup_time: 'Varies',
+        is_featured: false,
+        is_active: true,
+        views_count: 0,
+        meta_title: `${name} Integration Guide`,
+        meta_description: makeExcerpt(desc, 160),
+        seo_keywords: (Array.isArray(generatedContent.features) ? generatedContent.features : []).slice(0, 6).join(', '),
+      };
+
+      const { error } = await supabase.from('integrations').insert([integrationData]);
+      if (error) throw error;
+      toast({ title: 'Integration created', description: 'AI content pushed to Integrations as draft.' });
+    } catch (e:any) {
+      console.error('Push integration failed:', e);
+      toast({ title: 'Failed to create integration', description: e.message || 'An error occurred', variant: 'destructive' });
+    }
+  };
+
+  const pushToDocumentation = async () => {
+    if (!generatedContent) return;
+    try {
+      const title = generatedContent.title || topic;
+      const overview = generatedContent.overview || '';
+      const contentParts = [
+        overview,
+        Array.isArray(generatedContent.prerequisites) ? `\n\nPrerequisites:\n- ${generatedContent.prerequisites.join('\n- ')}` : '',
+        Array.isArray(generatedContent.instructions) ? `\n\nInstructions:\n- ${generatedContent.instructions.join('\n- ')}` : '',
+        Array.isArray(generatedContent.codeExamples) ? `\n\nCode Examples:\n${generatedContent.codeExamples.join('\n\n')}` : '',
+        generatedContent.troubleshooting ? `\n\nTroubleshooting:\n${generatedContent.troubleshooting}` : ''
+      ].join('');
+
+      const docData = {
+        title,
+        slug: slugify(title),
+        meta_title: `${title} – Documentation`,
+        meta_description: makeExcerpt(overview, 160),
+        excerpt: makeExcerpt(overview, 200),
+        content: contentParts,
+        featured_image_url: '',
+        category: generatedContent.category || 'General',
+        tags: Array.isArray(generatedContent.relatedTopics) ? generatedContent.relatedTopics : [],
+        author: 'AI Assistant',
+        featured: false,
+        published: false,
+        seo_keywords: Array.isArray(generatedContent.relatedTopics) ? generatedContent.relatedTopics.join(', ') : '',
+        canonical_url: '',
+        reading_time: estimateReadingTime(contentParts),
+      };
+
+      const { error } = await supabase.from('documentation').insert([docData]);
+      if (error) throw error;
+      toast({ title: 'Documentation created', description: 'AI content pushed to Documentation as draft.' });
+    } catch (e:any) {
+      console.error('Push documentation failed:', e);
+      toast({ title: 'Failed to create documentation', description: e.message || 'An error occurred', variant: 'destructive' });
+    }
+  };
+
   const renderContentPreview = () => {
     if (!generatedContent) return null;
 
@@ -221,6 +399,30 @@ export default function AIContentGenerator() {
                 </div>
               </div>
             ))}
+            <div className="border-t border-brandae-green/20 pt-6">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-white font-semibold">Quick publish</h4>
+                <p className="text-xs text-gray-400">Push this content into your CMS as drafts</p>
+              </div>
+              <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <Button onClick={pushToBlog} variant="outline" className="snap-start shrink-0 border-brandae-green/30 text-white hover:bg-brandae-green/10">
+                  <FileText className="w-4 h-4 mr-2" />
+                  Push to Blog
+                </Button>
+                <Button onClick={pushToCaseStudy} variant="outline" className="snap-start shrink-0 border-brandae-green/30 text-white hover:bg-brandae-green/10">
+                  <Briefcase className="w-4 h-4 mr-2" />
+                  Push to Case Study
+                </Button>
+                <Button onClick={pushToIntegration} variant="outline" className="snap-start shrink-0 border-brandae-green/30 text-white hover:bg-brandae-green/10">
+                  <Puzzle className="w-4 h-4 mr-2" />
+                  Push to Integration
+                </Button>
+                <Button onClick={pushToDocumentation} variant="outline" className="snap-start shrink-0 border-brandae-green/30 text-white hover:bg-brandae-green/10">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Push to Documentation
+                </Button>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </motion.div>
@@ -266,7 +468,7 @@ export default function AIContentGenerator() {
                 <SelectTrigger className="bg-brandae-dark border-brandae-green/30 text-white">
                   <SelectValue placeholder="Select content type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-[9999] bg-brandae-dark/95 backdrop-blur-md border border-brandae-green/30 shadow-2xl">
                   {contentTypes.map((type) => (
                     <SelectItem key={type.value} value={type.value}>
                       <div className="flex items-center gap-3">
