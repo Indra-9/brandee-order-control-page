@@ -103,11 +103,11 @@ Important:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
-            content: 'You are a professional content writer specializing in e-commerce and technology content. Always respond with valid JSON format as requested.'
+            content: 'You are a professional content writer specializing in e-commerce and technology content. Always respond with valid JSON format as requested. Do not use markdown code blocks or backticks in your response.'
           },
           {
             role: 'user',
@@ -133,14 +133,30 @@ Important:
 
     console.log('Generated content:', generatedContent);
 
-    // Parse the JSON response from OpenAI
+    // Clean and parse the JSON response from OpenAI
+    let cleanedContent = generatedContent.trim();
+    
+    // Remove markdown code blocks if present
+    if (cleanedContent.startsWith('```json')) {
+      cleanedContent = cleanedContent.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    } else if (cleanedContent.startsWith('```')) {
+      cleanedContent = cleanedContent.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    console.log('Cleaned content before parsing:', cleanedContent);
+    
     let parsedContent;
     try {
-      parsedContent = JSON.parse(generatedContent);
+      parsedContent = JSON.parse(cleanedContent);
     } catch (parseError) {
       console.error('Failed to parse OpenAI response as JSON:', parseError);
+      console.error('Raw content that failed to parse:', generatedContent);
       return new Response(
-        JSON.stringify({ error: 'Generated content was not in valid JSON format' }),
+        JSON.stringify({ 
+          error: 'Generated content was not in valid JSON format',
+          rawContent: generatedContent,
+          parseError: parseError.message 
+        }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
