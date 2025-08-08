@@ -159,31 +159,99 @@ export default function AIContentGenerator() {
     return Math.ceil(words / wordsPerMinute);
   };
 
+  // Content formatters for different types
+  const formatBlogContent = (content: any) => {
+    if (typeof content === 'string') return content;
+    if (!content) return '';
+    
+    let formatted = '';
+    
+    if (content.introduction) {
+      formatted += content.introduction + '\n\n';
+    }
+    
+    if (Array.isArray(content.mainSections)) {
+      content.mainSections.forEach((section: any) => {
+        if (section.sectionTitle) {
+          formatted += `## ${section.sectionTitle}\n\n`;
+        }
+        if (section.sectionContent) {
+          formatted += section.sectionContent + '\n\n';
+        }
+      });
+    }
+    
+    if (content.conclusion) {
+      formatted += content.conclusion + '\n\n';
+    }
+    
+    if (content.callToAction) {
+      formatted += '---\n\n' + content.callToAction;
+    }
+    
+    return formatted.trim();
+  };
+
+  const formatCaseStudyContent = (content: any) => {
+    const challenge = content.challenge || '';
+    const solution = content.solution || '';
+    const implementation = content.implementation || '';
+    const results = content.results || '';
+    return `${challenge}\n\n${solution}\n\n${implementation}\n\n${results}`.trim();
+  };
+
+  const formatIntegrationContent = (content: any) => {
+    const desc = content.description || '';
+    const setupSteps = Array.isArray(content.setupSteps) ? `\n\nSetup Steps:\n- ${content.setupSteps.join('\n- ')}` : '';
+    const codeExample = content.codeExample ? `\n\nCode Example:\n${content.codeExample}` : '';
+    const benefits = Array.isArray(content.benefits) ? `\n\nBenefits:\n- ${content.benefits.join('\n- ')}` : '';
+    return [desc, setupSteps, codeExample, benefits].join('');
+  };
+
+  const formatDocumentationContent = (content: any) => {
+    const overview = content.overview || '';
+    const prerequisites = Array.isArray(content.prerequisites) ? `\n\nPrerequisites:\n- ${content.prerequisites.join('\n- ')}` : '';
+    const instructions = Array.isArray(content.instructions) ? `\n\nInstructions:\n- ${content.instructions.join('\n- ')}` : '';
+    const codeExamples = Array.isArray(content.codeExamples) ? `\n\nCode Examples:\n${content.codeExamples.join('\n\n')}` : '';
+    const troubleshooting = content.troubleshooting ? `\n\nTroubleshooting:\n${content.troubleshooting}` : '';
+    return [overview, prerequisites, instructions, codeExamples, troubleshooting].join('');
+  };
+
   const pushToBlog = async () => {
     if (!generatedContent) return;
     try {
       const title = generatedContent.title || topic;
-      const content = generatedContent.content || '';
+      const formattedContent = formatBlogContent(generatedContent.content);
+      const excerpt = generatedContent.metaDescription || makeExcerpt(formattedContent, 180);
+      
       const postData = {
         title,
         slug: slugify(title),
-        excerpt: generatedContent.metaDescription || makeExcerpt(content, 180),
-        content,
+        excerpt,
+        content: formattedContent,
         image_url: '',
         author: 'AI Assistant',
         category: 'AI Generated',
         tags: Array.isArray(generatedContent.keywords) ? generatedContent.keywords : [],
-        read_time: `${estimateReadingTime(content)} min`,
+        read_time: `${estimateReadingTime(formattedContent)} min`,
         featured: false,
         published: false,
       };
 
       const { error } = await supabase.from('blog_posts').insert([postData]);
       if (error) throw error;
-      toast({ title: 'Blog created', description: 'AI content pushed to Blog as draft.' });
-    } catch (e:any) {
+      toast({ 
+        title: 'Success!', 
+        description: 'Blog post created and saved as draft.',
+        className: 'bg-green-900 border-green-700 text-green-100'
+      });
+    } catch (e: any) {
       console.error('Push blog failed:', e);
-      toast({ title: 'Failed to create blog', description: e.message || 'An error occurred', variant: 'destructive' });
+      toast({ 
+        title: 'Error', 
+        description: `Failed to create blog: ${e.message || 'Unknown error'}`,
+        variant: 'destructive' 
+      });
     }
   };
 
@@ -195,7 +263,7 @@ export default function AIContentGenerator() {
       const solution = generatedContent.solution || '';
       const implementation = generatedContent.implementation || '';
       const results = generatedContent.results || '';
-      const combinedContent = `${challenge}\n\n${solution}\n\n${implementation}\n\n${results}`.trim();
+      const combinedContent = formatCaseStudyContent(generatedContent);
 
       const studyData = {
         title,
@@ -228,10 +296,18 @@ export default function AIContentGenerator() {
 
       const { error } = await supabase.from('case_studies').insert([studyData]);
       if (error) throw error;
-      toast({ title: 'Case study created', description: 'AI content pushed to Case Studies as draft.' });
-    } catch (e:any) {
+      toast({ 
+        title: 'Success!', 
+        description: 'Case study created and saved as draft.',
+        className: 'bg-green-900 border-green-700 text-green-100'
+      });
+    } catch (e: any) {
       console.error('Push case study failed:', e);
-      toast({ title: 'Failed to create case study', description: e.message || 'An error occurred', variant: 'destructive' });
+      toast({ 
+        title: 'Error', 
+        description: `Failed to create case study: ${e.message || 'Unknown error'}`,
+        variant: 'destructive' 
+      });
     }
   };
 
@@ -240,12 +316,7 @@ export default function AIContentGenerator() {
     try {
       const name = generatedContent.name || topic;
       const desc = generatedContent.description || '';
-      const details = [
-        desc,
-        Array.isArray(generatedContent.setupSteps) ? `\n\nSetup Steps:\n- ${generatedContent.setupSteps.join('\n- ')}` : '',
-        generatedContent.codeExample ? `\n\nCode Example:\n${generatedContent.codeExample}` : '',
-        Array.isArray(generatedContent.benefits) ? `\n\nBenefits:\n- ${generatedContent.benefits.join('\n- ')}` : ''
-      ].join('');
+      const details = formatIntegrationContent(generatedContent);
 
       const integrationData = {
         name,
@@ -272,10 +343,18 @@ export default function AIContentGenerator() {
 
       const { error } = await supabase.from('integrations').insert([integrationData]);
       if (error) throw error;
-      toast({ title: 'Integration created', description: 'AI content pushed to Integrations as draft.' });
-    } catch (e:any) {
+      toast({ 
+        title: 'Success!', 
+        description: 'Integration guide created and saved as draft.',
+        className: 'bg-green-900 border-green-700 text-green-100'
+      });
+    } catch (e: any) {
       console.error('Push integration failed:', e);
-      toast({ title: 'Failed to create integration', description: e.message || 'An error occurred', variant: 'destructive' });
+      toast({ 
+        title: 'Error', 
+        description: `Failed to create integration: ${e.message || 'Unknown error'}`,
+        variant: 'destructive' 
+      });
     }
   };
 
@@ -284,13 +363,7 @@ export default function AIContentGenerator() {
     try {
       const title = generatedContent.title || topic;
       const overview = generatedContent.overview || '';
-      const contentParts = [
-        overview,
-        Array.isArray(generatedContent.prerequisites) ? `\n\nPrerequisites:\n- ${generatedContent.prerequisites.join('\n- ')}` : '',
-        Array.isArray(generatedContent.instructions) ? `\n\nInstructions:\n- ${generatedContent.instructions.join('\n- ')}` : '',
-        Array.isArray(generatedContent.codeExamples) ? `\n\nCode Examples:\n${generatedContent.codeExamples.join('\n\n')}` : '',
-        generatedContent.troubleshooting ? `\n\nTroubleshooting:\n${generatedContent.troubleshooting}` : ''
-      ].join('');
+      const contentParts = formatDocumentationContent(generatedContent);
 
       const docData = {
         title,
@@ -312,10 +385,18 @@ export default function AIContentGenerator() {
 
       const { error } = await supabase.from('documentation').insert([docData]);
       if (error) throw error;
-      toast({ title: 'Documentation created', description: 'AI content pushed to Documentation as draft.' });
-    } catch (e:any) {
+      toast({ 
+        title: 'Success!', 
+        description: 'Documentation created and saved as draft.',
+        className: 'bg-green-900 border-green-700 text-green-100'
+      });
+    } catch (e: any) {
       console.error('Push documentation failed:', e);
-      toast({ title: 'Failed to create documentation', description: e.message || 'An error occurred', variant: 'destructive' });
+      toast({ 
+        title: 'Error', 
+        description: `Failed to create documentation: ${e.message || 'Unknown error'}`,
+        variant: 'destructive' 
+      });
     }
   };
 
